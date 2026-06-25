@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #f8fafc;
+  --color-foreground: #0f172a;
+  --color-primary: #0a80be;
+  --color-secondary: #e0f2fe;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  overflow-x: hidden;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 72px;
+  }
+}
+
+/* Custom Utilities for smooth animations */
+.smooth-hover {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
