@@ -18,11 +18,11 @@ export default function ContactPage() {
 
         <div className="mb-12">
           <h2 className="font-sans font-bold uppercase tracking-widest text-xs mb-2">Direct Contact</h2>
-          <p className="text-lg leading-[1.7]">0484-2351581<br/>info@universalsanitary.com</p>
+          <p className="text-lg leading-[1.7]">0484-2351581<br/>universalsanitaryhouse@yahoo.com</p>
         </div>
 
         <a 
-          href="https://wa.me/919995340034" 
+          href="https://wa.me/919847037275" 
           target="_blank" 
           rel="noopener noreferrer"
           className="inline-flex items-center gap-3 bg-[#25D366] text-white px-8 py-4 hover:bg-[#128C7E] smooth-hover"

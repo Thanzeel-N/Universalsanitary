@@ -26,8 +26,8 @@ export default function Footer() {
           <ul className="flex flex-col gap-4 font-sans text-sm text-neutral-400">
             <li>Jew Street, Padma Junction</li>
             <li>Ernakulam, Kochi 682035</li>
-            <li>0484-2351581</li>
-            <li><Link href="mailto:info@universalsanitary.com" className="hover:text-white smooth-hover">info@universalsanitary.com</Link></li>
+            <li>9847037275</li>
+            <li><Link href="mailto:universalsanitaryhouse@yahoo.com" className="hover:text-white smooth-hover">universalsanitaryhouse@yahoo.com</Link></li>
           </ul>
         </div>
       </div>

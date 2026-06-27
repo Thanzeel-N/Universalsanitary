@@ -30,6 +30,52 @@ export default function NewProductPage() {
     fetch(apiUrl(`/api/v1/brands/`)).then(res => res.json()).then(setBrands);
   }, []);
 
+  const handleAddCategory = async () => {
+    const name = prompt("Enter new category name:");
+    if (!name) return;
+    const token = Cookies.get("access_token");
+    try {
+      const res = await fetch(apiUrl(`/api/v1/categories/`), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ name })
+      });
+      if (!res.ok) throw new Error("Failed to create category");
+      const newCat = await res.json();
+      setCategories(prev => [...prev, newCat]);
+      setFormData(prev => ({ ...prev, category: newCat.id }));
+    } catch (err) {
+      console.error(err);
+      alert("Failed to create category. Please make sure you are logged in.");
+    }
+  };
+
+  const handleAddBrand = async () => {
+    const name = prompt("Enter new brand name:");
+    if (!name) return;
+    const token = Cookies.get("access_token");
+    try {
+      const res = await fetch(apiUrl(`/api/v1/brands/`), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ name })
+      });
+      if (!res.ok) throw new Error("Failed to create brand");
+      const newBrand = await res.json();
+      setBrands(prev => [...prev, newBrand]);
+      setFormData(prev => ({ ...prev, brand: newBrand.id }));
+    } catch (err) {
+      console.error(err);
+      alert("Failed to create brand. Please make sure you are logged in.");
+    }
+  };
+
   const handleChange = (e: any) => {
     const { name, value, type, checked } = e.target;
     setFormData(prev => ({
@@ -109,17 +155,27 @@ export default function NewProductPage() {
         </div>
         <div>
           <label className="block text-xs uppercase text-neutral-500 font-bold mb-1">Category</label>
-          <select name="category" value={formData.category} onChange={handleChange} className="w-full border p-2 rounded">
-            <option value="">Select Category...</option>
-            {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
-          </select>
+          <div className="flex gap-2">
+            <select name="category" value={formData.category} onChange={handleChange} className="flex-1 border p-2 rounded">
+              <option value="">Select Category...</option>
+              {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+            </select>
+            <button type="button" onClick={handleAddCategory} className="bg-neutral-100 text-[#222] border px-4 py-2 rounded hover:bg-neutral-200 transition-colors text-sm font-bold">
+              + New
+            </button>
+          </div>
         </div>
         <div>
           <label className="block text-xs uppercase text-neutral-500 font-bold mb-1">Brand</label>
-          <select name="brand" value={formData.brand} onChange={handleChange} className="w-full border p-2 rounded">
-            <option value="">Select Brand...</option>
-            {brands.map(b => <option key={b.id} value={b.id}>{b.name}</option>)}
-          </select>
+          <div className="flex gap-2">
+            <select name="brand" value={formData.brand} onChange={handleChange} className="flex-1 border p-2 rounded">
+              <option value="">Select Brand...</option>
+              {brands.map(b => <option key={b.id} value={b.id}>{b.name}</option>)}
+            </select>
+            <button type="button" onClick={handleAddBrand} className="bg-neutral-100 text-[#222] border px-4 py-2 rounded hover:bg-neutral-200 transition-colors text-sm font-bold">
+              + New
+            </button>
+          </div>
         </div>
         <div>
           <label className="block text-xs uppercase text-neutral-500 font-bold mb-1">Description</label>

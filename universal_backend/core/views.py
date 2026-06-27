@@ -5,14 +5,16 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from .models import Category, Brand, Product, Project, ProductImage
 from .serializers import CategorySerializer, BrandSerializer, ProductSerializer, ProjectSerializer, ProductImageSerializer
 
-class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
+class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     lookup_field = 'slug'
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-class BrandViewSet(viewsets.ReadOnlyModelViewSet):
+class BrandViewSet(viewsets.ModelViewSet):
     queryset = Brand.objects.all()
     serializer_class = BrandSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()

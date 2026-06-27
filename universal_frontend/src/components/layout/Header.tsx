@@ -53,7 +53,7 @@ export default function Header({ isHomePage = true }: { isHomePage?: boolean }) 
             );
           })}
           <a
-            href="https://wa.me/919995340034?text=Hello,%20I%20would%20like%20to%20enquire%20about%20your%20premium%20sanitary%20collections."
+            href="https://wa.me/919847037275?text=Hello,%20I%20would%20like%20to%20enquire%20about%20your%20premium%20sanitary%20collections."
             target="_blank"
             rel="noopener noreferrer"
             className="border border-current px-6 py-2 hover:bg-white hover:text-black smooth-hover"
@@ -108,7 +108,7 @@ export default function Header({ isHomePage = true }: { isHomePage?: boolean }) 
                   );
                 })}
                 <a
-                  href="https://wa.me/919995340034?text=Hello,%20I%20would%20like%20to%20enquire%20about%20your%20premium%20sanitary%20collections."
+                  href="https://wa.me/919847037275?text=Hello,%20I%20would%20like%20to%20enquire%20about%20your%20premium%20sanitary%20collections."
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setMobileMenuOpen(false)}
