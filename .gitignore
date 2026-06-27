@@ -31,3 +31,8 @@ universal_frontend/.env.production.local
 .idea/
 .DS_Store
 Thumbs.db
+
+# Django local environments, collected static files, and media
+universal_backend/.env
+universal_backend/staticfiles/
+universal_backend/media/

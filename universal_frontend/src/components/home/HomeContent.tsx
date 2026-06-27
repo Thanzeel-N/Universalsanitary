@@ -694,8 +694,7 @@ export default function HomeContent({ categories }: { categories: any[] }) {
                         <p className="text-[9px] uppercase tracking-widest text-neutral-400 font-bold mb-1">{spot.brand}</p>
                         <h4 className="font-playfair text-sm text-foreground leading-tight mb-1 group-hover/card:text-primary transition-colors">{spot.title}</h4>
                         <p className="font-sans text-[10px] text-neutral-500 mb-2 line-clamp-2 leading-tight">{spot.desc}</p>
-                        <div className="flex justify-between items-center border-t border-neutral-100 pt-2 mt-1">
-                           <p className="font-sans font-bold text-xs">{spot.price}</p>
+                        <div className="flex justify-end items-center border-t border-neutral-100 pt-2 mt-1">
                           <span className="bg-primary text-white text-[9px] uppercase tracking-wider font-bold px-2 py-1 rounded-md group-hover/card:brightness-110 transition-colors">
                             View
                           </span>
@@ -732,7 +731,6 @@ export default function HomeContent({ categories }: { categories: any[] }) {
                       <h4 className="font-playfair text-sm text-foreground font-bold truncate mb-0.5">{spot.title}</h4>
                       <p className="font-sans text-[11px] text-neutral-500 line-clamp-1 mb-1.5">{spot.desc}</p>
                       <div className="flex items-center gap-2">
-                        <span className="font-sans font-bold text-xs">{spot.price}</span>
                         <span className="text-[10px] text-primary uppercase font-bold tracking-widest border-b border-primary pb-0.5">View Details</span>
                       </div>
                     </div>
