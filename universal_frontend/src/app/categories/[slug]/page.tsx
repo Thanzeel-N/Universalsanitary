@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const category = await getCategory(slug);
   if (!category) return { title: "Not Found" };
-  return { title: `${category.name} | Universal Sanitary House` };
+  return { title: `${category.name} | Universal Sanitary` };
 }
 
 export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {

@@ -1,7 +1,7 @@
 import { MessageCircle } from "lucide-react";
 
 export const metadata = {
-  title: "Contact Us | Universal Sanitary House",
+  title: "Contact Us | Universal Sanitary",
 };
 
 export default function ContactPage() {

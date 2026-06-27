@@ -8,8 +8,11 @@ const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfa
 import ClientLayoutWrapper from "@/components/layout/ClientLayoutWrapper";
 
 export const metadata: Metadata = {
-  title: "Universal Sanitary House | Premium Digital Showroom",
+  title: "Universal Sanitary",
   description: "Defining luxury spaces since 1968. Premium sanitaryware, architectural solutions, and interior products.",
+  icons: {
+    icon: "/images/logo/logo.webp",
+  },
 };
 
 export default function RootLayout({

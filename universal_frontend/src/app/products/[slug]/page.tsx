@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const product = await getProduct(slug);
   if (!product) return { title: "Product Not Found" };
-  return { title: `${product.name} | Universal Sanitary House` };
+  return { title: `${product.name} | Universal Sanitary` };
 }
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {

@@ -1,7 +1,7 @@
  import { ShieldCheck, PenTool, HeartHandshake, MapPin } from "lucide-react";
 
 export const metadata = {
-  title: "About Us | Universal Sanitary House",
+  title: "About Us | Universal Sanitary",
 };
 
 export default function AboutPage() {
