@@ -3,8 +3,8 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="bg-[#0f172a] text-neutral-300 py-20 px-6 md:px-12 border-t border-[#1e293b]">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
-        <div className="col-span-1 md:col-span-2">
+      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+        <div className="col-span-2 md:col-span-2">
           <Link href="/" className="inline-block mb-6">
             <img src="/images/logo/logo.webp" alt="Universal Sanitary" className="h-8 md:h-10 object-contain brightness-0 invert opacity-90 hover:opacity-100 transition-opacity" />
           </Link>
@@ -13,7 +13,7 @@ export default function Footer() {
           </p>
         </div>
         
-        <div>
+        <div className="col-span-1">
           <h3 className="font-sans font-bold uppercase tracking-widest text-xs mb-6 text-white">Explore</h3>
           <ul className="flex flex-col gap-4 font-sans text-sm text-neutral-400">
             <li><Link href="/products" className="hover:text-white smooth-hover">Collections</Link></li>
@@ -21,13 +21,13 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div>
+        <div className="col-span-1">
           <h3 className="font-sans font-bold uppercase tracking-widest text-xs mb-6 text-white">Contact</h3>
           <ul className="flex flex-col gap-4 font-sans text-sm text-neutral-400">
             <li>Jew Street, Padma Junction</li>
             <li>Ernakulam, Kochi 682035</li>
             <li>9847037275</li>
-            <li><Link href="mailto:universalsanitaryhouse@yahoo.com" className="hover:text-white smooth-hover">universalsanitaryhouse@yahoo.com</Link></li>
+            <li><Link href="mailto:universalsanitaryhouse@yahoo.com" className="hover:text-white smooth-hover break-all">universalsanitaryhouse@yahoo.com</Link></li>
           </ul>
         </div>
       </div>

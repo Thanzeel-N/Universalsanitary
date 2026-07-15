@@ -8,8 +8,32 @@ const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfa
 import ClientLayoutWrapper from "@/components/layout/ClientLayoutWrapper";
 
 export const metadata: Metadata = {
-  title: "Universal Sanitary",
-  description: "Defining luxury spaces since 1968. Premium sanitaryware, architectural solutions, and interior products.",
+  metadataBase: new URL("https://universalsanitary.com"),
+  title: "Universal Sanitary House | Premium Sanitaryware & Luxury Spaces",
+  description: "Defining luxury spaces since 1968. Kerala's premier destination for luxury sanitaryware, architectural solutions, and exclusive NECO manhole & drainage covers dealer.",
+  keywords: ["sanitaryware", "luxury spaces", "Jaquar", "Kohler", "Grohe", "TOTO", "Kerala", "Ernakulam", "Kochi", "bath fittings", "faucets", "NECO manhole covers"],
+  openGraph: {
+    title: "Universal Sanitary House",
+    description: "Kerala's premier destination for luxury sanitaryware since 1968.",
+    url: "https://universalsanitary.com",
+    siteName: "Universal Sanitary House",
+    images: [
+      {
+        url: "/images/hero.webp",
+        width: 1200,
+        height: 630,
+        alt: "Universal Sanitary House Hero",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Universal Sanitary House",
+    description: "Kerala's premier destination for luxury sanitaryware since 1968.",
+    images: ["/images/hero.webp"],
+  },
   icons: {
     icon: "/images/logo/logo.webp",
   },

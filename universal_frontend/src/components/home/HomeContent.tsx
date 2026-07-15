@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence, useInView, useMotionValue, useTransform, useScroll, animate } from "framer-motion";
 import { ShoppingBag, ArrowRight, Quote, Star, ShieldCheck, Truck, Clock, Headset } from "lucide-react";
 import InstagramFeed from "@/components/layout/InstagramFeed";
+import ClientMarquee from "@/components/home/ClientMarquee";
 
 function Counter({ from, to, formatter }: { from: number, to: number, formatter?: (v: number) => string }) {
   const count = useMotionValue(from);
@@ -88,6 +89,7 @@ export default function HomeContent({ categories }: { categories: any[] }) {
   const [activeHotspot, setActiveHotspot] = useState<number | null>(null);
   const [featuredProducts, setFeaturedProducts] = useState<any[]>([]);
   const [activeReviewIndex, setActiveReviewIndex] = useState(0);
+  const [activePillar, setActivePillar] = useState(0);
 
   useEffect(() => {
     fetch(apiUrl(`/api/v1/products/`))
@@ -241,19 +243,50 @@ export default function HomeContent({ categories }: { categories: any[] }) {
     }
   ];
 
+  const pillars = [
+    {
+      number: "01",
+      icon: ShieldCheck,
+      title: "Authorised & Exclusive Dealer",
+      description: "Official dealer for Jaquar, Kohler, Grohe, TOTO, Artize, and the one and only exclusive dealership in Kerala for NECO manhole & drainage covers.",
+      image: "/images/trust us/dealership.png"
+    },
+    {
+      number: "02",
+      icon: Truck,
+      title: "Delivery Across Kerala",
+      description: "Free delivery and installation support to all major cities including Kochi, Thrissur, Calicut and Trivandrum.",
+      image: "/images/trust us/delivery.png"
+    },
+    {
+      number: "03",
+      icon: Clock,
+      title: "55 Years of Expertise",
+      description: "Since 1968, we have helped over 10,000 families build their dream bathrooms with premium products.",
+      image: "/images/trust us/experiance.png"
+    },
+    {
+      number: "04",
+      icon: Headset,
+      title: "After-Sales Support",
+      description: "Dedicated support team available 6 days a week. We stand behind every product we sell.",
+      image: "/images/trust us/service.png"
+    }
+  ];
+
   return (
     <main className="min-h-screen bg-background" onClick={() => setActiveHotspot(null)}>
       {/* Hero Section */}
       <section ref={heroRef} className="relative h-screen flex items-center justify-center bg-primary text-background overflow-hidden">
         <div className="absolute inset-0 w-full h-full z-0">
-          <motion.img 
+          <motion.img
             style={{ y: heroImgY }}
             initial={{ scale: 1.08 }}
             animate={{ scale: 1 }}
             transition={{ duration: 10, ease: "easeOut" }}
-            src="/images/hero.webp" 
-            alt="Luxury Sanitaryware" 
-            className="w-full h-full object-cover blur-[2px]" 
+            src="/images/hero.webp"
+            alt="Luxury Sanitaryware"
+            className="w-full h-full object-cover blur-[2px]"
           />
           {/* Layered overlay for premium text legibility and vignetting */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/35 to-black/60" />
@@ -267,32 +300,32 @@ export default function HomeContent({ categories }: { categories: any[] }) {
           className="z-10 text-center px-6 max-w-4xl mx-auto flex flex-col items-center"
         >
           {/* Top Tagline */}
-          <motion.span 
+          <motion.span
             variants={heroItemVariants}
             className="text-[10px] md:text-xs font-sans font-bold tracking-[0.35em] text-sky-400 uppercase mb-4 block"
           >
             Universal Sanitary House
           </motion.span>
-          
+
           {/* Large Editorial Headline */}
-          <motion.h1 
+          <motion.h1
             variants={heroItemVariants}
             className="font-playfair text-4xl md:text-6xl lg:text-7xl font-light text-white tracking-wide mb-6 leading-tight drop-shadow-lg"
           >
             Defining <span className="italic font-normal text-sky-100">Luxury Spaces</span>
           </motion.h1>
-          
+
           {/* Subtitle */}
-          <motion.p 
+          <motion.p
             variants={heroItemVariants}
             className="font-sans text-xs md:text-sm text-neutral-300 tracking-[0.25em] uppercase max-w-xl mx-auto mb-10 leading-relaxed drop-shadow-md"
           >
             Kerala's Premier Destination for Luxury Sanitaryware Since 1968
           </motion.p>
-          
+
           {/* Custom Slide-Fill Button */}
           <motion.div variants={heroItemVariants}>
-            <Link 
+            <Link
               href="/products"
               className="group relative inline-block overflow-hidden border border-white/30 hover:border-white px-8 py-4 uppercase tracking-[0.2em] text-xs font-bold transition-all duration-500 ease-out shadow-lg"
             >
@@ -305,7 +338,7 @@ export default function HomeContent({ categories }: { categories: any[] }) {
         </motion.div>
       </section>
 
-      <motion.section 
+      <motion.section
         ref={legacyRef}
         initial="hidden"
         whileInView="visible"
@@ -316,20 +349,20 @@ export default function HomeContent({ categories }: { categories: any[] }) {
         <div className="flex-1 w-full relative group">
           {/* Background decorative offset frame */}
           <div className="absolute inset-4 -right-2 -bottom-2 border border-primary/20 rounded-2xl group-hover:translate-x-1 group-hover:translate-y-1 transition-transform duration-500" />
-          
+
           {/* Main image container */}
           <div className="relative w-full aspect-[4/5] bg-neutral-100 rounded-2xl overflow-hidden shadow-lg border border-neutral-200/50">
-            <motion.img 
+            <motion.img
               style={{ y: legacyImgY, scale: 1.15 }}
-              src="/images/about/interior_1968.webp" 
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-120" 
-              alt="Legacy Showroom" 
+              src="/images/about/interior_1968.webp"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-120"
+              alt="Legacy Showroom"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-60" />
           </div>
 
           {/* Floating detail badge */}
-          <motion.div 
+          <motion.div
             style={{ y: legacyBadgeY }}
             className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-md border border-neutral-200/50 py-3 px-5 rounded-xl shadow-md flex items-center gap-3"
           >
@@ -343,7 +376,7 @@ export default function HomeContent({ categories }: { categories: any[] }) {
             Our Heritage
           </span>
           <h2 className="font-playfair text-4xl md:text-5xl lg:text-6xl mb-6 text-neutral-900 font-light leading-tight">
-            Defining Luxury <br/>Since <span className="italic font-normal text-primary">1968</span>
+            Defining Luxury <br />Since <span className="italic font-normal text-primary">1968</span>
           </h2>
           <p className="text-neutral-500 mb-10 max-w-lg leading-[1.8] text-base md:text-lg font-light">
             For over five decades, Universal Sanitary House has been the premier destination for homeowners, architects, and designers seeking unparalleled elegance. We don't just sell sanitaryware; we curate experiences that transform everyday rituals into moments of luxury.
@@ -371,8 +404,8 @@ export default function HomeContent({ categories }: { categories: any[] }) {
             </div>
           </div>
 
-          <Link 
-            href="/about" 
+          <Link
+            href="/about"
             className="group inline-flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-primary hover:text-blue-800 transition-colors duration-300"
           >
             <span>Discover Our Story</span>
@@ -383,7 +416,7 @@ export default function HomeContent({ categories }: { categories: any[] }) {
       </motion.section>
 
       {/* Premium Partners */}
-      <motion.section 
+      <motion.section
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-120px" }}
@@ -402,168 +435,111 @@ export default function HomeContent({ categories }: { categories: any[] }) {
           <h3 className="font-playfair text-3xl tracking-wider text-neutral-800">NECO</h3>
         </div>
       </motion.section>
-
-      <motion.section 
+      <motion.section
         ref={chooseRef}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-120px" }}
         variants={sectionVariants}
-        className="py-16 md:py-28 px-6 md:px-12 bg-[#FCFAF9] border-b border-neutral-200 relative overflow-hidden"
-        style={{ backgroundImage: 'radial-gradient(circle at top, #ffffff 0%, #FAF9F6 100%)' }}
+        className="py-16 md:py-28 px-6 md:px-12 bg-[#FCFAF9] dark:bg-neutral-950/20 border-b border-neutral-200 dark:border-neutral-800/80 relative overflow-hidden"
       >
         {/* Subtle background decorative shapes for luxury branding */}
-        <motion.div 
+        <motion.div
           style={{ y: chooseBgY1 }}
-          className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-sky-50/30 rounded-full blur-3xl pointer-events-none -translate-y-1/2" 
+          className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-sky-50/30 dark:bg-sky-950/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2"
         />
-        <motion.div 
+        <motion.div
           style={{ y: chooseBgY2 }}
-          className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-50/20 rounded-full blur-3xl pointer-events-none translate-y-1/2" 
+          className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-50/20 dark:bg-blue-950/10 rounded-full blur-3xl pointer-events-none translate-y-1/2"
         />
 
-        <div className="max-w-[1400px] mx-auto relative z-10">
-          <div className="text-center mb-20">
-            <span className="text-[11px] font-sans font-bold tracking-[0.25em] text-primary uppercase mb-3 block">
-              The Universal Standard
-            </span>
-            <h2 className="font-playfair text-3xl md:text-5xl text-neutral-900 mb-6 tracking-wide font-light">
-              Why Thousands of Families <span className="italic font-normal text-primary">Trust Us</span>
-            </h2>
-            <div className="w-16 h-[2px] bg-gradient-to-r from-sky-200 via-primary to-sky-200 mx-auto mb-6" />
-            <p className="text-neutral-500 max-w-2xl mx-auto text-base md:text-lg leading-[1.7] font-light">
-              Kerala's most trusted sanitaryware destination since 1968
-            </p>
+        <div className="max-w-[1200px] mx-auto relative z-10 flex flex-col md:flex-row gap-12 md:gap-16 items-center">
+          {/* Left Column: Vertical Tabbed List */}
+          <div className="w-full md:w-[58%] flex flex-col gap-8">
+            <div>
+              <span className="text-[11px] font-sans font-bold tracking-[0.25em] text-primary uppercase mb-3 block">
+                The Universal Standard
+              </span>
+              <h2 className="font-playfair text-3xl md:text-5xl text-neutral-900 dark:text-neutral-100 mb-6 tracking-wide leading-tight font-light">
+                Why Thousands of Families <span className="italic font-normal text-primary">Trust Us</span>
+              </h2>
+              <p className="text-neutral-500 dark:text-neutral-400 max-w-xl text-sm md:text-base leading-[1.7] font-light">
+                Kerala's most trusted sanitaryware destination since 1968, setting the benchmark for luxury spaces and unmatched care.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 md:flex md:flex-col md:gap-5 mt-4">
+              {pillars.map((pillar, index) => {
+                const Icon = pillar.icon;
+                const isActive = activePillar === index;
+                return (
+                  <div
+                    key={index}
+                    onClick={() => setActivePillar(index)}
+                    onMouseEnter={() => setActivePillar(index)}
+                    className={`group cursor-pointer border-l-2 py-2 pl-3 md:py-2.5 md:pl-6 transition-all duration-300 flex flex-col md:flex-row items-start gap-2 md:gap-4 select-none
+                      ${isActive ? 'border-primary' : 'border-neutral-200 dark:border-neutral-800'}
+                    `}
+                  >
+                    {/* Icon Container */}
+                    <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 border
+                      ${isActive ? 'bg-primary border-transparent text-white' : 'bg-neutral-50 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 text-neutral-400'}
+                    `}>
+                      <Icon size={16} className="md:w-[18px] md:h-[18px]" strokeWidth={1.5} />
+                    </div>
+
+                    {/* Text block */}
+                    <div>
+                      <h3 className={`font-playfair text-sm md:text-lg font-bold transition-all duration-300 leading-tight
+                        ${isActive ? 'text-primary' : 'text-neutral-900 dark:text-neutral-100'}
+                      `}>
+                        {pillar.title}
+                      </h3>
+                      <p className={`font-sans text-[10px] md:text-sm leading-relaxed mt-1 transition-all duration-500 font-light line-clamp-3 md:line-clamp-none
+                        ${isActive ? 'text-neutral-600 dark:text-neutral-300' : 'text-neutral-400 dark:text-neutral-500'}
+                      `}>
+                        {pillar.description}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
-          <motion.div 
-            variants={containerVariants}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
-          >
-            {/* Pillar 1 */}
-            <motion.div
-              variants={cardVariants}
-              whileHover={{ y: -6, transition: { duration: 0.3 } }}
-              className="relative bg-white/70 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-neutral-200/60 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_45px_-12px_rgba(10,128,190,0.12)] hover:border-primary/25 hover:bg-white transition-all duration-500 flex flex-col items-start overflow-hidden group cursor-default"
-            >
-              {/* Elegant Luxury Numbering */}
-              <span className="absolute top-4 right-6 md:right-8 font-playfair text-6xl md:text-7xl text-neutral-100/80 font-bold select-none group-hover:text-sky-50/50 transition-colors duration-500 pointer-events-none">
-                01
-              </span>
+          {/* Right Column: Sticky Visual Showcase Frame */}
+          <div className="w-full md:w-[42%] h-[320px] md:h-[450px] relative rounded-2xl border border-neutral-200 dark:border-neutral-800 overflow-hidden bg-neutral-50 dark:bg-neutral-900 flex items-center justify-center md:sticky md:top-32 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.03)] shrink-0">
+            {pillars.map((pillar, index) => (
+              <div
+                key={index}
+                className={`absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out
+                  ${activePillar === index ? 'opacity-100 z-10' : 'opacity-0 z-0'}
+                `}
+              >
+                <img
+                  src={pillar.image}
+                  alt={pillar.title}
+                  className="w-full h-full object-cover opacity-90 transition-all duration-1000"
+                />
+                {/* Subtle overlay gradient to keep brand text readable */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
-              {/* Glowing ring and Icon Container */}
-              <div className="relative mb-8 shrink-0">
-                <div className="absolute inset-[-6px] rounded-full border border-primary/0 group-hover:border-primary/20 group-hover:scale-105 transition-all duration-500 ease-out" />
-                <div className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-neutral-200 bg-neutral-50/80 flex items-center justify-center text-primary group-hover:text-white group-hover:bg-gradient-to-br group-hover:from-primary group-hover:to-blue-600 group-hover:border-transparent transition-all duration-500 ease-out shadow-sm relative z-10">
-                  <ShieldCheck size={26} strokeWidth={1.5} />
+                {/* Bottom badge overlay inside the image container */}
+                <div className="absolute bottom-6 left-6 right-6 bg-white/90 dark:bg-black/90 backdrop-blur-md p-4 rounded-xl border border-neutral-200/50 dark:border-neutral-800/50">
+                  <span className="text-[10px] font-sans font-bold tracking-[0.2em] text-primary uppercase block mb-1">
+                    Pillar {pillar.number}
+                  </span>
+                  <span className="font-playfair text-sm text-neutral-900 dark:text-white font-medium">
+                    {pillar.title}
+                  </span>
                 </div>
               </div>
-
-              <h3 className="font-playfair text-lg md:text-xl font-bold text-neutral-900 mb-3 tracking-wide group-hover:text-primary transition-colors duration-300">
-                Authorised & Exclusive Dealer
-              </h3>
-              <p className="text-neutral-500 text-sm md:text-base leading-relaxed font-light">
-                Official dealer for Jaquar, Kohler, Grohe, TOTO, Artize, and the one and only exclusive dealership in Kerala for NECO manhole & drainage covers.
-              </p>
-
-              {/* Expanding Blue Hover Indicator */}
-              <div className="absolute bottom-0 left-0 w-0 h-[3px] bg-gradient-to-r from-sky-400 via-primary to-blue-600 group-hover:w-full transition-all duration-500 ease-out" />
-            </motion.div>
-
-            {/* Pillar 2 */}
-            <motion.div
-              variants={cardVariants}
-              whileHover={{ y: -6, transition: { duration: 0.3 } }}
-              className="relative bg-white/70 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-neutral-200/60 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_45px_-12px_rgba(10,128,190,0.12)] hover:border-primary/25 hover:bg-white transition-all duration-500 flex flex-col items-start overflow-hidden group cursor-default"
-            >
-              {/* Elegant Luxury Numbering */}
-              <span className="absolute top-4 right-6 md:right-8 font-playfair text-6xl md:text-7xl text-neutral-100/80 font-bold select-none group-hover:text-sky-50/50 transition-colors duration-500 pointer-events-none">
-                02
-              </span>
-
-              {/* Glowing ring and Icon Container */}
-              <div className="relative mb-8 shrink-0">
-                <div className="absolute inset-[-6px] rounded-full border border-primary/0 group-hover:border-primary/20 group-hover:scale-105 transition-all duration-500 ease-out" />
-                <div className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-neutral-200 bg-neutral-50/80 flex items-center justify-center text-primary group-hover:text-white group-hover:bg-gradient-to-br group-hover:from-primary group-hover:to-blue-600 group-hover:border-transparent transition-all duration-500 ease-out shadow-sm relative z-10">
-                  <Truck size={26} strokeWidth={1.5} />
-                </div>
-              </div>
-
-              <h3 className="font-playfair text-lg md:text-xl font-bold text-neutral-900 mb-3 tracking-wide group-hover:text-primary transition-colors duration-300">
-                Delivery Across Kerala
-              </h3>
-              <p className="text-neutral-500 text-sm md:text-base leading-relaxed font-light">
-                Free delivery and installation support to all major cities including Kochi, Thrissur, Calicut and Trivandrum.
-              </p>
-
-              {/* Expanding Blue Hover Indicator */}
-              <div className="absolute bottom-0 left-0 w-0 h-[3px] bg-gradient-to-r from-sky-400 via-primary to-blue-600 group-hover:w-full transition-all duration-500 ease-out" />
-            </motion.div>
-
-            {/* Pillar 3 */}
-            <motion.div
-              variants={cardVariants}
-              whileHover={{ y: -6, transition: { duration: 0.3 } }}
-              className="relative bg-white/70 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-neutral-200/60 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_45px_-12px_rgba(10,128,190,0.12)] hover:border-primary/25 hover:bg-white transition-all duration-500 flex flex-col items-start overflow-hidden group cursor-default"
-            >
-              {/* Elegant Luxury Numbering */}
-              <span className="absolute top-4 right-6 md:right-8 font-playfair text-6xl md:text-7xl text-neutral-100/80 font-bold select-none group-hover:text-sky-50/50 transition-colors duration-500 pointer-events-none">
-                03
-              </span>
-
-              {/* Glowing ring and Icon Container */}
-              <div className="relative mb-8 shrink-0">
-                <div className="absolute inset-[-6px] rounded-full border border-primary/0 group-hover:border-primary/20 group-hover:scale-105 transition-all duration-500 ease-out" />
-                <div className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-neutral-200 bg-neutral-50/80 flex items-center justify-center text-primary group-hover:text-white group-hover:bg-gradient-to-br group-hover:from-primary group-hover:to-blue-600 group-hover:border-transparent transition-all duration-500 ease-out shadow-sm relative z-10">
-                  <Clock size={26} strokeWidth={1.5} />
-                </div>
-              </div>
-
-              <h3 className="font-playfair text-lg md:text-xl font-bold text-neutral-900 mb-3 tracking-wide group-hover:text-primary transition-colors duration-300">
-                55 Years of Expertise
-              </h3>
-              <p className="text-neutral-500 text-sm md:text-base leading-relaxed font-light">
-                Since 1968, we have helped over 10,000 families build their dream bathrooms with premium products.
-              </p>
-
-              {/* Expanding Blue Hover Indicator */}
-              <div className="absolute bottom-0 left-0 w-0 h-[3px] bg-gradient-to-r from-sky-400 via-primary to-blue-600 group-hover:w-full transition-all duration-500 ease-out" />
-            </motion.div>
-
-            {/* Pillar 4 */}
-            <motion.div
-              variants={cardVariants}
-              whileHover={{ y: -6, transition: { duration: 0.3 } }}
-              className="relative bg-white/70 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-neutral-200/60 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_45px_-12px_rgba(10,128,190,0.12)] hover:border-primary/25 hover:bg-white transition-all duration-500 flex flex-col items-start overflow-hidden group cursor-default"
-            >
-              {/* Elegant Luxury Numbering */}
-              <span className="absolute top-4 right-6 md:right-8 font-playfair text-6xl md:text-7xl text-neutral-100/80 font-bold select-none group-hover:text-sky-50/50 transition-colors duration-500 pointer-events-none">
-                04
-              </span>
-
-              {/* Glowing ring and Icon Container */}
-              <div className="relative mb-8 shrink-0">
-                <div className="absolute inset-[-6px] rounded-full border border-primary/0 group-hover:border-primary/20 group-hover:scale-105 transition-all duration-500 ease-out" />
-                <div className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-neutral-200 bg-neutral-50/80 flex items-center justify-center text-primary group-hover:text-white group-hover:bg-gradient-to-br group-hover:from-primary group-hover:to-blue-600 group-hover:border-transparent transition-all duration-500 ease-out shadow-sm relative z-10">
-                  <Headset size={26} strokeWidth={1.5} />
-                </div>
-              </div>
-
-              <h3 className="font-playfair text-lg md:text-xl font-bold text-neutral-900 mb-3 tracking-wide group-hover:text-primary transition-colors duration-300">
-                After-Sales Support
-              </h3>
-              <p className="text-neutral-500 text-sm md:text-base leading-relaxed font-light">
-                Dedicated support team available 6 days a week. We stand behind every product we sell.
-              </p>
-
-              {/* Expanding Blue Hover Indicator */}
-              <div className="absolute bottom-0 left-0 w-0 h-[3px] bg-gradient-to-r from-sky-400 via-primary to-blue-600 group-hover:w-full transition-all duration-500 ease-out" />
-            </motion.div>
-          </motion.div>
+            ))}
+          </div>
         </div>
       </motion.section>
 
-      <motion.section 
+      <motion.section
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-120px" }}
@@ -576,8 +552,8 @@ export default function HomeContent({ categories }: { categories: any[] }) {
             View All
           </Link>
         </div>
-        
-        <motion.div 
+
+        <motion.div
           variants={containerVariants}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
         >
@@ -605,7 +581,7 @@ export default function HomeContent({ categories }: { categories: any[] }) {
         </motion.div>
       </motion.section>
 
-      <motion.section 
+      <motion.section
         ref={lookRef}
         initial="hidden"
         whileInView="visible"
@@ -621,7 +597,7 @@ export default function HomeContent({ categories }: { categories: any[] }) {
             <p className="text-neutral-500 mb-6 max-w-sm ml-auto text-base leading-[1.7]">Recreate this setting effortlessly with our pre-curated combo of matching pieces.</p>
             <div className="flex flex-wrap gap-2 justify-start md:justify-end">
               {looks.map(tab => (
-                <button 
+                <button
                   key={tab.id}
                   onClick={() => {
                     setActiveTab(tab.id);
@@ -639,73 +615,74 @@ export default function HomeContent({ categories }: { categories: any[] }) {
         {/* Increased image size with min-h and dynamic aspect ratio */}
         <div className="relative w-full aspect-[4/3] md:aspect-[16/9] lg:aspect-[21/10] min-h-[300px] md:min-h-[500px] lg:min-h-[700px] bg-neutral-200 rounded-lg overflow-hidden">
           <AnimatePresence mode="wait">
-            <motion.img 
+            <motion.img
               style={{ y: lookImgY, scale: 1.1 }}
               key={currentLook.id}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
-              src={currentLook.image} 
-              alt={currentLook.id} 
+              src={currentLook.image}
+              alt={currentLook.id}
               className="absolute inset-0 w-full h-full object-cover rounded-lg"
             />
           </AnimatePresence>
-          
+
           {currentLook.hotspots.map((spot) => {
             // Dynamic placement logic: Ensures the card opens inward, staying within the bounds of the image container.
             const isRightSide = spot.x > 50;
             const isBottomSide = spot.y > 50;
-            
+
             const posX = isRightSide ? "right-4" : "left-4";
             const posY = isBottomSide ? "bottom-4" : "top-4";
             const animY = isBottomSide ? 10 : -10;
 
             return (
-            <div 
-              key={spot.id}
-              className="absolute z-10"
-              style={{ left: `${spot.x}%`, top: `${spot.y}%` }}
-              onMouseEnter={() => setActiveHotspot(spot.id)}
-              onMouseLeave={() => setActiveHotspot(null)}
-              onClick={(e) => {
-                e.stopPropagation();
-                setActiveHotspot(activeHotspot === spot.id ? null : spot.id);
-              }}
-            >
-              <div className="relative flex items-center justify-center cursor-pointer -translate-x-1/2 -translate-y-1/2">
-                <div className="absolute w-8 h-8 bg-white/50 rounded-full animate-ping duration-1000"></div>
-                <div className="relative w-4 h-4 bg-white rounded-full shadow-lg border border-neutral-200"></div>
-              </div>
+              <div
+                key={spot.id}
+                className="absolute z-10"
+                style={{ left: `${spot.x}%`, top: `${spot.y}%` }}
+                onMouseEnter={() => setActiveHotspot(spot.id)}
+                onMouseLeave={() => setActiveHotspot(null)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveHotspot(activeHotspot === spot.id ? null : spot.id);
+                }}
+              >
+                <div className="relative flex items-center justify-center cursor-pointer -translate-x-1/2 -translate-y-1/2">
+                  <div className="absolute w-8 h-8 bg-white/50 rounded-full animate-ping duration-1000"></div>
+                  <div className="relative w-4 h-4 bg-white rounded-full shadow-lg border border-neutral-200"></div>
+                </div>
 
-              <AnimatePresence>
-                {activeHotspot === spot.id && (
-                  <motion.div
-                    initial={{ opacity: 0, y: animY, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: animY, scale: 0.95 }}
-                    className={`absolute z-20 ${posY} ${posX} w-52 bg-white rounded-xl shadow-2xl overflow-hidden p-2 hidden md:block`}
-                  >
-                    <Link href={`/products/${spot.slug}`} className="block group/card">
-                      <div className="relative aspect-[4/3] rounded-md overflow-hidden mb-2 bg-neutral-100">
-                        <img src={spot.image} alt={spot.title} className="w-full h-full object-contain p-2 group-hover/card:scale-105 transition-transform duration-300" />
-                      </div>
-                      <div className="px-1 pb-1">
-                        <p className="text-[9px] uppercase tracking-widest text-neutral-400 font-bold mb-1">{spot.brand}</p>
-                        <h4 className="font-playfair text-sm text-foreground leading-tight mb-1 group-hover/card:text-primary transition-colors">{spot.title}</h4>
-                        <p className="font-sans text-[10px] text-neutral-500 mb-2 line-clamp-2 leading-tight">{spot.desc}</p>
-                        <div className="flex justify-end items-center border-t border-neutral-100 pt-2 mt-1">
-                          <span className="bg-primary text-white text-[9px] uppercase tracking-wider font-bold px-2 py-1 rounded-md group-hover/card:brightness-110 transition-colors">
-                            View
-                          </span>
+                <AnimatePresence>
+                  {activeHotspot === spot.id && (
+                    <motion.div
+                      initial={{ opacity: 0, y: animY, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: animY, scale: 0.95 }}
+                      className={`absolute z-20 ${posY} ${posX} w-52 bg-white rounded-xl shadow-2xl overflow-hidden p-2 hidden md:block`}
+                    >
+                      <Link href={`/products/${spot.slug}`} className="block group/card">
+                        <div className="relative aspect-[4/3] rounded-md overflow-hidden mb-2 bg-neutral-100">
+                          <img src={spot.image} alt={spot.title} className="w-full h-full object-contain p-2 group-hover/card:scale-105 transition-transform duration-300" />
                         </div>
-                      </div>
-                    </Link>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          )})}
+                        <div className="px-1 pb-1">
+                          <p className="text-[9px] uppercase tracking-widest text-neutral-400 font-bold mb-1">{spot.brand}</p>
+                          <h4 className="font-playfair text-sm text-foreground leading-tight mb-1 group-hover/card:text-primary transition-colors">{spot.title}</h4>
+                          <p className="font-sans text-[10px] text-neutral-500 mb-2 line-clamp-2 leading-tight">{spot.desc}</p>
+                          <div className="flex justify-end items-center border-t border-neutral-100 pt-2 mt-1">
+                            <span className="bg-primary text-white text-[9px] uppercase tracking-wider font-bold px-2 py-1 rounded-md group-hover/card:brightness-110 transition-colors">
+                              View
+                            </span>
+                          </div>
+                        </div>
+                      </Link>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            )
+          })}
         </div>
 
         {/* Mobile Hotspot Info Card */}
@@ -744,7 +721,7 @@ export default function HomeContent({ categories }: { categories: any[] }) {
 
 
 
-      <motion.section 
+      <motion.section
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-120px" }}
@@ -760,24 +737,24 @@ export default function HomeContent({ categories }: { categories: any[] }) {
           </div>
         </div>
 
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           className="flex flex-col md:flex-row h-auto md:h-[600px] w-full gap-4 md:gap-6"
         >
           {collections.map((col) => (
-            <motion.div 
+            <motion.div
               variants={cardVariants}
               key={col.id}
               className="group relative w-full md:w-auto md:flex-1 md:hover:flex-[4] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] rounded-2xl overflow-hidden cursor-pointer h-[200px] md:h-full bg-neutral-200 block shrink-0"
             >
               <Link href={`/products?category=${col.slug}`} className="absolute inset-0 block">
-                <img 
-                  src={col.img} 
-                  alt={col.name} 
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" 
+                <img
+                  src={col.img}
+                  alt={col.name}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 md:opacity-60 md:group-hover:opacity-80 transition-opacity duration-700" />
-                
+
                 <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end">
                   <h3 className="text-white font-playfair text-2xl lg:text-3xl font-bold opacity-100 md:opacity-0 transform md:-translate-x-4 md:group-hover:opacity-100 md:group-hover:translate-x-0 transition-all duration-500 ease-out">
                     {col.name}
@@ -800,7 +777,9 @@ export default function HomeContent({ categories }: { categories: any[] }) {
 
       <InstagramFeed username="universalsanitaryhouse" />
 
-      <motion.section 
+      <ClientMarquee />
+
+      <motion.section
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-120px" }}
@@ -855,7 +834,7 @@ export default function HomeContent({ categories }: { categories: any[] }) {
         </div>
       </motion.section>
 
-      <motion.section 
+      <motion.section
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-120px" }}

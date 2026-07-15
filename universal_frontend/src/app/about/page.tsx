@@ -1,4 +1,5 @@
 import { ShieldCheck, PenTool, HeartHandshake, MapPin } from "lucide-react";
+import JourneySection from "@/components/about/JourneySection";
 
 export const metadata = {
   title: "About Us | Universal Sanitary",
@@ -25,12 +26,18 @@ export default function AboutPage() {
       <section className="py-24 px-6 md:px-12 max-w-4xl mx-auto text-center">
         <h2 className="font-playfair text-3xl md:text-4xl text-foreground mb-8">A Tradition of Excellence</h2>
         <p className="text-lg md:text-xl text-neutral-600 leading-[1.7] font-sans mb-8">
-          Founded in 1968, <strong className="text-foreground">Universal Sanitary House</strong> has been at the forefront of redefining luxury spaces in Kerala and beyond. For over five decades, we have partnered with the world's most prestigious brands to bring unparalleled elegance and functionality to residential, commercial, and hospitality projects.
+          <strong className="text-foreground">Universal Sanitary House</strong> was established in the year 1968 in Ernakulam, the business capital of Kerala. Since then, it has been one of the leading Sanitary ware and Water Supply Materials business houses in Ernakulam.
         </p>
         <p className="text-lg md:text-xl text-neutral-600 leading-[1.7] font-sans mb-8">
-          We take immense pride in our heritage, holding the historic distinction of being the <strong className="text-foreground">first authorized dealership in Kerala for legendary companies like Cera and Parryware</strong>. Today, we continue this legacy as the one and only exclusive dealership in Kerala for <strong className="text-foreground">NECO</strong>, the premier manhole and drainage cover brand.
+          We have a strong and satisfied customer base and the expertise to guide customers for cost-efficient procurement of a wide range of quality Sanitary ware, Tiles, and Water Supply materials. Over the years, we have established a reputation as a trustworthy dealer in Sanitary ware and allied building materials.
+        </p>
+        <p className="text-lg md:text-xl text-neutral-600 leading-[1.7] font-sans mb-8">
+          Our core strength, apart from our immense industry expertise, lies in the quality of our products, the fair pricing we have established, and the unmatched service we render to our esteemed clientele.
         </p>
       </section>
+
+      {/* The Journey Section */}
+      <JourneySection />
 
       {/* The Founders Section */}
       <section className="py-24 bg-neutral-100 px-6 md:px-12">
@@ -39,16 +46,19 @@ export default function AboutPage() {
             <img src="/images/about/interior_1968.webp" alt="Showroom Legacy" className="absolute inset-0 w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 transition-all duration-1000" />
           </div>
           <div className="flex-1">
-            <h3 className="font-sans font-bold uppercase tracking-widest text-xs text-neutral-400 mb-4">Visionary Leadership</h3>
+            <h3 className="font-sans font-bold uppercase tracking-widest text-xs text-neutral-400 mb-4">Our Roots</h3>
             <h2 className="font-playfair text-4xl md:text-5xl text-foreground mb-8">The Pillars of Our Success</h2>
             <div className="relative">
               <span className="absolute -top-10 -left-6 text-9xl text-primary/10 font-serif">"</span>
               <p className="text-xl text-neutral-700 leading-[1.7] italic font-playfair relative z-10 mb-8">
-                Under the visionary leadership of Mr. T. E. Azad and Mr. T. E. Akbar, we transitioned from a traditional building materials supplier into a premier destination for architects, interior designers, and homeowners seeking the extraordinary.
+                The company is a division of M/s. T. H. Ebrahim Kareem & Co., Muvattupuzha, which was founded way back in 1946 as a wholesale and retail business in General Hardware, Iron and Steel and allied items.
               </p>
             </div>
+            <p className="text-neutral-500 leading-relaxed mb-4">
+              Mr. T. H. Ebrahim Kareem, the founder of M/s. T. H. Ebrahim Kareem & Co., masterminded the formation of Universal Sanitary House.
+            </p>
             <p className="text-neutral-500 leading-relaxed">
-              Their commitment to quality, an eye for meticulous design, and dedication to customer satisfaction set the foundation that still guides every decision we make today.
+              At present, his sons, <strong className="text-neutral-700">Mr. T. E. Azad</strong> and <strong className="text-neutral-700">Mr. T. E. Akbar</strong>, are leading the company on the growth track based on the principles and vision of its mentor.
             </p>
           </div>
         </div>

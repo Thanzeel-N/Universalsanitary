@@ -25,3 +25,28 @@ body {
 .smooth-hover {
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 50s linear infinite;
+}
+
+.animate-marquee-hover-pause:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+.mask-fade-edges {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
