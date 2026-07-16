@@ -18,12 +18,18 @@ class ProductImageSerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     images = ProductImageSerializer(many=True, read_only=True)
-    category = CategorySerializer(read_only=True)
-    brand = BrandSerializer(read_only=True)
+    category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
+    brand = serializers.PrimaryKeyRelatedField(queryset=Brand.objects.all())
 
     class Meta:
         model = Product
         fields = '__all__'
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['category'] = CategorySerializer(instance.category).data if instance.category else None
+        representation['brand'] = BrandSerializer(instance.brand).data if instance.brand else None
+        return representation
 
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
