@@ -130,6 +130,14 @@ export default function EditProductPage({ params }: { params: Promise<{ slug: st
       if (!res.ok) {
         const err = await res.json();
         console.error(err);
+        
+        let errorMsg = "Failed to update product";
+        if (typeof err === 'object' && err !== null) {
+            errorMsg = Object.entries(err)
+                .map(([key, value]) => `${key}: ${Array.isArray(value) ? value.join(', ') : value}`)
+                .join('\n');
+        }
+        alert(`Validation Error:\n${errorMsg}`);
         throw new Error("Failed to update product");
       }
       
