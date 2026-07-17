@@ -22,6 +22,16 @@ class ProductViewSet(viewsets.ModelViewSet):
     lookup_field = 'slug'
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        is_featured = self.request.query_params.get('is_featured', None)
+        if is_featured is not None:
+            if is_featured.lower() == 'true':
+                queryset = queryset.filter(is_featured=True)
+            elif is_featured.lower() == 'false':
+                queryset = queryset.filter(is_featured=False)
+        return queryset
+
     @action(detail=True, methods=['post'], parser_classes=[MultiPartParser, FormParser])
     def upload_image(self, request, slug=None):
         product = self.get_object()

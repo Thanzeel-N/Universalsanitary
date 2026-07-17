@@ -92,7 +92,7 @@ export default function HomeContent({ categories }: { categories: any[] }) {
   const [activePillar, setActivePillar] = useState(0);
 
   useEffect(() => {
-    fetch(apiUrl(`/api/v1/products/`))
+    fetch(apiUrl(`/api/v1/products/?is_featured=true`))
       .then(res => res.json())
       .then(data => setFeaturedProducts(data.reverse().slice(0, 4)))
       .catch(err => console.error(err));
