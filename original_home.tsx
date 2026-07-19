@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
@@ -151,7 +151,7 @@ export default function HomeContent({ categories }: { categories: any[] }) {
           title: "Freestanding Bath Tube",
           brand: "Jaquar",
           desc: "An elegantly contoured freestanding bath that serves as the luxurious centerpiece of the modern bathroom.",
-          price: "₹82,500",
+          price: "Γé╣82,500",
           image: "/images/space/bath_tube.webp",
           slug: "freestanding-bath-tube"
         },
@@ -160,7 +160,7 @@ export default function HomeContent({ categories }: { categories: any[] }) {
           title: "Thin Rim Table Top Basin",
           brand: "Jaquar",
           desc: "Solo by Jaquar presents JDS series washbasins with a thin rim table top design.",
-          price: "₹8,900",
+          price: "Γé╣8,900",
           image: "/images/space/wash_basin.webp",
           slug: "thin-rim-table-top-basin"
         },
@@ -169,7 +169,7 @@ export default function HomeContent({ categories }: { categories: any[] }) {
           title: "Rimless Wall-Hung WC",
           brand: "Jaquar",
           desc: "Solo by Jaquar presents Rimless WC with hidden installation screws for better aesthetics.",
-          price: "₹15,700",
+          price: "Γé╣15,700",
           image: "/images/space/toilet_closet.webp",
           slug: "rimless-wall-hung-wc"
         },
@@ -178,7 +178,7 @@ export default function HomeContent({ categories }: { categories: any[] }) {
           title: "Beta L-Shaped Shower Enclosure",
           brand: "Jaquar",
           desc: "Premium L-shaped glass shower enclosure with high-quality hinges and tempered safety glass.",
-          price: "₹1,06,000",
+          price: "Γé╣1,06,000",
           image: "/images/space/shower_closet.webp",
           slug: "beta-l-shaped-shower-enclosure"
         },
@@ -187,7 +187,7 @@ export default function HomeContent({ categories }: { categories: any[] }) {
           title: "Concealed Stop Cocks",
           brand: "Jaquar",
           desc: "Exposed part kit of two concealed stop cocks in Blush Gold Bright PVD finish.",
-          price: "₹17,300",
+          price: "Γé╣17,300",
           image: "/images/space/faucet.webp",
           slug: "concealed-stop-cocks"
         }
@@ -276,80 +276,65 @@ export default function HomeContent({ categories }: { categories: any[] }) {
 
   return (
     <main className="min-h-screen bg-background" onClick={() => setActiveHotspot(null)}>
-      {/* Hero Section - Refined Original Minimalist */}
-      <section ref={heroRef} className="relative h-screen flex items-center justify-center bg-black text-white overflow-hidden">
-        {/* Crisp, unblurred background image with very slow, elegant scale */}
+      {/* Hero Section */}
+      <section ref={heroRef} className="relative h-screen flex items-center justify-center bg-primary text-background overflow-hidden">
         <div className="absolute inset-0 w-full h-full z-0">
           <motion.img
             style={{ y: heroImgY }}
-            initial={{ scale: 1.05 }}
+            initial={{ scale: 1.08 }}
             animate={{ scale: 1 }}
             transition={{ duration: 10, ease: "easeOut" }}
             src="/images/hero.webp"
             alt="Luxury Sanitaryware"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover blur-[2px]"
           />
-          {/* Minimalist overlay: just enough to make text readable, no heavy vignette */}
-          <div className="absolute inset-0 bg-black/40" />
+          {/* Layered overlay for premium text legibility and vignetting */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/35 to-black/60" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(0,0,0,0)_0%,_rgba(0,0,0,0.4)_100%)]" />
         </div>
-        
         <motion.div
           style={{ y: heroTextY, opacity: heroOpacity }}
           variants={heroContainerVariants}
           initial="hidden"
           animate="visible"
-          className="z-10 text-center px-6 max-w-4xl mx-auto flex flex-col items-center mt-12"
+          className="z-10 text-center px-6 max-w-4xl mx-auto flex flex-col items-center"
         >
           {/* Top Tagline */}
           <motion.span
             variants={heroItemVariants}
-            className="text-[10px] md:text-xs font-sans font-bold tracking-[0.4em] text-white/80 uppercase mb-6 block"
+            className="text-[10px] md:text-xs font-sans font-bold tracking-[0.35em] text-sky-400 uppercase mb-4 block"
           >
             Universal Sanitary House
           </motion.span>
 
-          {/* Large Editorial Headline - Pure and simple */}
+          {/* Large Editorial Headline */}
           <motion.h1
             variants={heroItemVariants}
-            className="font-playfair text-5xl md:text-7xl lg:text-8xl font-normal text-white tracking-wide mb-8 leading-[1.1] drop-shadow-sm"
+            className="font-playfair text-4xl md:text-6xl lg:text-7xl font-light text-white tracking-wide mb-6 leading-tight drop-shadow-lg"
           >
-            Defining <br className="hidden md:block" />
-            <span className="italic font-light">Luxury Spaces.</span>
+            Defining <span className="italic font-normal text-sky-100">Luxury Spaces</span>
           </motion.h1>
 
           {/* Subtitle */}
           <motion.p
             variants={heroItemVariants}
-            className="font-sans text-[10px] md:text-xs text-white/70 tracking-[0.2em] uppercase max-w-xl mx-auto mb-12 leading-relaxed"
+            className="font-sans text-xs md:text-sm text-neutral-300 tracking-[0.25em] uppercase max-w-xl mx-auto mb-10 leading-relaxed drop-shadow-md"
           >
-            Kerala's Premier Destination Since 1968
+            Kerala's Premier Destination for Luxury Sanitaryware Since 1968
           </motion.p>
 
-          {/* Ultra Minimal Button */}
+          {/* Custom Slide-Fill Button */}
           <motion.div variants={heroItemVariants}>
             <Link
               href="/products"
-              className="inline-block border border-white/40 bg-white/5 backdrop-blur-sm hover:bg-white hover:text-black px-10 py-4 uppercase tracking-[0.2em] text-[10px] font-bold transition-colors duration-300"
+              className="group relative inline-block overflow-hidden border border-white/30 hover:border-white px-8 py-4 uppercase tracking-[0.2em] text-xs font-bold transition-all duration-500 ease-out shadow-lg"
             >
-              Explore Collection
+              <span className="relative z-10 text-white transition-colors duration-500 group-hover:text-neutral-900">
+                Explore the Collection
+              </span>
+              <div className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-0" />
             </Link>
           </motion.div>
-        </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center z-10"
-        >
-          <div className="w-[1px] h-16 bg-white/20 relative overflow-hidden">
-            <motion.div 
-              animate={{ y: [0, 64, 0] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-0 left-0 w-full h-1/3 bg-white"
-            />
-          </div>
         </motion.div>
       </section>
 
