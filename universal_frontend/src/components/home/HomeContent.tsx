@@ -277,86 +277,75 @@ export default function HomeContent({ categories }: { categories: any[] }) {
   return (
     <main className="min-h-screen bg-background" onClick={() => setActiveHotspot(null)}>
       {/* Hero Section */}
-      <section ref={heroRef} className="relative h-screen flex flex-col justify-center items-center overflow-hidden">
-        {/* Background Image with slow zoom */}
-        <div className="absolute inset-0 z-0">
-          <motion.img
-            initial={{ scale: 1.1 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 15, ease: "easeOut" }}
-            src="/images/hero.webp"
-            alt="Luxury Space"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-black/40 to-transparent" />
-          <div className="absolute inset-0 bg-black/30" />
-        </div>
-
-        {/* Content */}
-        <motion.div
-          variants={heroContainerVariants}
-          initial="hidden"
-          animate="visible"
-          className="relative z-10 w-full max-w-[1200px] mx-auto px-6 text-center mt-20"
-        >
-          <motion.div variants={heroItemVariants} className="inline-flex items-center justify-center gap-4 mb-8">
-            <span className="w-12 h-[1px] bg-white/60"></span>
-            <span className="text-[10px] md:text-xs font-sans font-bold tracking-[0.4em] text-white/90 uppercase">
-              Universal Sanitary House
-            </span>
-            <span className="w-12 h-[1px] bg-white/60"></span>
-          </motion.div>
-
-          <motion.h1
-            variants={heroItemVariants}
-            className="font-playfair text-6xl md:text-7xl lg:text-[7rem] text-white leading-[1.1] mb-8 drop-shadow-2xl"
+      <section ref={heroRef} className="relative min-h-[90vh] md:min-h-screen flex items-center bg-[#FCFAF9] overflow-hidden pt-24 pb-16">
+        <div className="w-full max-w-[1500px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          {/* Left Text Content - Editorial Minimalist */}
+          <motion.div
+            variants={heroContainerVariants}
+            initial="hidden"
+            animate="visible"
+            className="lg:col-span-6 flex flex-col justify-center text-left pt-10 lg:pt-0 relative z-20"
           >
-            The Art Of <br />
-            <span className="italic font-light">Fine Living.</span>
-          </motion.h1>
-
-          <motion.p
-            variants={heroItemVariants}
-            className="font-sans text-sm md:text-base text-neutral-300 max-w-2xl mx-auto mb-12 tracking-wider font-light leading-relaxed drop-shadow-md"
-          >
-            Curating the finest sanitaryware since 1968. Experience a world where flawless design meets extraordinary functionality.
-          </motion.p>
-
-          <motion.div variants={heroItemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Link
-              href="/products"
-              className="group relative overflow-hidden bg-white text-black px-10 py-5 text-xs font-bold uppercase tracking-widest hover:scale-105 transition-transform duration-300"
-            >
-              <span className="relative z-10 flex items-center gap-2">
-                View Collection
-                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+            <motion.div variants={heroItemVariants} className="flex items-center gap-4 mb-10">
+              <span className="w-10 h-[1px] bg-neutral-300"></span>
+              <span className="text-[10px] md:text-xs font-sans font-bold tracking-[0.2em] text-neutral-500 uppercase">
+                Premium Sanitaryware
               </span>
-            </Link>
-            <Link
-              href="/about"
-              className="px-10 py-5 bg-transparent border border-white/40 text-white text-xs font-bold uppercase tracking-widest hover:bg-white/10 hover:border-white transition-colors duration-300 backdrop-blur-sm"
-            >
-              Our Heritage
-            </Link>
-          </motion.div>
-        </motion.div>
+            </motion.div>
 
-        {/* Scroll Indicator */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10"
-        >
-          <span className="text-[9px] uppercase tracking-[0.4em] text-white/60 font-bold">Scroll</span>
-          <div className="w-[1px] h-16 bg-white/20 relative overflow-hidden">
+            <motion.h1
+              variants={heroItemVariants}
+              className="font-playfair text-6xl md:text-7xl lg:text-[6.5rem] text-neutral-900 leading-[1.05] mb-8 tracking-tight"
+            >
+              Quiet <br />
+              <span className="italic font-light text-neutral-500">Elegance.</span>
+            </motion.h1>
+
+            <motion.p
+              variants={heroItemVariants}
+              className="font-sans text-sm md:text-base text-neutral-500 max-w-md mb-12 leading-[1.8] font-light"
+            >
+              Universal Sanitary House brings unparalleled craftsmanship to your spaces. Curating the world's finest collections since 1968.
+            </motion.p>
+
+            <motion.div variants={heroItemVariants} className="flex items-center gap-8">
+              <Link
+                href="/products"
+                className="group relative inline-flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-neutral-900 hover:text-neutral-500 transition-colors"
+              >
+                <span>View Collection</span>
+                <span className="w-12 h-[1px] bg-neutral-900 group-hover:w-20 transition-all duration-500"></span>
+              </Link>
+            </motion.div>
+          </motion.div>
+
+          {/* Right Images Composition - Asymmetric */}
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.5, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+            className="lg:col-span-6 relative h-[60vh] md:h-[75vh] w-full mt-10 lg:mt-0 flex justify-end"
+          >
+            {/* Primary Portrait Image */}
             <motion.div 
-              animate={{ y: [0, 64, 0] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-0 left-0 w-full h-1/2 bg-white"
-            />
-          </div>
-        </motion.div>
+              style={{ y: heroImgY }}
+              className="w-[85%] md:w-[75%] h-[90%] md:h-[100%] rounded-sm overflow-hidden relative shadow-2xl"
+            >
+              <img src="/images/hero.webp" alt="Luxury Bathroom" className="w-full h-full object-cover scale-105 hover:scale-100 transition-transform duration-[2s] ease-out" />
+            </motion.div>
+
+            {/* Overlapping Smaller Image */}
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
+              className="absolute left-0 bottom-[10%] w-[45%] md:w-[40%] aspect-[4/5] rounded-sm overflow-hidden border-[8px] border-[#FCFAF9] shadow-xl z-20"
+            >
+              <img src="/images/space/modern_luxury.webp" alt="Detail" className="w-full h-full object-cover scale-100 hover:scale-110 transition-transform duration-[3s] ease-out" />
+            </motion.div>
+          </motion.div>
+        </div>
       </section>
 
       <motion.section
