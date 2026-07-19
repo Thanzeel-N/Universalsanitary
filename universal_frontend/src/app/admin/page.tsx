@@ -68,11 +68,11 @@ export default function AdminDashboard() {
     }
   };
 
-  const handleDeleteBrand = async (slug: string) => {
+  const handleDeleteBrand = async (id: number) => {
     if (!confirm("Are you sure you want to delete this brand?")) return;
     const token = Cookies.get("access_token");
     try {
-      await fetch(apiUrl(`/api/v1/brands/${slug}/`), {
+      await fetch(apiUrl(`/api/v1/brands/${id}/`), {
         method: "DELETE",
         headers: { "Authorization": `Bearer ${token}` }
       });
@@ -206,7 +206,7 @@ export default function AdminDashboard() {
                 <tr key={brand.id} className="border-b border-neutral-100 hover:bg-neutral-50">
                   <td className="p-4 font-sans text-[#222] font-medium">{brand.name}</td>
                   <td className="p-4 flex justify-end gap-3">
-                    <button onClick={() => handleDeleteBrand(brand.slug)} className="text-red-500 hover:text-red-700">
+                    <button onClick={() => handleDeleteBrand(brand.id)} className="text-red-500 hover:text-red-700">
                       <Trash2 size={18} />
                     </button>
                   </td>
