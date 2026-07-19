@@ -37,12 +37,12 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="aspect-square bg-neutral-100 flex items-center justify-center overflow-hidden rounded-lg">
+      <div className="aspect-square bg-neutral-100 flex items-center justify-center overflow-hidden rounded-lg group cursor-zoom-in">
         {product.images && product.images.length > 0 ? (
           <img 
             src={product.images.find((img: any) => img.is_primary)?.image || product.images[0].image} 
             alt={product.name} 
-            className="w-full h-full object-cover" 
+            className="max-w-[90%] max-h-[90%] object-contain mix-blend-multiply transition-transform duration-500 ease-out group-hover:scale-150 origin-center" 
           />
         ) : (
           <p className="text-neutral-400">No Image Available</p>
