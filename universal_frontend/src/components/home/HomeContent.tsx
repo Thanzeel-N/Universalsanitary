@@ -542,7 +542,7 @@ export default function HomeContent({ categories }: { categories: any[] }) {
       <motion.section
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-120px" }}
+        viewport={{ once: true, amount: 0.1 }}
         variants={sectionVariants}
         className="py-16 md:py-24 px-6 md:px-12 max-w-[1400px] mx-auto border-t border-neutral-200"
       >
@@ -558,19 +558,21 @@ export default function HomeContent({ categories }: { categories: any[] }) {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
         >
           {featuredProducts.map((product) => (
-            <motion.div variants={cardVariants} key={product.id} className="group block cursor-pointer">
-              <div className="aspect-square bg-neutral-100 rounded-lg overflow-hidden mb-4 relative">
-                {product.images && product.images.length > 0 ? (
-                  <img src={product.images.find((img: any) => img.is_primary)?.image || product.images[0].image} alt={product.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                ) : (
-                  <div className="absolute inset-0 flex items-center justify-center text-neutral-300">
-                    <ShoppingBag size={48} strokeWidth={1} />
-                  </div>
-                )}
-              </div>
-              <p className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold mb-1">{product.category?.name || "Sanitary"}</p>
-              <h3 className="font-playfair text-lg text-foreground mb-1">{product.name}</h3>
-              <p className="text-base text-neutral-500 line-clamp-2 leading-[1.7]">{product.description}</p>
+            <motion.div variants={cardVariants} key={product.id} className="group block">
+              <Link href={`/products/${product.slug}`} className="block cursor-pointer">
+                <div className="aspect-square bg-neutral-100 rounded-lg overflow-hidden mb-4 relative">
+                  {product.images && product.images.length > 0 ? (
+                    <img src={product.images.find((img: any) => img.is_primary)?.image || product.images[0].image} alt={product.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center text-neutral-300">
+                      <ShoppingBag size={48} strokeWidth={1} />
+                    </div>
+                  )}
+                </div>
+                <p className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold mb-1">{product.category?.name || "Sanitary"}</p>
+                <h3 className="font-playfair text-lg text-foreground mb-1">{product.name}</h3>
+                <p className="text-base text-neutral-500 line-clamp-2 leading-[1.7]">{product.description}</p>
+              </Link>
             </motion.div>
           ))}
           {featuredProducts.length === 0 && (
