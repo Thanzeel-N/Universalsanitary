@@ -276,75 +276,109 @@ export default function HomeContent({ categories }: { categories: any[] }) {
 
   return (
     <main className="min-h-screen bg-background" onClick={() => setActiveHotspot(null)}>
-      {/* Hero Section */}
-      <section ref={heroRef} className="relative min-h-[90vh] md:min-h-screen flex items-center bg-[#FCFAF9] overflow-hidden pt-24 pb-16">
-        <div className="w-full max-w-[1500px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      {/* Hero Section - Bento Grid */}
+      <section ref={heroRef} className="relative min-h-screen bg-neutral-100 overflow-hidden pt-24 pb-12 px-4 md:px-8">
+        <div className="w-full max-w-[1600px] mx-auto h-full min-h-[80vh] grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6">
           
-          {/* Left Text Content - Editorial Minimalist */}
-          <motion.div
-            variants={heroContainerVariants}
-            initial="hidden"
-            animate="visible"
-            className="lg:col-span-6 flex flex-col justify-center text-left pt-10 lg:pt-0 relative z-20"
+          {/* Main Large Bento Block */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="lg:col-span-8 relative rounded-3xl overflow-hidden group min-h-[60vh] lg:min-h-0 bg-black shadow-lg"
           >
-            <motion.div variants={heroItemVariants} className="flex items-center gap-4 mb-10">
-              <span className="w-10 h-[1px] bg-neutral-300"></span>
-              <span className="text-[10px] md:text-xs font-sans font-bold tracking-[0.2em] text-neutral-500 uppercase">
-                Premium Sanitaryware
+            <motion.img
+              style={{ scale: useTransform(heroScroll, [0, 1], [1, 1.05]) }}
+              src="/images/hero.webp"
+              alt="Luxury Space"
+              className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+            
+            <div className="absolute bottom-0 left-0 p-8 md:p-12 z-10 w-full">
+              <span className="inline-block px-4 py-2 rounded-full bg-white/20 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-widest mb-6">
+                Universal Sanitary House
               </span>
-            </motion.div>
-
-            <motion.h1
-              variants={heroItemVariants}
-              className="font-playfair text-6xl md:text-7xl lg:text-[6.5rem] text-neutral-900 leading-[1.05] mb-8 tracking-tight"
-            >
-              Quiet <br />
-              <span className="italic font-light text-neutral-500">Elegance.</span>
-            </motion.h1>
-
-            <motion.p
-              variants={heroItemVariants}
-              className="font-sans text-sm md:text-base text-neutral-500 max-w-md mb-12 leading-[1.8] font-light"
-            >
-              Universal Sanitary House brings unparalleled craftsmanship to your spaces. Curating the world's finest collections since 1968.
-            </motion.p>
-
-            <motion.div variants={heroItemVariants} className="flex items-center gap-8">
+              <h1 className="font-playfair text-5xl md:text-7xl text-white leading-tight mb-4 drop-shadow-lg">
+                Crafting <br/><span className="italic font-light">Luxury.</span>
+              </h1>
+              <p className="text-white/80 font-sans text-sm md:text-base max-w-md mb-8">
+                Kerala's premier destination for curated sanitaryware. Since 1968.
+              </p>
               <Link
                 href="/products"
-                className="group relative inline-flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-neutral-900 hover:text-neutral-500 transition-colors"
+                className="inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 hover:bg-neutral-100 transition-all shadow-md"
               >
-                <span>View Collection</span>
-                <span className="w-12 h-[1px] bg-neutral-900 group-hover:w-20 transition-all duration-500"></span>
+                Explore Collection
+                <ArrowRight size={14} />
               </Link>
-            </motion.div>
+            </div>
           </motion.div>
 
-          {/* Right Images Composition - Asymmetric */}
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.5, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-            className="lg:col-span-6 relative h-[60vh] md:h-[75vh] w-full mt-10 lg:mt-0 flex justify-end"
-          >
-            {/* Primary Portrait Image */}
+          {/* Right Side Stacked Bento Blocks */}
+          <div className="lg:col-span-4 flex flex-col gap-4 lg:gap-6">
+            
+            {/* Top Right Block: Collection Spotlight */}
             <motion.div 
-              style={{ y: heroImgY }}
-              className="w-[85%] md:w-[75%] h-[90%] md:h-[100%] rounded-sm overflow-hidden relative shadow-2xl"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+              className="flex-1 relative rounded-3xl overflow-hidden group bg-neutral-200 min-h-[30vh] shadow-lg"
             >
-              <img src="/images/hero.webp" alt="Luxury Bathroom" className="w-full h-full object-cover scale-105 hover:scale-100 transition-transform duration-[2s] ease-out" />
+              <img 
+                src="/images/space/modern_luxury.webp" 
+                alt="Modern Collection" 
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-[3s]" 
+              />
+              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500" />
+              
+              <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                <h3 className="text-white font-playfair text-3xl mb-2">Modern Series</h3>
+                <Link href="/products" className="text-white/90 text-xs font-bold uppercase tracking-widest flex items-center gap-2 group-hover:text-white transition-colors">
+                  View Series <span className="w-6 h-[1px] bg-white/80 group-hover:w-10 transition-all"></span>
+                </Link>
+              </div>
             </motion.div>
 
-            {/* Overlapping Smaller Image */}
+            {/* Bottom Right Block: Trust/Heritage */}
             <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
-              className="absolute left-0 bottom-[10%] w-[45%] md:w-[40%] aspect-[4/5] rounded-sm overflow-hidden border-[8px] border-[#FCFAF9] shadow-xl z-20"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+              className="flex-1 relative rounded-3xl overflow-hidden bg-slate-900 p-8 flex flex-col justify-between min-h-[30vh] shadow-lg group hover:bg-slate-800 transition-colors duration-500"
             >
-              <img src="/images/space/modern_luxury.webp" alt="Detail" className="w-full h-full object-cover scale-100 hover:scale-110 transition-transform duration-[3s] ease-out" />
+              <div className="flex justify-between items-start">
+                <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-sky-400 group-hover:scale-110 transition-transform">
+                  <ShieldCheck size={24} />
+                </div>
+                <span className="text-slate-700 font-bold text-5xl font-playfair group-hover:text-slate-600 transition-colors">55</span>
+              </div>
+              
+              <div>
+                <h3 className="text-white font-playfair text-2xl mb-3">Years of Trust</h3>
+                <p className="text-slate-400 text-sm font-sans mb-6 leading-relaxed">
+                  Over 10,000 families trust us for their luxury bathroom transformations.
+                </p>
+                
+                <div className="flex items-center justify-between">
+                  <div className="flex -space-x-3">
+                    {[14, 15, 21].map(i => (
+                      <div key={i} className="w-10 h-10 rounded-full border-2 border-slate-900 overflow-hidden bg-white">
+                        <img src={`/images/clients/client_${i}.${i===14?'webp':(i===15?'png':'jpg')}`} className="w-full h-full object-cover p-1" alt="Client" />
+                      </div>
+                    ))}
+                    <div className="w-10 h-10 rounded-full border-2 border-slate-900 bg-sky-500 flex items-center justify-center text-white text-[10px] font-bold">
+                      10k+
+                    </div>
+                  </div>
+                  <Link href="/about" className="w-10 h-10 rounded-full bg-white/10 hover:bg-white flex items-center justify-center text-white hover:text-slate-900 transition-colors">
+                    <ArrowRight size={16} />
+                  </Link>
+                </div>
+              </div>
             </motion.div>
-          </motion.div>
+
+          </div>
         </div>
       </section>
 
