@@ -276,109 +276,108 @@ export default function HomeContent({ categories }: { categories: any[] }) {
 
   return (
     <main className="min-h-screen bg-background" onClick={() => setActiveHotspot(null)}>
-      {/* Hero Section - Bento Grid */}
-      <section ref={heroRef} className="relative min-h-screen bg-neutral-100 overflow-hidden pt-24 pb-12 px-4 md:px-8">
-        <div className="w-full max-w-[1600px] mx-auto h-full min-h-[80vh] grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6">
+      {/* Hero Section - Clean & Corporate */}
+      <section ref={heroRef} className="relative min-h-[85vh] flex items-center bg-white overflow-hidden pt-24 pb-16">
+        <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           
-          {/* Main Large Bento Block */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="lg:col-span-8 relative rounded-3xl overflow-hidden group min-h-[60vh] lg:min-h-0 bg-black shadow-lg"
+          {/* Left Text Content */}
+          <motion.div
+            variants={heroContainerVariants}
+            initial="hidden"
+            animate="visible"
+            className="flex flex-col justify-center text-left pt-10 lg:pt-0 z-20"
           >
-            <motion.img
-              style={{ scale: useTransform(heroScroll, [0, 1], [1, 1.05]) }}
-              src="/images/hero.webp"
-              alt="Luxury Space"
-              className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-700"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-            
-            <div className="absolute bottom-0 left-0 p-8 md:p-12 z-10 w-full">
-              <span className="inline-block px-4 py-2 rounded-full bg-white/20 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-widest mb-6">
-                Universal Sanitary House
+            <motion.div variants={heroItemVariants} className="inline-block mb-6">
+              <span className="bg-sky-50 text-sky-700 px-4 py-2 rounded-full text-xs font-bold tracking-wider uppercase border border-sky-100 shadow-sm">
+                Premium Sanitaryware Solutions
               </span>
-              <h1 className="font-playfair text-5xl md:text-7xl text-white leading-tight mb-4 drop-shadow-lg">
-                Crafting <br/><span className="italic font-light">Luxury.</span>
-              </h1>
-              <p className="text-white/80 font-sans text-sm md:text-base max-w-md mb-8">
-                Kerala's premier destination for curated sanitaryware. Since 1968.
-              </p>
+            </motion.div>
+
+            <motion.h1
+              variants={heroItemVariants}
+              className="font-playfair text-4xl md:text-5xl lg:text-6xl text-slate-900 leading-tight mb-6 font-bold"
+            >
+              Transforming Spaces with Quality & Elegance
+            </motion.h1>
+
+            <motion.p
+              variants={heroItemVariants}
+              className="font-sans text-base md:text-lg text-slate-600 max-w-lg mb-10 leading-relaxed"
+            >
+              Universal Sanitary House has been Kerala's trusted distributor since 1968, providing world-class products and unmatched service for modern living.
+            </motion.p>
+
+            <motion.div variants={heroItemVariants} className="flex flex-col sm:flex-row items-center gap-4 mb-12">
               <Link
                 href="/products"
-                className="inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 hover:bg-neutral-100 transition-all shadow-md"
+                className="w-full sm:w-auto text-center bg-slate-900 text-white px-8 py-4 rounded-lg text-sm font-bold tracking-wide hover:bg-slate-800 transition-colors shadow-lg"
               >
-                Explore Collection
-                <ArrowRight size={14} />
+                Explore Products
               </Link>
-            </div>
+              <Link
+                href="/about"
+                className="w-full sm:w-auto text-center bg-white text-slate-900 border border-slate-300 px-8 py-4 rounded-lg text-sm font-bold tracking-wide hover:bg-slate-50 transition-colors shadow-sm"
+              >
+                Our Heritage
+              </Link>
+            </motion.div>
+
+            <motion.div variants={heroItemVariants} className="flex items-center gap-8 pt-8 border-t border-slate-100">
+              <div className="flex flex-col">
+                <span className="text-3xl font-bold text-slate-900">10k+</span>
+                <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold mt-1">Customers</span>
+              </div>
+              <div className="w-[1px] h-12 bg-slate-200"></div>
+              <div className="flex flex-col">
+                <span className="text-3xl font-bold text-slate-900">55+</span>
+                <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold mt-1">Years Exp</span>
+              </div>
+              <div className="w-[1px] h-12 bg-slate-200"></div>
+              <div className="flex flex-col">
+                <div className="flex text-amber-400 mb-1">
+                  <Star size={18} fill="currentColor" />
+                  <Star size={18} fill="currentColor" />
+                  <Star size={18} fill="currentColor" />
+                  <Star size={18} fill="currentColor" />
+                  <Star size={18} fill="currentColor" />
+                </div>
+                <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Top Rated</span>
+              </div>
+            </motion.div>
           </motion.div>
 
-          {/* Right Side Stacked Bento Blocks */}
-          <div className="lg:col-span-4 flex flex-col gap-4 lg:gap-6">
-            
-            {/* Top Right Block: Collection Spotlight */}
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-              className="flex-1 relative rounded-3xl overflow-hidden group bg-neutral-200 min-h-[30vh] shadow-lg"
-            >
+          {/* Right Image Content */}
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="relative h-[50vh] md:h-[60vh] lg:h-[75vh] w-full mt-8 lg:mt-0"
+          >
+            <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl border border-slate-100">
               <img 
-                src="/images/space/modern_luxury.webp" 
-                alt="Modern Collection" 
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-[3s]" 
+                src="/images/hero.webp" 
+                alt="Modern Bathroom Interior" 
+                className="w-full h-full object-cover" 
               />
-              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500" />
-              
-              <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                <h3 className="text-white font-playfair text-3xl mb-2">Modern Series</h3>
-                <Link href="/products" className="text-white/90 text-xs font-bold uppercase tracking-widest flex items-center gap-2 group-hover:text-white transition-colors">
-                  View Series <span className="w-6 h-[1px] bg-white/80 group-hover:w-10 transition-all"></span>
-                </Link>
-              </div>
-            </motion.div>
-
-            {/* Bottom Right Block: Trust/Heritage */}
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-              className="flex-1 relative rounded-3xl overflow-hidden bg-slate-900 p-8 flex flex-col justify-between min-h-[30vh] shadow-lg group hover:bg-slate-800 transition-colors duration-500"
+            </div>
+            
+            {/* Simple Corporate Trust Card overlay */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="absolute -bottom-6 -left-6 md:bottom-8 md:-left-12 bg-white p-6 rounded-xl shadow-xl border border-slate-100 flex items-center gap-5 z-10"
             >
-              <div className="flex justify-between items-start">
-                <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-sky-400 group-hover:scale-110 transition-transform">
-                  <ShieldCheck size={24} />
-                </div>
-                <span className="text-slate-700 font-bold text-5xl font-playfair group-hover:text-slate-600 transition-colors">55</span>
+              <div className="w-14 h-14 bg-sky-50 rounded-full flex items-center justify-center text-sky-600">
+                <ShieldCheck size={28} />
               </div>
-              
               <div>
-                <h3 className="text-white font-playfair text-2xl mb-3">Years of Trust</h3>
-                <p className="text-slate-400 text-sm font-sans mb-6 leading-relaxed">
-                  Over 10,000 families trust us for their luxury bathroom transformations.
-                </p>
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex -space-x-3">
-                    {[14, 15, 21].map(i => (
-                      <div key={i} className="w-10 h-10 rounded-full border-2 border-slate-900 overflow-hidden bg-white">
-                        <img src={`/images/clients/client_${i}.${i===14?'webp':(i===15?'png':'jpg')}`} className="w-full h-full object-cover p-1" alt="Client" />
-                      </div>
-                    ))}
-                    <div className="w-10 h-10 rounded-full border-2 border-slate-900 bg-sky-500 flex items-center justify-center text-white text-[10px] font-bold">
-                      10k+
-                    </div>
-                  </div>
-                  <Link href="/about" className="w-10 h-10 rounded-full bg-white/10 hover:bg-white flex items-center justify-center text-white hover:text-slate-900 transition-colors">
-                    <ArrowRight size={16} />
-                  </Link>
-                </div>
+                <h4 className="text-slate-900 font-bold text-lg">Authorized Dealer</h4>
+                <p className="text-slate-500 text-sm">Premium Global Brands</p>
               </div>
             </motion.div>
-
-          </div>
+          </motion.div>
+          
         </div>
       </section>
 
