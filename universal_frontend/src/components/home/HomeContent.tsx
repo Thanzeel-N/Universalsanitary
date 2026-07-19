@@ -277,145 +277,86 @@ export default function HomeContent({ categories }: { categories: any[] }) {
   return (
     <main className="min-h-screen bg-background" onClick={() => setActiveHotspot(null)}>
       {/* Hero Section */}
-      <section ref={heroRef} className="relative min-h-screen flex items-center justify-center bg-[#0a0a0a] overflow-hidden pt-20 pb-16">
-        
-        {/* Abstract animated background gradients */}
-        <div className="absolute inset-0 z-0 opacity-40">
-          <motion.div 
-            animate={{ 
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.5, 0.3],
-            }}
-            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -top-[20%] -left-[10%] w-[50vw] h-[50vw] bg-sky-900/30 rounded-full blur-[120px]"
+      <section ref={heroRef} className="relative h-screen flex flex-col justify-center items-center overflow-hidden">
+        {/* Background Image with slow zoom */}
+        <div className="absolute inset-0 z-0">
+          <motion.img
+            initial={{ scale: 1.1 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 15, ease: "easeOut" }}
+            src="/images/hero.webp"
+            alt="Luxury Space"
+            className="w-full h-full object-cover"
           />
-          <motion.div 
-            animate={{ 
-              scale: [1, 1.3, 1],
-              opacity: [0.2, 0.4, 0.2],
-            }}
-            transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-            className="absolute top-[40%] -right-[10%] w-[40vw] h-[40vw] bg-amber-900/20 rounded-full blur-[100px]"
-          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-black/30" />
         </div>
 
-        <div className="w-full max-w-[1500px] mx-auto px-6 md:px-12 z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          {/* Left Text Content */}
-          <motion.div
-            variants={heroContainerVariants}
-            initial="hidden"
-            animate="visible"
-            className="lg:col-span-5 flex flex-col justify-center text-left pt-10 lg:pt-0 relative z-20"
+        {/* Content */}
+        <motion.div
+          variants={heroContainerVariants}
+          initial="hidden"
+          animate="visible"
+          className="relative z-10 w-full max-w-[1200px] mx-auto px-6 text-center mt-20"
+        >
+          <motion.div variants={heroItemVariants} className="inline-flex items-center justify-center gap-4 mb-8">
+            <span className="w-12 h-[1px] bg-white/60"></span>
+            <span className="text-[10px] md:text-xs font-sans font-bold tracking-[0.4em] text-white/90 uppercase">
+              Universal Sanitary House
+            </span>
+            <span className="w-12 h-[1px] bg-white/60"></span>
+          </motion.div>
+
+          <motion.h1
+            variants={heroItemVariants}
+            className="font-playfair text-6xl md:text-7xl lg:text-[7rem] text-white leading-[1.1] mb-8 drop-shadow-2xl"
           >
-            <motion.div variants={heroItemVariants} className="flex items-center gap-4 mb-6">
-              <span className="w-12 h-[1px] bg-sky-400"></span>
-              <span className="text-[10px] md:text-xs font-sans font-bold tracking-[0.3em] text-sky-400 uppercase">
-                Est. 1968
+            The Art Of <br />
+            <span className="italic font-light">Fine Living.</span>
+          </motion.h1>
+
+          <motion.p
+            variants={heroItemVariants}
+            className="font-sans text-sm md:text-base text-neutral-300 max-w-2xl mx-auto mb-12 tracking-wider font-light leading-relaxed drop-shadow-md"
+          >
+            Curating the finest sanitaryware since 1968. Experience a world where flawless design meets extraordinary functionality.
+          </motion.p>
+
+          <motion.div variants={heroItemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <Link
+              href="/products"
+              className="group relative overflow-hidden bg-white text-black px-10 py-5 text-xs font-bold uppercase tracking-widest hover:scale-105 transition-transform duration-300"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                View Collection
+                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </span>
-            </motion.div>
-
-            <motion.h1
-              variants={heroItemVariants}
-              className="font-playfair text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] text-white leading-[1.1] mb-6 drop-shadow-2xl"
+            </Link>
+            <Link
+              href="/about"
+              className="px-10 py-5 bg-transparent border border-white/40 text-white text-xs font-bold uppercase tracking-widest hover:bg-white/10 hover:border-white transition-colors duration-300 backdrop-blur-sm"
             >
-              Elevating <br />
-              <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-sky-200 to-amber-100 font-normal">Luxury</span>
-              <br /> Spaces.
-            </motion.h1>
-
-            <motion.p
-              variants={heroItemVariants}
-              className="font-sans text-sm md:text-base text-neutral-400 max-w-md mb-10 leading-relaxed"
-            >
-              Discover Kerala’s premier destination for curated sanitaryware. We blend timeless elegance with modern innovation to transform your everyday rituals.
-            </motion.p>
-
-            <motion.div variants={heroItemVariants} className="flex flex-col sm:flex-row items-start sm:items-center gap-8">
-              <Link
-                href="/products"
-                className="group relative overflow-hidden bg-white text-black px-8 py-4 text-xs font-bold uppercase tracking-widest transition-transform hover:scale-105 shadow-lg shadow-white/10"
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  Explore Collection
-                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                </span>
-                <div className="absolute inset-0 bg-neutral-200 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-0" />
-              </Link>
-              
-              <div className="flex items-center gap-4">
-                <div className="flex -space-x-4">
-                  {[14, 15, 21].map(i => (
-                    <div key={i} className="w-10 h-10 rounded-full border-2 border-[#0a0a0a] bg-neutral-800 overflow-hidden shadow-sm">
-                      <img src={`/images/clients/client_${i}.${i===14?'webp':(i===15?'png':'jpg')}`} className="w-full h-full object-cover bg-white p-1" alt="Client" />
-                    </div>
-                  ))}
-                  <div className="w-10 h-10 rounded-full border-2 border-[#0a0a0a] bg-sky-900 flex items-center justify-center text-white text-[10px] font-bold shadow-sm">
-                    10k+
-                  </div>
-                </div>
-                <div className="flex flex-col">
-                  <div className="flex text-amber-400">
-                    <Star size={12} fill="currentColor" />
-                    <Star size={12} fill="currentColor" />
-                    <Star size={12} fill="currentColor" />
-                    <Star size={12} fill="currentColor" />
-                    <Star size={12} fill="currentColor" />
-                  </div>
-                  <span className="text-[10px] text-neutral-400 font-bold uppercase tracking-widest mt-1">Trusted By</span>
-                </div>
-              </div>
-            </motion.div>
+              Our Heritage
+            </Link>
           </motion.div>
+        </motion.div>
 
-          {/* Right Images Composition */}
-          <motion.div 
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.2, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-            className="lg:col-span-7 relative h-[50vh] md:h-[65vh] lg:h-[80vh] w-full mt-10 lg:mt-0"
-          >
-            {/* Main Image */}
+        {/* Scroll Indicator */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2, duration: 1 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10"
+        >
+          <span className="text-[9px] uppercase tracking-[0.4em] text-white/60 font-bold">Scroll</span>
+          <div className="w-[1px] h-16 bg-white/20 relative overflow-hidden">
             <motion.div 
-              style={{ y: heroImgY }}
-              className="absolute right-0 top-[5%] lg:top-[10%] w-[90%] lg:w-[85%] h-[90%] lg:h-[80%] rounded-2xl overflow-hidden border border-white/10 shadow-2xl"
-            >
-              <div className="absolute inset-0 bg-black/20 z-10 transition-colors duration-500 hover:bg-black/10" />
-              <img src="/images/hero.webp" alt="Luxury Bathroom" className="w-full h-full object-cover scale-105 hover:scale-100 transition-transform duration-[2s]" />
-            </motion.div>
-
-            {/* Overlapping Glassmorphic Image */}
-            <motion.div 
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
-              className="absolute left-0 bottom-[0%] lg:bottom-[5%] w-[55%] lg:w-[45%] aspect-square rounded-2xl overflow-hidden border border-white/20 shadow-2xl z-20 group"
-            >
-              <img src="/images/space/modern_luxury.webp" alt="Modern Faucet" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s]" />
-              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-4 lg:p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                <p className="text-white font-playfair text-lg lg:text-xl">Modern Series</p>
-                <p className="text-sky-300 text-[10px] lg:text-xs font-sans tracking-widest uppercase mt-1">2026 Collection</p>
-              </div>
-            </motion.div>
-
-            {/* Floating feature card */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 1.2, ease: "easeOut" }}
-              className="absolute top-0 lg:top-[5%] left-[5%] lg:left-[10%] backdrop-blur-md bg-black/40 border border-white/20 p-3 lg:p-4 rounded-2xl shadow-2xl z-30 flex items-center gap-3 lg:gap-4 hover:-translate-y-1 transition-transform duration-300"
-            >
-              <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-gradient-to-br from-amber-200 to-amber-600 flex items-center justify-center text-black">
-                <ShieldCheck size={20} className="lg:w-6 lg:h-6" />
-              </div>
-              <div>
-                <p className="text-white font-bold text-xs lg:text-sm">Premium Quality</p>
-                <p className="text-neutral-400 text-[10px] lg:text-xs">Certified Materials</p>
-              </div>
-            </motion.div>
-            
-          </motion.div>
-        </div>
+              animate={{ y: [0, 64, 0] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-0 left-0 w-full h-1/2 bg-white"
+            />
+          </div>
+        </motion.div>
       </section>
 
       <motion.section

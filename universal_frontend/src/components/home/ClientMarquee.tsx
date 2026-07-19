@@ -12,7 +12,7 @@ const CLIENT_LOGOS = [
   '/images/clients/client_23.jpg', // Abad Builders
   '/images/clients/client_24.jpg', // Heera Builders
   '/images/clients/client_25.jpg', // Asset Homes
-  '/images/clients/client_17.jpg', // Taj Hotels
+  '/images/clients/client_17.png', // Taj Hotels
   '/images/clients/client_12.jpg', // Crowne Plaza
   '/images/clients/client_13.png', // Le Meridien
 ];
