@@ -27,6 +27,23 @@ const FilterSkeleton = () => (
   </div>
 );
 
+const ProductCard = ({ product }: { product: any }) => (
+  <Link href={`/products/${product.slug}`} className="group block cursor-pointer">
+    <div className="aspect-square bg-neutral-100 rounded-lg overflow-hidden mb-4 relative">
+      {product.images && product.images.length > 0 ? (
+        <img src={product.images[0].image} alt={product.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center text-neutral-300">
+          <ShoppingBag size={48} strokeWidth={1} />
+        </div>
+      )}
+    </div>
+    <p className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold mb-1">{product.category?.name || "Sanitary"}</p>
+    <h3 className="font-playfair text-lg text-foreground mb-1">{product.name}</h3>
+    <p className="text-sm text-neutral-500 line-clamp-2">{product.description}</p>
+  </Link>
+);
+
 export default function ProductsPage() {
   const [products, setProducts] = useState<any[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
@@ -105,7 +122,7 @@ export default function ProductsPage() {
         </div>
       <div className="flex flex-col md:flex-row gap-12">
         {/* Sidebar Filters */}
-        <aside className="w-full md:w-64 shrink-0">
+        <aside className="w-full md:w-64 shrink-0 md:sticky md:top-8 self-start max-h-[85vh] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           <div 
             className="flex items-center justify-between gap-2 mb-4 md:mb-6 text-foreground font-playfair text-xl border-b border-neutral-200 pb-4 cursor-pointer md:cursor-default"
             onClick={() => setIsMobileFilterOpen(!isMobileFilterOpen)}
@@ -167,24 +184,33 @@ export default function ProductsPage() {
               {[...Array(6)].map((_, i) => <ProductSkeleton key={i} />)}
             </div>
           ) : filteredProducts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProducts.map(product => (
-                <Link key={product.id} href={`/products/${product.slug}`} className="group block cursor-pointer">
-                  <div className="aspect-square bg-neutral-100 rounded-lg overflow-hidden mb-4 relative">
-                    {product.images && product.images.length > 0 ? (
-                      <img src={product.images[0].image} alt={product.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    ) : (
-                      <div className="absolute inset-0 flex items-center justify-center text-neutral-300">
-                        <ShoppingBag size={48} strokeWidth={1} />
+            selectedCategories.length === 0 && selectedBrands.length === 0 ? (
+              <div className="flex flex-col gap-12">
+                {categories.map(category => {
+                  const categoryProducts = filteredProducts.filter(p => (p.category?.id ?? p.category) === category.id);
+                  if (categoryProducts.length === 0) return null;
+                  return (
+                    <div key={category.id}>
+                      <div className="flex items-center gap-4 mb-6">
+                        <h2 className="font-playfair text-2xl text-foreground">{category.name}</h2>
+                        <div className="h-px bg-neutral-200 flex-1"></div>
                       </div>
-                    )}
-                  </div>
-                  <p className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold mb-1">{product.category?.name || "Sanitary"}</p>
-                  <h3 className="font-playfair text-lg text-foreground mb-1">{product.name}</h3>
-                  <p className="text-sm text-neutral-500 line-clamp-2">{product.description}</p>
-                </Link>
-              ))}
-            </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {categoryProducts.map(product => (
+                          <ProductCard key={product.id} product={product} />
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredProducts.map(product => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            )
           ) : (
             <div className="flex flex-col items-center justify-center h-64 bg-neutral-50 rounded-lg border border-dashed border-neutral-200">
               <p className="text-neutral-500 mb-2">No products match your selected filters.</p>

@@ -9,13 +9,24 @@ import { apiUrl } from "@/lib/api";
 
 export default function AdminDashboard() {
   const [products, setProducts] = useState<any[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
+  const [brands, setBrands] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchProducts = async () => {
+  const fetchData = async () => {
     try {
-      const res = await fetch(apiUrl(`/api/v1/products/`));
-      const data = await res.json();
-      setProducts(data);
+      const [resProducts, resCategories, resBrands] = await Promise.all([
+        fetch(apiUrl(`/api/v1/products/`)),
+        fetch(apiUrl(`/api/v1/categories/`)),
+        fetch(apiUrl(`/api/v1/brands/`))
+      ]);
+      const dataProducts = await resProducts.json();
+      const dataCategories = await resCategories.json();
+      const dataBrands = await resBrands.json();
+      
+      setProducts(dataProducts);
+      setCategories(dataCategories);
+      setBrands(dataBrands);
     } catch (err) {
       console.error(err);
     } finally {
@@ -24,24 +35,51 @@ export default function AdminDashboard() {
   };
 
   useEffect(() => {
-    fetchProducts();
+    fetchData();
   }, []);
 
-  const handleDelete = async (slug: string) => {
+  const handleDeleteProduct = async (slug: string) => {
     if (!confirm("Are you sure you want to delete this product?")) return;
-    
     const token = Cookies.get("access_token");
     try {
       await fetch(apiUrl(`/api/v1/products/${slug}/`), {
         method: "DELETE",
-        headers: {
-          "Authorization": `Bearer ${token}`
-        }
+        headers: { "Authorization": `Bearer ${token}` }
       });
-      fetchProducts();
+      fetchData();
     } catch (err) {
       console.error(err);
       alert("Failed to delete product.");
+    }
+  };
+
+  const handleDeleteCategory = async (slug: string) => {
+    if (!confirm("Are you sure you want to delete this category?")) return;
+    const token = Cookies.get("access_token");
+    try {
+      await fetch(apiUrl(`/api/v1/categories/${slug}/`), {
+        method: "DELETE",
+        headers: { "Authorization": `Bearer ${token}` }
+      });
+      fetchData();
+    } catch (err) {
+      console.error(err);
+      alert("Failed to delete category.");
+    }
+  };
+
+  const handleDeleteBrand = async (slug: string) => {
+    if (!confirm("Are you sure you want to delete this brand?")) return;
+    const token = Cookies.get("access_token");
+    try {
+      await fetch(apiUrl(`/api/v1/brands/${slug}/`), {
+        method: "DELETE",
+        headers: { "Authorization": `Bearer ${token}` }
+      });
+      fetchData();
+    } catch (err) {
+      console.error(err);
+      alert("Failed to delete brand.");
     }
   };
 
@@ -72,47 +110,118 @@ export default function AdminDashboard() {
   );
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-playfair font-bold text-[#222]">Products</h1>
-        <Link 
-          href="/admin/products/new" 
-          className="bg-[#2a2f35] text-white px-4 py-2 flex items-center gap-2 text-sm uppercase tracking-widest font-bold hover:bg-black transition-colors rounded"
-        >
-          <Plus size={16} /> Add Product
-        </Link>
+    <div className="space-y-12">
+      {/* Products Section */}
+      <div>
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-playfair font-bold text-[#222]">Products</h2>
+          <Link 
+            href="/admin/products/new" 
+            className="bg-[#2a2f35] text-white px-4 py-2 flex items-center gap-2 text-sm uppercase tracking-widest font-bold hover:bg-black transition-colors rounded"
+          >
+            <Plus size={16} /> Add Product
+          </Link>
+        </div>
+        <div className="bg-white border border-neutral-200 rounded-lg overflow-hidden">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="bg-neutral-50 border-b border-neutral-200 text-xs uppercase tracking-widest text-neutral-500">
+                <th className="p-4 font-bold">Product Name</th>
+                <th className="p-4 font-bold text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.map(product => (
+                <tr key={product.id} className="border-b border-neutral-100 hover:bg-neutral-50">
+                  <td className="p-4 font-sans text-[#222] font-medium">{product.name}</td>
+                  <td className="p-4 flex justify-end gap-3">
+                    <Link href={`/admin/products/${product.slug}/edit`} className="text-blue-500 hover:text-blue-700">
+                      <Edit size={18} />
+                    </Link>
+                    <button onClick={() => handleDeleteProduct(product.slug)} className="text-red-500 hover:text-red-700">
+                      <Trash2 size={18} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+              {products.length === 0 && (
+                <tr>
+                  <td colSpan={2} className="p-8 text-center text-neutral-500">No products found.</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      <div className="bg-white border border-neutral-200 rounded-lg overflow-hidden">
-        <table className="w-full text-left border-collapse">
-          <thead>
-            <tr className="bg-neutral-50 border-b border-neutral-200 text-xs uppercase tracking-widest text-neutral-500">
-              <th className="p-4 font-bold">Product Name</th>
-              <th className="p-4 font-bold text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.map(product => (
-              <tr key={product.id} className="border-b border-neutral-100 hover:bg-neutral-50">
-                <td className="p-4 font-sans text-[#222] font-medium">{product.name}</td>
-                <td className="p-4 flex justify-end gap-3">
-                  <Link href={`/admin/products/${product.slug}/edit`} className="text-blue-500 hover:text-blue-700">
-                    <Edit size={18} />
-                  </Link>
-                  <button onClick={() => handleDelete(product.slug)} className="text-red-500 hover:text-red-700">
-                    <Trash2 size={18} />
-                  </button>
-                </td>
+      {/* Categories Section */}
+      <div>
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-playfair font-bold text-[#222]">Categories</h2>
+        </div>
+        <div className="bg-white border border-neutral-200 rounded-lg overflow-hidden">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="bg-neutral-50 border-b border-neutral-200 text-xs uppercase tracking-widest text-neutral-500">
+                <th className="p-4 font-bold">Category Name</th>
+                <th className="p-4 font-bold text-right">Actions</th>
               </tr>
-            ))}
-            {products.length === 0 && (
-              <tr>
-                <td colSpan={2} className="p-8 text-center text-neutral-500">No products found.</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {categories.map(category => (
+                <tr key={category.id} className="border-b border-neutral-100 hover:bg-neutral-50">
+                  <td className="p-4 font-sans text-[#222] font-medium">{category.name}</td>
+                  <td className="p-4 flex justify-end gap-3">
+                    <button onClick={() => handleDeleteCategory(category.slug)} className="text-red-500 hover:text-red-700">
+                      <Trash2 size={18} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+              {categories.length === 0 && (
+                <tr>
+                  <td colSpan={2} className="p-8 text-center text-neutral-500">No categories found.</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
+
+      {/* Brands Section */}
+      <div>
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-playfair font-bold text-[#222]">Brands</h2>
+        </div>
+        <div className="bg-white border border-neutral-200 rounded-lg overflow-hidden">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="bg-neutral-50 border-b border-neutral-200 text-xs uppercase tracking-widest text-neutral-500">
+                <th className="p-4 font-bold">Brand Name</th>
+                <th className="p-4 font-bold text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {brands.map(brand => (
+                <tr key={brand.id} className="border-b border-neutral-100 hover:bg-neutral-50">
+                  <td className="p-4 font-sans text-[#222] font-medium">{brand.name}</td>
+                  <td className="p-4 flex justify-end gap-3">
+                    <button onClick={() => handleDeleteBrand(brand.slug)} className="text-red-500 hover:text-red-700">
+                      <Trash2 size={18} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+              {brands.length === 0 && (
+                <tr>
+                  <td colSpan={2} className="p-8 text-center text-neutral-500">No brands found.</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
     </div>
   );
 }
