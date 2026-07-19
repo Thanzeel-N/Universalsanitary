@@ -5,8 +5,8 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 const CLIENT_LOGOS = [
-  '/images/clients/client_14.jpg', // Sobha
-  '/images/clients/client_15.jpg', // Prestige Group
+  '/images/clients/client_14.webp', // Sobha
+  '/images/clients/client_15.png', // Prestige Group
   '/images/clients/client_21.jpg', // Skyline Builders
   '/images/clients/client_22.jpg', // SFS Homes
   '/images/clients/client_23.jpg', // Abad Builders
@@ -14,7 +14,7 @@ const CLIENT_LOGOS = [
   '/images/clients/client_25.jpg', // Asset Homes
   '/images/clients/client_17.jpg', // Taj Hotels
   '/images/clients/client_12.jpg', // Crowne Plaza
-  '/images/clients/client_13.jpg', // Le Meridien
+  '/images/clients/client_13.png', // Le Meridien
 ];
 
 export default function ClientMarquee() {
