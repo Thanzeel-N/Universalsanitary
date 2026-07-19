@@ -31,7 +31,7 @@ const ProductCard = ({ product }: { product: any }) => (
   <Link href={`/products/${product.slug}`} className="group block cursor-pointer">
     <div className="aspect-square bg-neutral-100 rounded-lg overflow-hidden mb-4 relative">
       {product.images && product.images.length > 0 ? (
-        <img src={product.images[0].image} alt={product.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+        <img src={product.images[0].image} alt={product.name} className="absolute inset-0 w-full h-full object-contain p-6 mix-blend-multiply group-hover:scale-110 transition-transform duration-500" />
       ) : (
         <div className="absolute inset-0 flex items-center justify-center text-neutral-300">
           <ShoppingBag size={48} strokeWidth={1} />
