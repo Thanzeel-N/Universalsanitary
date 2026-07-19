@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 };
 
 const CLIENTS = [
-  { logo: '/images/clients/client_14.jpg', name: 'Sobha' },
-  { logo: '/images/clients/client_15.jpg', name: 'Prestige Group' },
+  { logo: '/images/clients/client_14.webp', name: 'Sobha' },
+  { logo: '/images/clients/client_15.png', name: 'Prestige Group' },
   { logo: '/images/clients/client_21.jpg', name: 'Skyline Builders' },
   { logo: '/images/clients/client_22.jpg', name: 'SFS Homes' },
   { logo: '/images/clients/client_23.jpg', name: 'Abad Builders' },
@@ -21,18 +21,18 @@ const CLIENTS = [
   { logo: '/images/clients/client_12.jpg', name: 'Crowne Plaza' },
   { logo: '/images/clients/client_13.png', name: 'Le Meridien' },
   { logo: '/images/clients/client_18.jpg', name: 'Casino Group of Hotels' },
-  { logo: '/images/clients/client_7.jpg', name: 'Kumarakom Lake Resort' },
+  { logo: '/images/clients/client_7.png', name: 'Kumarakom Lake Resort' },
   { logo: '/images/clients/client_8.jpg', name: 'Coconut Lagoon' },
   { logo: '/images/clients/client_20.jpg', name: 'Spice Village' },
-  { logo: '/images/clients/client_16.jpg', name: 'Cochin International Airport' },
-  { logo: '/images/clients/client_9.jpg', name: 'Aster Medcity' },
+  { logo: '/images/clients/client_16.png', name: 'Cochin International Airport' },
+  { logo: '/images/clients/client_9.webp', name: 'Aster Medcity' },
   { logo: '/images/clients/client_10.jpg', name: 'Rajagiri Hospital' },
   { logo: '/images/clients/client_4.jpg', name: 'Infopark' },
-  { logo: '/images/clients/client_6.jpg', name: 'Kerala Livestock Development Board' },
+  { logo: '/images/clients/client_6.png', name: 'Kerala Livestock Development Board' },
   { logo: '/images/clients/client_19.jpg', name: 'CPWD' },
-  { logo: '/images/clients/client_1.jpg', name: 'TATA' },
+  { logo: '/images/clients/client_1.png', name: 'TATA' },
   { logo: '/images/clients/client_2.jpg', name: 'Harrisons Malayalam' },
-  { logo: '/images/clients/client_3.jpg', name: 'Kannan Devan' },
+  { logo: '/images/clients/client_3.webp', name: 'Kannan Devan' },
   { logo: '/images/clients/client_5.png', name: 'Sai Balaji' },
 ];
 
