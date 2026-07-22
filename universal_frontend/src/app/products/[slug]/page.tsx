@@ -38,6 +38,41 @@ const STATIC_PRODUCTS: Record<string, any> = {
     technical_specs: "Finish: Blush Gold PVD | Material: Forged Brass Body | Operation: Quarter Turn",
     images: [{ image: "/images/space/faucet.webp", is_primary: true }]
   },
+  "premium-tabletop-basin": {
+    name: "Premium Tabletop Basin",
+    brand: { name: "Kohler" },
+    description: "Modern ceramic countertop wash basin with smooth stain-resistant glaze.",
+    technical_specs: "Dimensions: 580 x 390 x 140 mm | Finish: Glossy White Ceramic",
+    images: [{ image: "/images/col_basins.webp", is_primary: true }]
+  },
+  "designer-brass-faucet": {
+    name: "Designer Brass Faucet",
+    brand: { name: "Grohe" },
+    description: "Sleek single-lever basin mixer faucet in brushed gold PVD finish.",
+    technical_specs: "Finish: Brushed Gold PVD | Flow Rate: Eco-Smart 5L/min",
+    images: [{ image: "/images/col_faucets.webp", is_primary: true }]
+  },
+  "thermostatic-shower-column": {
+    name: "Thermostatic Rain Shower Column",
+    brand: { name: "Jaquar" },
+    description: "Multi-function overhead rain shower system with thermostatic control valve.",
+    technical_specs: "Head Size: 300x300mm | Air-injection rain flow system",
+    images: [{ image: "/images/col_shower.webp", is_primary: true }]
+  },
+  "intelligent-bidet-toilet": {
+    name: "Intelligent Bidet Toilet",
+    brand: { name: "TOTO" },
+    description: "Smart wall-hung bidet toilet with heated seat, automatic flush, and remote control.",
+    technical_specs: "Auto flush, heated seat, warm air dryer, deodorizer",
+    images: [{ image: "/images/col_toilets.webp", is_primary: true }]
+  },
+  "luxury-bath-accessories-set": {
+    name: "Luxury Bath Accessories Suite",
+    brand: { name: "CERA" },
+    description: "Comprehensive 5-piece solid brass bathroom hardware and accessories set.",
+    technical_specs: "Material: Solid Brass SS304 | Finish: Chrome",
+    images: [{ image: "/images/grid1.webp", is_primary: true }]
+  },
   "Wash Basin": {
     name: "Premium Wash Basin Collection",
     brand: { name: "Universal Sanitary" },
