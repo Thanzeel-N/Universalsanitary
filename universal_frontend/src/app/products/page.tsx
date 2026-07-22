@@ -56,20 +56,27 @@ export default function ProductsPage() {
 
   useEffect(() => {
     Promise.all([
-      fetch(apiUrl(`/api/v1/products/`)).then(r => r.json()),
-      fetch(apiUrl(`/api/v1/categories/`)).then(r => r.json()),
-      fetch(apiUrl(`/api/v1/brands/`)).then(r => r.json())
+      fetch(apiUrl(`/api/v1/products/`)).then(r => r.ok ? r.json() : []).catch(() => []),
+      fetch(apiUrl(`/api/v1/categories/`)).then(r => r.ok ? r.json() : []).catch(() => []),
+      fetch(apiUrl(`/api/v1/brands/`)).then(r => r.ok ? r.json() : []).catch(() => [])
     ]).then(([prods, cats, brs]) => {
-      setProducts(prods);
-      setCategories(cats);
-      setBrands(brs);
+      setProducts(prods && prods.length > 0 ? prods : []);
+      setCategories(cats && cats.length > 0 ? cats : []);
+      setBrands(brs && brs.length > 0 ? brs : []);
       setLoading(false);
 
       // Check for category filter in URL query parameter
       const params = new URLSearchParams(window.location.search);
-      const catSlug = params.get("category");
-      if (catSlug) {
-        const matched = cats.find((c: any) => c.slug === catSlug);
+      const catParam = params.get("category");
+      if (catParam) {
+        const norm = (s: string) => (s || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+        const target = norm(catParam);
+        const activeCats = cats && cats.length > 0 ? cats : [];
+        const matched = activeCats.find((c: any) => {
+          const cSlug = norm(c.slug);
+          const cName = norm(c.name);
+          return cSlug === target || cName === target || cSlug.includes(target) || cName.includes(target) || target.includes(cSlug) || target.includes(cName);
+        });
         if (matched) {
           setSelectedCategories([String(matched.id)]);
         }

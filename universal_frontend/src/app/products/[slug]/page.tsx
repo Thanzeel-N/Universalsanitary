@@ -75,22 +75,41 @@ const STATIC_PRODUCTS: Record<string, any> = {
   }
 };
 
+function resolveImageUrl(url: string): string {
+  if (!url) return '';
+  if (url.includes('/media/images/')) {
+    return url.substring(url.indexOf('/media/images/') + 6);
+  }
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url;
+  }
+  if (url.startsWith('/')) {
+    return url;
+  }
+  return `/${url}`;
+}
+
 async function getProduct(slug: string) {
+  const decodedSlug = decodeURIComponent(slug);
+  const staticFallback = STATIC_PRODUCTS[slug] || STATIC_PRODUCTS[decodedSlug];
+
   try {
     const res = await fetch(apiUrl(`/api/v1/products/${slug}/`), { cache: 'no-store' });
     if (res.ok) {
       const data = await res.json();
-      if (data) return data;
+      if (data) {
+        // If API product has no images or empty images array, use static fallback images
+        if ((!data.images || data.images.length === 0) && staticFallback?.images) {
+          data.images = staticFallback.images;
+        }
+        return data;
+      }
     }
   } catch (err) {
     // Ignore API error and fallback to static frontend products
   }
 
-  const decodedSlug = decodeURIComponent(slug);
-  if (STATIC_PRODUCTS[slug]) return STATIC_PRODUCTS[slug];
-  if (STATIC_PRODUCTS[decodedSlug]) return STATIC_PRODUCTS[decodedSlug];
-
-  return null;
+  return staticFallback || null;
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -124,13 +143,18 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       />
       <div className="aspect-square bg-neutral-100 flex items-center justify-center overflow-hidden rounded-lg group cursor-zoom-in">
         {product.images && product.images.length > 0 ? (
-          <img
-            src={product.images.find((img: any) => img.is_primary)?.image || product.images[0].image}
-            alt={product.name}
-            className="max-w-[90%] max-h-[90%] object-contain mix-blend-multiply transition-transform duration-500 ease-out group-hover:scale-150 origin-center"
-          />
-        ) : (
-          <p className="text-neutral-400">No Image Available</p>
+          (() => {
+            const rawImg = product.images.find((img: any) => img.is_primary)?.image || product.images[0].image;
+            const imageSrc = resolveImageUrl(rawImg);
+            return (
+              <img 
+                src={imageSrc} 
+                alt={product.name} 
+                className="max-w-[90%] max-h-[90%] object-contain mix-blend-multiply transition-transform duration-500 ease-out group-hover:scale-150 origin-center" 
+              />
+            );
+          })()
+        ) : (<p className="text-neutral-400">No Image Available</p>
         )}
       </div>
       <div>
