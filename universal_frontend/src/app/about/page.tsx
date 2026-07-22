@@ -26,13 +26,16 @@ export default function AboutPage() {
       <section className="py-24 px-6 md:px-12 max-w-4xl mx-auto text-center">
         <h2 className="font-playfair text-3xl md:text-4xl text-foreground mb-8">A Tradition of Excellence</h2>
         <p className="text-lg md:text-xl text-neutral-600 leading-[1.7] font-sans mb-8">
-          <strong className="text-foreground">Universal Sanitary House</strong> was established in the year 1968 in Ernakulam, the business capital of Kerala. Since then, it has been one of the leading Sanitary ware and Water Supply Materials business houses in Ernakulam.
+          <strong className="text-foreground">Universal Sanitary House</strong> was Established in 1968 in Ernakulam, the commercial capital of Kerala, Universal Sanitary House has grown to become a trusted luxury sanitaryware showroom in Kochi and one of the leading sanitaryware dealers in Ernakulam.
         </p>
         <p className="text-lg md:text-xl text-neutral-600 leading-[1.7] font-sans mb-8">
-          We have a strong and satisfied customer base and the expertise to guide customers for cost-efficient procurement of a wide range of quality Sanitary ware, Tiles, and Water Supply materials. Over the years, we have established a reputation as a trustworthy dealer in Sanitary ware and allied building materials.
+          For over five decades, we have served homeowners, architects, interior designers, builders, and contractors with a wide range of premium sanitaryware, bathroom fittings, tiles, and water supply materials. Our experienced team helps customers select quality products and cost-effective solutions that suit their functional requirements, design preferences, and budgets.
         </p>
         <p className="text-lg md:text-xl text-neutral-600 leading-[1.7] font-sans mb-8">
-          Our core strength, apart from our immense industry expertise, lies in the quality of our products, the fair pricing we have established, and the unmatched service we render to our esteemed clientele.
+          Over the years, Universal Sanitary House has earned a strong and loyal customer base by offering dependable products, transparent pricing, and professional guidance. Today, we are recognised as a trusted destination for premium sanitaryware and bathroom fittings in Kerala, along with reliable solutions for residential and commercial projects.
+        </p>
+        <p className="text-lg md:text-xl text-neutral-600 leading-[1.7] font-sans mb-8">
+          Our core strength lies in our extensive industry expertise, carefully selected products, fair pricing, and the unmatched service we provide to every customer.
         </p>
       </section>
 
@@ -51,14 +54,14 @@ export default function AboutPage() {
             <div className="relative">
               <span className="absolute -top-10 -left-6 text-9xl text-primary/10 font-serif">"</span>
               <p className="text-xl text-neutral-700 leading-[1.7] italic font-playfair relative z-10 mb-8">
-                The company is a division of M/s. T. H. Ebrahim Kareem & Co., Muvattupuzha, which was founded way back in 1946 as a wholesale and retail business in General Hardware, Iron and Steel and allied items.
+                Universal Sanitary House is a division of M/s. T. H. Ebrahim Kareem & Co., Muvattupuzha, a trusted business established in 1946 in the wholesale and retail trade of general hardware, iron, steel, and allied products.
               </p>
             </div>
             <p className="text-neutral-500 leading-relaxed mb-4">
-              Mr. T. H. Ebrahim Kareem, the founder of M/s. T. H. Ebrahim Kareem & Co., masterminded the formation of Universal Sanitary House.
+              The vision for Universal Sanitary House was shaped by its founder, Mr. T. H. Ebrahim Kareem, whose experience and values laid the foundation for the company’s growth.
             </p>
             <p className="text-neutral-500 leading-relaxed">
-              At present, his sons, <strong className="text-neutral-700">Mr. T. E. Azad</strong> and <strong className="text-neutral-700">Mr. T. E. Akbar</strong>, are leading the company on the growth track based on the principles and vision of its mentor.
+              Today, the company is led by his sons, <strong className="text-neutral-700">Mr. T. E. Azad</strong> and <strong className="text-neutral-700">Mr. T. E. Akbar</strong>.. Guided by the founder’s principles, they continue to strengthen Universal Sanitary House as a trusted name in premium sanitaryware and architectural solutions in Kerala.
             </p>
           </div>
         </div>
@@ -77,21 +80,21 @@ export default function AboutPage() {
               <ShieldCheck size={32} />
             </div>
             <h3 className="font-playfair text-2xl text-foreground mb-4">Uncompromising Quality</h3>
-            <p className="text-neutral-500 leading-[1.7]">We source only the finest materials and partner with globally recognized brands to ensure every product stands the test of time.</p>
+            <p className="text-neutral-500 leading-[1.7]">We source the finest materials and partner with globally recognised brands to offer premium sanitaryware in Kerala that delivers lasting quality, durability, and timeless design.</p>
           </div>
           <div className="text-center group">
             <div className="w-20 h-20 mx-auto bg-neutral-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors duration-500 text-primary">
               <PenTool size={32} />
             </div>
             <h3 className="font-playfair text-2xl text-foreground mb-4">Curated Design</h3>
-            <p className="text-neutral-500 leading-[1.7]">Our collections are meticulously chosen not just for their utility, but for their ability to inspire and elevate the aesthetics of any room.</p>
+            <p className="text-neutral-500 leading-[1.7]">Our collections are carefully selected to combine functionality with elegant design, offering luxury bathroom fittings in Kochi that enhance the beauty and character of every space.</p>
           </div>
           <div className="text-center group">
             <div className="w-20 h-20 mx-auto bg-neutral-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors duration-500 text-primary">
               <HeartHandshake size={32} />
             </div>
             <h3 className="font-playfair text-2xl text-foreground mb-4">Customer Excellence</h3>
-            <p className="text-neutral-500 leading-[1.7]">From expert consultation to seamless delivery, our dedicated team ensures your experience is as luxurious as our products.</p>
+            <p className="text-neutral-500 leading-[1.7]">From expert consultation to reliable door delivery, our dedicated team provides exceptional service, making us a trusted sanitaryware dealer in Ernakulam.</p>
           </div>
         </div>
       </section>
@@ -102,7 +105,7 @@ export default function AboutPage() {
           <MapPin size={48} className="mx-auto text-primary mb-8 opacity-80" />
           <h2 className="font-playfair text-4xl md:text-5xl mb-6">Experience It In Person</h2>
           <p className="text-neutral-400 mb-10 text-lg leading-[1.7]">
-            Words and pictures can only say so much. We invite you to visit our expansive showroom to touch, feel, and truly appreciate the quality of our curated collections.
+            Visit our luxury sanitaryware showroom in Kochi to explore our curated collections, experience the quality firsthand, and find the perfect products for your space.
           </p>
           <a
             href="https://maps.google.com/?q=Universal+Sanitary+House,+Jew+Street,+Padma+Junction,+Ernakulam,+Kochi+682035"

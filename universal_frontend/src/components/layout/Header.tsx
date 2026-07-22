@@ -24,6 +24,7 @@ export default function Header({ isHomePage = true }: { isHomePage?: boolean }) 
     { name: "Collections", href: "/products" },
     { name: "Clients", href: "/clients" },
     { name: "About", href: "/about" },
+    { name: "Blog", href: "/blog" },
   ];
 
   const headerClass = isHomePage && !isScrolled

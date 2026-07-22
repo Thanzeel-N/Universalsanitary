@@ -198,11 +198,11 @@ export default function HomeContent({ categories }: { categories: any[] }) {
   const currentLook = looks.find(l => l.id === activeTab) || looks[0];
 
   const collections = [
-    { id: 1, name: "Premium Basins", img: "/images/col_basins.webp", slug: "premium-basin-accessory" },
-    { id: 2, name: "Luxury Faucets", img: "/images/col_faucets.webp", slug: "luxury-faucet-accessory" },
-    { id: 3, name: "Shower Systems", img: "/images/col_shower.webp", slug: "shower-system-accessory" },
-    { id: 4, name: "Smart Toilets", img: "/images/col_toilets.webp", slug: "smart-toilet-accessory" },
-    { id: 5, name: "Bath Accessories", img: "/images/grid1.webp", slug: "bath-accessory-suite" },
+    { id: 1, name: "Premium Basins", img: "/images/col_basins.webp", slug: "Wash Basin" },
+    { id: 2, name: "Luxury Faucets", img: "/images/col_faucets.webp", slug: "faucet" },
+    { id: 3, name: "Shower Systems", img: "/images/col_shower.webp", slug: "Shower" },
+    { id: 4, name: "Smart Toilets", img: "/images/col_toilets.webp", slug: "Sanitaryware" },
+    { id: 5, name: "Bath Accessories", img: "/images/grid1.webp", slug: "Bathroom Accessories" },
   ];
 
   const reviews = [
@@ -292,7 +292,7 @@ export default function HomeContent({ categories }: { categories: any[] }) {
           {/* Minimalist overlay: just enough to make text readable, no heavy vignette */}
           <div className="absolute inset-0 bg-black/40" />
         </div>
-        
+
         <motion.div
           style={{ y: heroTextY, opacity: heroOpacity }}
           variants={heroContainerVariants}
@@ -337,14 +337,14 @@ export default function HomeContent({ categories }: { categories: any[] }) {
         </motion.div>
 
         {/* Scroll Indicator */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center z-10"
         >
           <div className="w-[1px] h-16 bg-white/20 relative overflow-hidden">
-            <motion.div 
+            <motion.div
               animate={{ y: [0, 64, 0] }}
               transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
               className="absolute top-0 left-0 w-full h-1/3 bg-white"
@@ -394,7 +394,7 @@ export default function HomeContent({ categories }: { categories: any[] }) {
             Defining Luxury <br />Since <span className="italic font-normal text-primary">1968</span>
           </h2>
           <p className="text-neutral-500 mb-10 max-w-lg leading-[1.8] text-base md:text-lg font-light">
-            For over five decades, Universal Sanitary House has been the premier destination for homeowners, architects, and designers seeking unparalleled elegance. We don't just sell sanitaryware; we curate experiences that transform everyday rituals into moments of luxury.
+            For over five decades, Universal Sanitary House has been a trusted luxury sanitaryware showroom in Kochi, serving homeowners, architects, and designers seeking exceptional quality and timeless elegance. We do not simply sell sanitaryware; we carefully curate premium bathroom experiences that transform everyday rituals into moments of comfort, style, and luxury.
           </p>
 
           <div className="grid grid-cols-2 gap-6 md:gap-8 mb-10 max-w-md bg-stone-50/50 border border-stone-100/80 p-6 rounded-2xl">
@@ -443,9 +443,9 @@ export default function HomeContent({ categories }: { categories: any[] }) {
         </div>
         <div className="flex justify-center items-center gap-12 md:gap-24 lg:gap-32 flex-wrap opacity-40 grayscale">
           <h3 className="font-playfair text-3xl">Jaquar</h3>
-          <h3 className="font-playfair text-3xl font-bold italic">Artize</h3>
+          <h3 className="font-playfair text-3xl font-bold italic">GEBERIT</h3>
           <h3 className="font-playfair text-3xl tracking-widest">CERA</h3>
-          <h3 className="font-playfair text-3xl">KOHLER</h3>
+          <h3 className="font-playfair text-3xl">SYLUX</h3>
           <h3 className="font-playfair text-3xl font-bold">Parryware</h3>
           <h3 className="font-playfair text-3xl tracking-wider text-neutral-800">NECO</h3>
         </div>
@@ -475,11 +475,11 @@ export default function HomeContent({ categories }: { categories: any[] }) {
               <span className="text-[11px] font-sans font-bold tracking-[0.25em] text-primary uppercase mb-3 block">
                 The Universal Standard
               </span>
-              <h2 className="font-playfair text-3xl md:text-5xl text-neutral-900 dark:text-neutral-100 mb-6 tracking-wide leading-tight font-light">
+              <h2 className="font-playfair text-3xl md:text-5xl text-neutral-900 mb-6 tracking-wide leading-tight font-light">
                 Why Thousands of Families <span className="italic font-normal text-primary">Trust Us</span>
               </h2>
-              <p className="text-neutral-500 dark:text-neutral-400 max-w-xl text-sm md:text-base leading-[1.7] font-light">
-                Kerala's most trusted sanitaryware destination since 1968, setting the benchmark for luxury spaces and unmatched care.
+              <p className="text-neutral-500 max-w-xl text-sm md:text-base leading-[1.7] font-light">
+                A trusted luxury sanitaryware showroom in Kochi since 1968, known for quality products, premium bathroom solutions, fair pricing, and reliable customer service.
               </p>
             </div>
 
@@ -506,12 +506,12 @@ export default function HomeContent({ categories }: { categories: any[] }) {
                     {/* Text block */}
                     <div>
                       <h3 className={`font-playfair text-sm md:text-lg font-bold transition-all duration-300 leading-tight
-                        ${isActive ? 'text-primary' : 'text-neutral-900 dark:text-neutral-100'}
+                        ${isActive ? 'text-primary' : 'text-neutral-900'}
                       `}>
                         {pillar.title}
                       </h3>
                       <p className={`font-sans text-[10px] md:text-sm leading-relaxed mt-1 transition-all duration-500 font-light line-clamp-3 md:line-clamp-none
-                        ${isActive ? 'text-neutral-600 dark:text-neutral-300' : 'text-neutral-400 dark:text-neutral-500'}
+                        ${isActive ? 'text-neutral-600' : 'text-neutral-400'}
                       `}>
                         {pillar.description}
                       </p>
@@ -862,7 +862,7 @@ export default function HomeContent({ categories }: { categories: any[] }) {
           <div>
             <h2 className="font-playfair text-4xl md:text-5xl text-foreground mb-6">Visit Our Showroom</h2>
             <p className="text-neutral-500 mb-8 max-w-lg text-base leading-[1.7]">
-              Experience our luxury collections firsthand. Visit our premier showroom in Ernakulam to explore a curated range of luxury sanitaryware, premium faucets, and modern shower systems with the help of our expert design consultants.
+              Experience our luxury collections firsthand at our premium sanitaryware showroom in Ernakulam. Explore a curated range of luxury sanitaryware, premium faucets, and modern shower systems with guidance from our expert consultants.
             </p>
             <div className="space-y-6 mb-8">
               <div>
