@@ -27,144 +27,22 @@ const FilterSkeleton = () => (
   </div>
 );
 
-const STATIC_CATEGORIES = [
-  { id: 1, name: "Wash Basin", slug: "Wash Basin" },
-  { id: 2, name: "Luxury Faucets", slug: "faucet" },
-  { id: 3, name: "Shower Systems", slug: "Shower" },
-  { id: 4, name: "Smart Toilets", slug: "Sanitaryware" },
-  { id: 5, name: "Bath Accessories", slug: "Bathroom Accessories" },
-];
-
-const STATIC_BRANDS = [
-  { id: 1, name: "Jaquar" },
-  { id: 2, name: "Kohler" },
-  { id: 3, name: "TOTO" },
-  { id: 4, name: "Grohe" },
-  { id: 5, name: "CERA" },
-];
-
-const STATIC_PRODUCTS = [
-  {
-    id: 1,
-    slug: "freestanding-bath-tube",
-    name: "Freestanding Bath Tube",
-    description: "An elegantly contoured freestanding bath that serves as the luxurious centerpiece of the modern bathroom.",
-    images: [{ image: "/images/space/bath_tube.webp", is_primary: true }],
-    category: { id: 5, name: "Bath Accessories" },
-    brand: { id: 1, name: "Jaquar" }
-  },
-  {
-    id: 2,
-    slug: "thin-rim-table-top-basin",
-    name: "Thin Rim Table Top Basin",
-    description: "Solo by Jaquar presents JDS series washbasins with a thin rim table top design.",
-    images: [{ image: "/images/space/wash_basin.webp", is_primary: true }],
-    category: { id: 1, name: "Wash Basin" },
-    brand: { id: 1, name: "Jaquar" }
-  },
-  {
-    id: 3,
-    slug: "rimless-wall-hung-wc",
-    name: "Rimless Wall-Hung WC",
-    description: "Solo by Jaquar presents Rimless WC with hidden installation screws for better aesthetics.",
-    images: [{ image: "/images/space/toilet_closet.webp", is_primary: true }],
-    category: { id: 4, name: "Smart Toilets" },
-    brand: { id: 1, name: "Jaquar" }
-  },
-  {
-    id: 4,
-    slug: "beta-l-shaped-shower-enclosure",
-    name: "Beta L-Shaped Shower Enclosure",
-    description: "Premium L-shaped glass shower enclosure with high-quality hinges and tempered safety glass.",
-    images: [{ image: "/images/space/shower_closet.webp", is_primary: true }],
-    category: { id: 3, name: "Shower Systems" },
-    brand: { id: 1, name: "Jaquar" }
-  },
-  {
-    id: 5,
-    slug: "concealed-stop-cocks",
-    name: "Concealed Stop Cocks",
-    description: "Exposed part kit of two concealed stop cocks in Blush Gold Bright PVD finish.",
-    images: [{ image: "/images/space/faucet.webp", is_primary: true }],
-    category: { id: 2, name: "Luxury Faucets" },
-    brand: { id: 1, name: "Jaquar" }
-  },
-  {
-    id: 6,
-    slug: "premium-tabletop-basin",
-    name: "Premium Tabletop Basin",
-    description: "Modern ceramic countertop wash basin with smooth stain-resistant glaze.",
-    images: [{ image: "/images/col_basins.webp", is_primary: true }],
-    category: { id: 1, name: "Wash Basin" },
-    brand: { id: 2, name: "Kohler" }
-  },
-  {
-    id: 7,
-    slug: "designer-brass-faucet",
-    name: "Designer Brass Faucet",
-    description: "Sleek single-lever basin mixer faucet in brushed gold PVD finish.",
-    images: [{ image: "/images/col_faucets.webp", is_primary: true }],
-    category: { id: 2, name: "Luxury Faucets" },
-    brand: { id: 4, name: "Grohe" }
-  },
-  {
-    id: 8,
-    slug: "thermostatic-shower-column",
-    name: "Thermostatic Rain Shower Column",
-    description: "Multi-function overhead rain shower system with thermostatic control valve.",
-    images: [{ image: "/images/col_shower.webp", is_primary: true }],
-    category: { id: 3, name: "Shower Systems" },
-    brand: { id: 1, name: "Jaquar" }
-  },
-  {
-    id: 9,
-    slug: "intelligent-bidet-toilet",
-    name: "Intelligent Bidet Toilet",
-    description: "Smart wall-hung bidet toilet with heated seat, automatic flush, and remote control.",
-    images: [{ image: "/images/col_toilets.webp", is_primary: true }],
-    category: { id: 4, name: "Smart Toilets" },
-    brand: { id: 3, name: "TOTO" }
-  },
-  {
-    id: 10,
-    slug: "luxury-bath-accessories-set",
-    name: "Luxury Bath Accessories Suite",
-    description: "Comprehensive 5-piece solid brass bathroom hardware and accessories set.",
-    images: [{ image: "/images/grid1.webp", is_primary: true }],
-    category: { id: 5, name: "Bath Accessories" },
-    brand: { id: 5, name: "CERA" }
-  }
-];
-
-function resolveImageUrl(url: string): string {
-  if (!url) return '';
-  if (url.includes('/media/images/')) {
-    return url.substring(url.indexOf('/media/images/') + 6);
-  }
-  if (url.startsWith('http://') || url.startsWith('https://')) {
-    return url;
-  }
-  if (url.startsWith('/')) {
-    return url;
-  }
-  return `/${url}`;
-}
-
-const ProductCard = ({ product }: { product: any }) => {
-  const primaryImg = product.images?.find((img: any) => img.is_primary)?.image || product.images?.[0]?.image;
-  const imgSrc = primaryImg ? resolveImageUrl(primaryImg) : '/images/col_basins.webp';
-
-  return (
-    <Link href={`/products/${product.slug}`} className="group block cursor-pointer">
-      <div className="aspect-square bg-neutral-100 rounded-lg overflow-hidden mb-4 relative">
-        <img src={imgSrc} alt={product.name} className="absolute inset-0 w-full h-full object-contain p-6 mix-blend-multiply group-hover:scale-110 transition-transform duration-500" />
-      </div>
-      <p className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold mb-1">{product.category?.name || "Sanitary"}</p>
-      <h3 className="font-playfair text-lg text-foreground mb-1">{product.name}</h3>
-      <p className="text-sm text-neutral-500 line-clamp-2">{product.description}</p>
-    </Link>
-  );
-};
+const ProductCard = ({ product }: { product: any }) => (
+  <Link href={`/products/${product.slug}`} className="group block cursor-pointer">
+    <div className="aspect-square bg-neutral-100 rounded-lg overflow-hidden mb-4 relative">
+      {product.images && product.images.length > 0 ? (
+        <img src={product.images[0].image} alt={product.name} className="absolute inset-0 w-full h-full object-contain p-6 mix-blend-multiply group-hover:scale-110 transition-transform duration-500" />
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center text-neutral-300">
+          <ShoppingBag size={48} strokeWidth={1} />
+        </div>
+      )}
+    </div>
+    <p className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold mb-1">{product.category?.name || "Sanitary"}</p>
+    <h3 className="font-playfair text-lg text-foreground mb-1">{product.name}</h3>
+    <p className="text-sm text-neutral-500 line-clamp-2">{product.description}</p>
+  </Link>
+);
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<any[]>([]);
@@ -182,22 +60,9 @@ export default function ProductsPage() {
       fetch(apiUrl(`/api/v1/categories/`)).then(r => r.ok ? r.json() : []).catch(() => []),
       fetch(apiUrl(`/api/v1/brands/`)).then(r => r.ok ? r.json() : []).catch(() => [])
     ]).then(([prods, cats, brs]) => {
-      const activeCategories = (cats && cats.length > 0) ? cats : STATIC_CATEGORIES;
-      const activeBrands = (brs && brs.length > 0) ? brs : STATIC_BRANDS;
-      let activeProducts = (prods && prods.length > 0) ? prods : STATIC_PRODUCTS;
-
-      // Ensure all products have valid images from public images folder
-      activeProducts = activeProducts.map((p: any, idx: number) => {
-        if (!p.images || p.images.length === 0 || !p.images[0]?.image) {
-          const fallback = STATIC_PRODUCTS[idx % STATIC_PRODUCTS.length];
-          return { ...p, images: fallback.images };
-        }
-        return p;
-      });
-
-      setProducts(activeProducts);
-      setCategories(activeCategories);
-      setBrands(activeBrands);
+      setProducts(prods && prods.length > 0 ? prods : []);
+      setCategories(cats && cats.length > 0 ? cats : []);
+      setBrands(brs && brs.length > 0 ? brs : []);
       setLoading(false);
 
       // Check for category filter in URL query parameter
@@ -206,7 +71,8 @@ export default function ProductsPage() {
       if (catParam) {
         const norm = (s: string) => (s || "").toLowerCase().replace(/[^a-z0-9]/g, "");
         const target = norm(catParam);
-        const matched = activeCategories.find((c: any) => {
+        const activeCats = cats && cats.length > 0 ? cats : [];
+        const matched = activeCats.find((c: any) => {
           const cSlug = norm(c.slug);
           const cName = norm(c.name);
           return cSlug === target || cName === target || cSlug.includes(target) || cName.includes(target) || target.includes(cSlug) || target.includes(cName);
