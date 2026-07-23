@@ -13,24 +13,24 @@ interface Milestone {
 
 const milestones: Milestone[] = [
   {
-    id: "01",
+    id: "1946",
     title: "The Beginning",
     subtitle: "FIRST BRANCH OPENED",
     description: "Opened our first branch in Perumbavoor, marking the start of our legacy in the sanitaryware industry.",
     icon: MapPin,
   },
   {
-    id: "02",
+    id: "1965",
     title: "Expansion",
     subtitle: "ERNAKULAM BROADWAY",
     description: "Expanded our presence with a new shop in the bustling Ernakulam Broadway.",
     icon: Building,
   },
   {
-    id: "03",
+    id: "1968",
     title: "A New Home",
     subtitle: "JEW STREET BUILDING",
-    description: "Relocated to a dedicated building in Jew Street, establishing a strong foundation for the future.",
+    description:"Moved into our current dedicated building on Jew Street, marking a new chapter of growth and progress.",
     icon: Home,
   },
   {
@@ -90,23 +90,28 @@ export default function JourneySection() {
         </p>
       </div>
 
+      <style>{`
+        @keyframes scrollMarquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          animation: scrollMarquee 40s linear infinite;
+        }
+        .marquee-container:hover .animate-marquee {
+          animation-play-state: paused !important;
+        }
+      `}</style>
+
       <div 
-        className="relative z-10 w-full group overflow-hidden py-8"
+        className="relative z-10 w-full overflow-hidden py-8 marquee-container"
         style={{ 
           maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
           WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
         }}
       >
         {/* Scrolling Track */}
-        <motion.div
-          className="flex space-x-6 px-4 md:px-8 w-max"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{
-            ease: "linear",
-            duration: 40,
-            repeat: Infinity,
-          }}
-        >
+        <div className="animate-marquee flex space-x-6 px-4 md:px-8 w-max">
           {marqueeItems.map((milestone, idx) => {
             const Icon = milestone.icon;
             return (
@@ -123,12 +128,12 @@ export default function JourneySection() {
                 </div>
 
                 {/* Background Number */}
-                <div className="absolute top-32 left-1/2 -translate-x-1/2 text-8xl md:text-9xl font-playfair text-white opacity-[0.03] pointer-events-none select-none z-0">
+                <div className="absolute top-32 left-1/2 -translate-x-1/2 text-8xl md:text-9xl font-playfair font-bold text-white opacity-[0.03] pointer-events-none select-none z-0">
                   {milestone.id}
                 </div>
 
                 {/* ID small */}
-                <span className="text-neutral-500 font-playfair text-lg mb-2 z-10">{milestone.id}</span>
+                <span className="text-neutral-500 font-playfair font-bold text-xl mb-2 z-10">{milestone.id}</span>
 
                 {/* Title */}
                 <h3 className="font-playfair text-3xl text-white mb-6 z-10">{milestone.title}</h3>
@@ -143,7 +148,7 @@ export default function JourneySection() {
               </div>
             );
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
