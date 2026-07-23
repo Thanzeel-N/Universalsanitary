@@ -57,12 +57,12 @@ export default function ClientsPage() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-16 gap-x-12 md:gap-y-24 md:gap-x-16">
           {CLIENTS.map((client, idx) => (
             <div key={idx} className="flex flex-col items-center justify-center group">
-              <div className="relative w-full h-16 md:h-20 lg:h-24 mb-6">
+              <div className={`relative w-full h-16 md:h-20 lg:h-24 mb-6 ${client.logo.includes('client_6.png') ? 'bg-black p-2 rounded' : ''}`}>
                 <Image
                   src={client.logo}
                   alt={client.name}
                   fill
-                  className="object-contain mix-blend-multiply transition-transform duration-700 ease-out group-hover:scale-105"
+                  className={`object-contain transition-transform duration-700 ease-out group-hover:scale-105 ${client.logo.includes('client_6.png') ? '' : 'mix-blend-multiply'}`}
                 />
               </div>
               <h3 className="text-center font-sans font-medium text-[11px] md:text-xs tracking-widest uppercase text-neutral-400 group-hover:text-neutral-900 transition-colors duration-500">

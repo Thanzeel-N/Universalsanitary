@@ -1,76 +1,64 @@
-import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { BLOG_POSTS } from "@/lib/blogData";
 
 export const metadata = {
   title: "Blog & Insights | Universal Sanitary",
 };
 
-const BLOG_POSTS = [
-  {
-    id: 1,
-    title: "Choosing the Right Sanitaryware for Your Master Bathroom",
-    excerpt: "Discover the perfect balance of luxury and functionality with our comprehensive guide to selecting premium sanitaryware.",
-    date: "July 15, 2026",
-    category: "Design Tips",
-    image: "/images/about/exterior.webp",
-  },
-  {
-    id: 2,
-    title: "The Evolution of Bathroom Aesthetics Since 1968",
-    excerpt: "Take a journey through the changing trends in bathroom design and how Universal Sanitary has adapted to modern luxury.",
-    date: "June 22, 2026",
-    category: "Our Legacy",
-    image: "/images/about/interior_1968.webp",
-  },
-  {
-    id: 3,
-    title: "Water Conservation in Modern Luxury Fittings",
-    excerpt: "Learn how the latest premium fittings combine eco-friendly water saving technology with uncompromising luxury.",
-    date: "May 10, 2026",
-    category: "Sustainability",
-    image: "/images/about/exterior.webp",
-  }
-];
-
 export default function BlogPage() {
   return (
-    <main className="min-h-screen bg-background pb-24">
+    <main className="min-h-screen bg-background pb-24 font-sans">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-16 px-6 md:px-12 text-center border-b border-neutral-200 dark:border-neutral-800">
-        <h1 className="font-playfair text-5xl md:text-6xl text-foreground mb-6">Blog & Insights</h1>
-        <p className="font-sans text-lg text-neutral-500 max-w-2xl mx-auto">
-          Explore our latest thoughts on luxury living, interior design trends, and the legacy of Universal Sanitary.
-        </p>
+      <section className="relative h-[50vh] md:h-[60vh] flex items-center justify-center overflow-hidden mb-12">
+        <div className="absolute inset-0 w-full h-full">
+          <img src="/images/hero-blog.jpg" alt="Blog & Insights" className="w-full h-full object-cover blur-[2px] scale-105" />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+        <div className="relative z-10 text-center px-6 mt-16">
+          <h1 className="font-playfair text-5xl md:text-7xl text-white mb-4 drop-shadow-lg">Blog & Insights</h1>
+          <p className="font-sans text-sm md:text-base tracking-widest uppercase text-neutral-300 drop-shadow-md">
+            Explore our latest thoughts on luxury living
+          </p>
+        </div>
       </section>
 
-      {/* Blog Grid */}
-      <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {BLOG_POSTS.map((post) => (
-            <article key={post.id} className="group cursor-pointer">
-              <div className="w-full aspect-[4/3] bg-neutral-200 overflow-hidden mb-6 relative rounded-sm">
+      {/* Blog List */}
+      <section className="flex flex-col w-full">
+        {BLOG_POSTS.map((post, index) => (
+          <article 
+            key={post.id} 
+            className={`w-full py-16 px-6 md:px-12 flex justify-center ${index % 2 === 0 ? 'bg-secondary' : 'bg-slate-50'}`}
+          >
+            <div className="max-w-5xl w-full flex flex-col md:flex-row gap-8 md:gap-16 items-start">
+              {/* Image */}
+              <div className="w-full md:w-1/3 aspect-square rounded-xl overflow-hidden shrink-0 shadow-sm">
                 <img 
                   src={post.image} 
                   alt={post.title} 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                 />
               </div>
-              <div className="flex items-center gap-4 mb-4">
-                <span className="text-xs font-bold uppercase tracking-widest text-primary">{post.category}</span>
-                <span className="text-sm text-neutral-400">{post.date}</span>
+              
+              {/* Content */}
+              <div className="w-full md:w-2/3 flex flex-col h-full pt-2">
+                <h3 className="text-2xl md:text-3xl font-bold text-primary mb-6 leading-snug">
+                  {post.title}
+                </h3>
+                <p className="text-neutral-700 text-sm md:text-base leading-relaxed mb-6">
+                  {post.excerpt}
+                </p>
+                <div className="mt-auto">
+                  <Link 
+                    href={`/blog/${post.id}`} 
+                    className="inline-block font-bold text-primary border-b-2 border-primary pb-0.5 hover:text-foreground hover:border-foreground transition-colors"
+                  >
+                    Read more
+                  </Link>
+                </div>
               </div>
-              <h2 className="font-playfair text-2xl text-foreground mb-4 group-hover:text-primary transition-colors">
-                {post.title}
-              </h2>
-              <p className="text-neutral-500 mb-6 line-clamp-3 leading-relaxed">
-                {post.excerpt}
-              </p>
-              <Link href={`/blog/${post.id}`} className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-foreground hover:text-primary transition-colors">
-                Read More <ArrowRight size={16} />
-              </Link>
-            </article>
-          ))}
-        </div>
+            </div>
+          </article>
+        ))}
       </section>
     </main>
   );

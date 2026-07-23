@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     siteName: "Universal Sanitary House",
     images: [
       {
-        url: "/images/hero.webp",
+        url: "/images/hero.jpeg",
         width: 1200,
         height: 630,
         alt: "Universal Sanitary House Hero",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Universal Sanitary House",
     description: "Kerala's premier destination for luxury sanitaryware since 1968.",
-    images: ["/images/hero.webp"],
+    images: ["/images/hero.jpeg"],
   },
   icons: {
     icon: "/images/logo/logo.webp",

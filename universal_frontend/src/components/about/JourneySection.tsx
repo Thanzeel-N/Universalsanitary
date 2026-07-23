@@ -1,118 +1,149 @@
+"use client";
 import React from "react";
-import Image from "next/image";
+import { motion } from "framer-motion";
+import { Mountain, Award, Handshake, MapPin, Building, Home } from "lucide-react";
 
 interface Milestone {
-  year: string;
+  id: string;
   title: string;
+  subtitle: string;
   description: string;
-  image: string;
+  icon: React.ElementType;
 }
 
 const milestones: Milestone[] = [
   {
-    year: "1968",
-    title: "The Inception",
-    description: "Universal Sanitary House was founded, starting its journey as a trusted provider of quality building materials in Kerala.",
-    image: "/images/about/interior_1968.webp",
+    id: "01",
+    title: "The Beginning",
+    subtitle: "FIRST BRANCH OPENED",
+    description: "Opened our first branch in Perumbavoor, marking the start of our legacy in the sanitaryware industry.",
+    icon: MapPin,
   },
   {
-    year: "1978",
-    title: "Kerala's First Pioneers",
-    description: "Secured the historic distinction of becoming the first authorized dealership in Kerala for legendary brands Cera and Parryware.",
-    image: "/images/space/classic_elegance.webp",
+    id: "02",
+    title: "Expansion",
+    subtitle: "ERNAKULAM BROADWAY",
+    description: "Expanded our presence with a new shop in the bustling Ernakulam Broadway.",
+    icon: Building,
   },
   {
-    year: "1990",
-    title: "Showroom Expansion",
-    description: "Transformed into a premier sanitary and tile concept showroom, showcasing complete bathroom designs for architects and builders.",
-    image: "/images/space/bathroom.webp",
+    id: "03",
+    title: "A New Home",
+    subtitle: "JEW STREET BUILDING",
+    description: "Relocated to a dedicated building in Jew Street, establishing a strong foundation for the future.",
+    icon: Home,
   },
   {
-    year: "2005",
-    title: "Visionary Luxury Pivot",
-    description: "Under the leadership of Mr. T. E. Azad and Mr. T. E. Akbar, pivoted to curating top-tier international luxury bathroom collections.",
-    image: "/images/space/modern_luxury.webp",
+    id: "04",
+    title: "Pioneers",
+    subtitle: "LEADING DEALERSHIPS",
+    description: "Proud to be the first dealership for CERA and JAGUAR in Kerala, and the second dealer for Parryware in the state.",
+    icon: Mountain,
   },
   {
-    year: "2015",
-    title: "The NECO Partnership",
-    description: "Appointed as the exclusive dealer for NECO in Kerala, reinforcing our footprint in commercial and municipal infrastructure.",
-    image: "/images/space/shower_closet.webp",
+    id: "05",
+    title: "Certified",
+    subtitle: "RECOGNIZED EXCELLENCE",
+    description: "Achieved GEM and MSME certifications, reflecting our commitment to quality and standard business practices.",
+    icon: Award,
   },
   {
-    year: "2023 & Beyond",
-    title: "Defining Luxury Spaces",
-    description: "Having served over 10,000 families, we continue to bring the world's most premium sanitaryware and wellness designs to life.",
-    image: "/images/space/minimal_zen.webp",
+    id: "06",
+    title: "Trusted",
+    subtitle: "APPROVED SUPPLIERS",
+    description: "Became approved suppliers for prestigious organizations including Cochin Shipyard, Naval Base, and CPWD.",
+    icon: Handshake,
   },
 ];
 
 export default function JourneySection() {
+  const marqueeItems = [...milestones, ...milestones];
+
   return (
-    <section className="py-24 bg-white dark:bg-[#0a0a0a]">
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Minimal Header */}
-        <div className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between border-b border-neutral-200 dark:border-neutral-800 pb-8">
-          <div>
-            <h2 className="font-sans font-light text-5xl md:text-7xl tracking-tighter text-neutral-900 dark:text-neutral-100">
-              Our Journey.
-            </h2>
-          </div>
-          <div className="mt-6 md:mt-0 max-w-sm">
-            <p className="font-sans text-sm text-neutral-500 dark:text-neutral-400 font-light leading-relaxed">
-              A chronological curation of our most defining moments, 
-              partnerships, and architectural expansions over the decades.
-            </p>
-          </div>
+    <section className="relative py-24 bg-[#0a0a0a] overflow-hidden">
+      
+      {/* Background Decorative Elements */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full border-[1px] border-[#B8985B]/10 translate-x-1/3 -translate-y-1/3 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] rounded-full border-[1px] border-[#B8985B]/5 translate-x-1/4 -translate-y-1/4 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full border-[1px] border-[#B8985B]/10 -translate-x-1/3 translate-y-1/3 pointer-events-none" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 mb-16 text-center">
+        
+        {/* Header Section */}
+        <div className="flex items-center justify-center space-x-4 mb-4">
+          <div className="w-12 h-[1px] bg-[#B8985B]"></div>
+          <span className="text-[#B8985B] uppercase tracking-[0.3em] text-xs font-semibold">Our Journey</span>
+          <div className="w-12 h-[1px] bg-[#B8985B]"></div>
         </div>
+        <h2 className="font-playfair text-5xl md:text-6xl mb-6">
+          <span className="text-white">The </span>
+          <span className="text-[#B8985B]">Journey</span>
+        </h2>
+        <div className="flex items-center justify-center mb-4">
+          <div className="w-8 h-[2px] bg-[#B8985B]"></div>
+          <div className="w-2 h-2 rotate-45 bg-[#B8985B] mx-1"></div>
+          <div className="w-8 h-[2px] bg-[#B8985B]"></div>
+        </div>
+        <p className="font-sans text-neutral-400 max-w-2xl mx-auto text-sm md:text-base">
+          A chronological curation of our most defining moments, partnerships, 
+          and milestones over the decades.
+        </p>
+      </div>
 
-        {/* Minimalist List */}
-        <div className="flex flex-col">
-          {milestones.map((milestone, idx) => {
-            const displayYear = milestone.year.split(' ')[0];
-            const hasBeyond = milestone.year.includes('&');
-
+      <div 
+        className="relative z-10 w-full group overflow-hidden py-8"
+        style={{ 
+          maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+          WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
+        }}
+      >
+        {/* Scrolling Track */}
+        <motion.div
+          className="flex space-x-6 px-4 md:px-8 w-max"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{
+            ease: "linear",
+            duration: 40,
+            repeat: Infinity,
+          }}
+        >
+          {marqueeItems.map((milestone, idx) => {
+            const Icon = milestone.icon;
             return (
               <div 
-                key={idx} 
-                className="group flex flex-col md:flex-row items-stretch py-12 md:py-20 border-b border-neutral-100 dark:border-neutral-900 last:border-0"
+                key={idx}
+                className="shrink-0 w-[300px] md:w-[340px] bg-gradient-to-b from-[#161616] to-[#0a0a0a] border border-[#B8985B]/30 rounded-2xl p-8 flex flex-col items-center text-center relative overflow-hidden transition-all duration-500 hover:border-[#B8985B] hover:-translate-y-2 group/card"
               >
-                {/* Text Content (Left) */}
-                <div className="w-full md:w-5/12 flex flex-col justify-between pr-0 md:pr-12 mb-10 md:mb-0">
-                  <div>
-                    <span className="font-sans font-light text-7xl md:text-8xl lg:text-9xl tracking-tighter text-neutral-900 dark:text-neutral-100 leading-none">
-                      {displayYear}
-                    </span>
-                    {hasBeyond && (
-                      <span className="block mt-3 font-sans text-xs tracking-[0.2em] uppercase text-neutral-400 dark:text-neutral-500">
-                        & Beyond
-                      </span>
-                    )}
-                  </div>
-                  
-                  <div className="mt-12 md:mt-auto">
-                    <h3 className="font-sans font-medium text-xl md:text-2xl text-neutral-900 dark:text-neutral-100 mb-4 tracking-wide">
-                      {milestone.title}
-                    </h3>
-                    <p className="font-sans text-sm md:text-base text-neutral-500 dark:text-neutral-400 font-light leading-relaxed max-w-sm">
-                      {milestone.description}
-                    </p>
-                  </div>
+                {/* Subtle curved overlay behind the icon (like in reference) */}
+                <div className="absolute top-0 left-0 w-full h-32 bg-[#1a1a1a] rounded-b-[100%] border-b border-[#B8985B]/20 z-0"></div>
+
+                {/* Circular Emblem */}
+                <div className="relative w-20 h-20 rounded-full border border-[#B8985B] flex items-center justify-center bg-[#0a0a0a] z-10 mb-8 shadow-[0_0_20px_rgba(184,152,91,0.15)] group-hover/card:shadow-[0_0_30px_rgba(184,152,91,0.3)] transition-shadow duration-500">
+                  <Icon className="text-[#B8985B] w-8 h-8" strokeWidth={1.5} />
                 </div>
 
-                {/* Image (Right) */}
-                <div className="w-full md:w-7/12 relative h-[300px] md:h-[500px] overflow-hidden bg-neutral-100 dark:bg-neutral-900 rounded-sm">
-                  <Image
-                    src={milestone.image}
-                    alt={milestone.title}
-                    fill
-                    className="object-cover grayscale transition-all duration-[1s] ease-in-out group-hover:grayscale-0 group-hover:scale-105"
-                  />
+                {/* Background Number */}
+                <div className="absolute top-32 left-1/2 -translate-x-1/2 text-8xl md:text-9xl font-playfair text-white opacity-[0.03] pointer-events-none select-none z-0">
+                  {milestone.id}
                 </div>
+
+                {/* ID small */}
+                <span className="text-neutral-500 font-playfair text-lg mb-2 z-10">{milestone.id}</span>
+
+                {/* Title */}
+                <h3 className="font-playfair text-3xl text-white mb-6 z-10">{milestone.title}</h3>
+                
+                {/* Subtitle */}
+                <h4 className="text-[#B8985B] text-xs font-bold uppercase tracking-widest mb-4 z-10">{milestone.subtitle}</h4>
+                
+                {/* Description */}
+                <p className="text-neutral-400 text-sm leading-relaxed z-10 px-2 whitespace-normal">
+                  {milestone.description}
+                </p>
               </div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
