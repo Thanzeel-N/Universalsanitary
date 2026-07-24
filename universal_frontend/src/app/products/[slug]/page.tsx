@@ -168,7 +168,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         </div>
 
         <a
-          href={`https://wa.me/919847037275?text=Hello,%20I%20would%20like%20to%20enquire%20about%20the%20product:%20${encodeURIComponent(product.name)}`}
+          href={`https://wa.me/917356863985?text=Hello,%20I%20would%20like%20to%20enquire%20about%20the%20product:%20${encodeURIComponent(product.name)}`}
           target="_blank"
           rel="noopener noreferrer"
           className="block text-center w-full bg-primary text-white py-4 hover:brightness-110 smooth-hover uppercase tracking-widest text-sm"

@@ -394,7 +394,7 @@ export default function HomeContent({ categories }: { categories: any[] }) {
             Defining Luxury <br />Since <span className="italic font-normal text-primary">1968</span>
           </h2>
           <p className="text-neutral-500 mb-10 max-w-lg leading-[1.8] text-base md:text-lg font-light">
-            For over five decades, Universal Sanitary House has been a trusted luxury sanitaryware showroom in Kochi, serving homeowners, architects, and designers seeking exceptional quality and timeless elegance. We do not simply sell sanitaryware; we carefully curate premium bathroom experiences that transform everyday rituals into moments of comfort, style, and luxury.
+            For over six decades, Universal Sanitary House has been a trusted luxury sanitaryware showroom in Kochi, serving homeowners, architects, and designers seeking exceptional quality and timeless elegance. We do not simply sell sanitaryware; we carefully curate premium bathroom experiences that transform everyday rituals into moments of comfort, style, and luxury.
           </p>
 
           <div className="grid grid-cols-2 gap-6 md:gap-8 mb-10 max-w-md bg-stone-50/50 border border-stone-100/80 p-6 rounded-2xl">
