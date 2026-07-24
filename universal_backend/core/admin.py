@@ -4,7 +4,8 @@ from .models import Category, Brand, Product, ProductImage, Project
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
-    list_display = ('name', 'slug')
+    list_display = ('name', 'order', 'slug')
+    list_editable = ('order',)
 
 @admin.register(Brand)
 class BrandAdmin(admin.ModelAdmin):

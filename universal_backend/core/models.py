@@ -6,6 +6,11 @@ class Category(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     hero_image = models.ImageField(upload_to='categories/', null=True, blank=True)
     description = models.TextField(blank=True)
+    order = models.IntegerField(default=0, help_text="Order in which this category is displayed (lower numbers first)")
+
+    class Meta:
+        ordering = ['order', 'name']
+        verbose_name_plural = "Categories"
 
     def save(self, *args, **kwargs):
         if not self.slug:
