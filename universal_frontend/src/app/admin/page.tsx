@@ -53,6 +53,24 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleUpdateCategoryOrder = async (slug: string, newOrder: number) => {
+    const token = Cookies.get("access_token");
+    try {
+      await fetch(apiUrl(`/api/v1/categories/${slug}/`), {
+        method: "PATCH",
+        headers: { 
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ order: newOrder })
+      });
+      fetchData();
+    } catch (err) {
+      console.error(err);
+      alert("Failed to update category order.");
+    }
+  };
+
   const handleDeleteCategory = async (slug: string) => {
     if (!confirm("Are you sure you want to delete this category?")) return;
     const token = Cookies.get("access_token");
@@ -164,6 +182,7 @@ export default function AdminDashboard() {
             <thead>
               <tr className="bg-neutral-50 border-b border-neutral-200 text-xs uppercase tracking-widest text-neutral-500">
                 <th className="p-4 font-bold">Category Name</th>
+                <th className="p-4 font-bold text-center">Order</th>
                 <th className="p-4 font-bold text-right">Actions</th>
               </tr>
             </thead>
@@ -171,6 +190,14 @@ export default function AdminDashboard() {
               {categories.map(category => (
                 <tr key={category.id} className="border-b border-neutral-100 hover:bg-neutral-50">
                   <td className="p-4 font-sans text-[#222] font-medium">{category.name}</td>
+                  <td className="p-4 text-center">
+                    <input 
+                      type="number" 
+                      defaultValue={category.order || 0}
+                      className="w-16 border border-neutral-200 rounded px-2 py-1 text-center"
+                      onBlur={(e) => handleUpdateCategoryOrder(category.slug, parseInt(e.target.value))}
+                    />
+                  </td>
                   <td className="p-4 flex justify-end gap-3">
                     <button onClick={() => handleDeleteCategory(category.slug)} className="text-red-500 hover:text-red-700">
                       <Trash2 size={18} />
