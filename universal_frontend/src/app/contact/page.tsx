@@ -13,16 +13,16 @@ export default function ContactPage() {
         
         <div className="mb-8">
           <h2 className="font-sans font-bold uppercase tracking-widest text-xs mb-2">Showroom Location</h2>
-          <p className="text-lg leading-[1.7]">Jew Street, Padma Junction<br/>Shenoys, Ernakulam<br/>Kochi, Kerala – 682035</p>
+          <p className="text-lg leading-[1.7]">Post box No. 3674, Jew street<br/>Ernakulam, Kerala, India - 682035</p>
         </div>
 
         <div className="mb-12">
           <h2 className="font-sans font-bold uppercase tracking-widest text-xs mb-2">Direct Contact</h2>
-          <p className="text-lg leading-[1.7]">0484-2351581<br/>universalsanitaryhouse@yahoo.com</p>
+          <p className="text-lg leading-[1.7]">+91- 484- 2351581, 2360931, 2366939<br/>universalsanitary@yahoo.com<br/>www.universalsanitary.com</p>
         </div>
 
         <a 
-          href="https://wa.me/919847037275" 
+          href="https://wa.me/917356863985" 
           target="_blank" 
           rel="noopener noreferrer"
           className="inline-flex items-center gap-3 bg-[#25D366] text-white px-8 py-4 hover:bg-[#128C7E] smooth-hover"

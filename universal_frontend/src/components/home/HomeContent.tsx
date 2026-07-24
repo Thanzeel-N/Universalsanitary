@@ -878,11 +878,11 @@ export default function HomeContent({ categories }: { categories: any[] }) {
               </div>
               <div>
                 <h4 className="font-sans font-bold uppercase tracking-widest text-xs text-neutral-400 mb-1">Address</h4>
-                <p className="text-base text-neutral-700 leading-[1.7]">Jew Street, Padma Junction, Ernakulam, Kochi 682035</p>
+                <p className="text-base text-neutral-700 leading-[1.7]">Post box No. 3674, Jew street, Ernakulam, Kerala, India - 682035</p>
               </div>
             </div>
             <a
-              href="https://maps.google.com/?q=Universal+Sanitary+House,+Jew+Street,+Padma+Junction,+Ernakulam,+Kochi+682035"
+              href="https://maps.google.com/?q=Universal+Sanitary+House,+Jew+Street,+Ernakulam,+Kerala+682035"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-primary text-white px-8 py-4 rounded-md font-sans uppercase tracking-widest text-sm font-bold hover:brightness-110 smooth-hover transition-all duration-300"

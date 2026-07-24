@@ -24,10 +24,12 @@ export default function Footer() {
         <div className="col-span-1">
           <h3 className="font-sans font-bold uppercase tracking-widest text-xs mb-6 text-white">Contact</h3>
           <ul className="flex flex-col gap-4 font-sans text-sm text-neutral-400">
-            <li>Jew Street, Padma Junction</li>
-            <li>Ernakulam, Kochi 682035</li>
-            <li>9847037275</li>
-            <li><Link href="mailto:universalsanitaryhouse@yahoo.com" className="hover:text-white smooth-hover break-all">universalsanitaryhouse@yahoo.com</Link></li>
+            <li>Post box No. 3674, Jew street</li>
+            <li>Ernakulam, Kerala, India - 682035</li>
+            <li>+91- 484- 2351581, 2360931, 2366939</li>
+            <li><Link href="https://wa.me/917356863985" className="hover:text-white smooth-hover">WhatsApp: +917356863985</Link></li>
+            <li><Link href="mailto:universalsanitary@yahoo.com" className="hover:text-white smooth-hover break-all">universalsanitary@yahoo.com</Link></li>
+            <li><Link href="http://www.universalsanitary.com" className="hover:text-white smooth-hover">www.universalsanitary.com</Link></li>
           </ul>
         </div>
       </div>
