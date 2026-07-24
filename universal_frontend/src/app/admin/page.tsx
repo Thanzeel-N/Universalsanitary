@@ -3,9 +3,60 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Plus, Edit, Trash2 } from "lucide-react";
+import { Plus, Edit, Trash2, GripVertical } from "lucide-react";
 import Cookies from "js-cookie";
 import { apiUrl } from "@/lib/api";
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+  useSortable,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+
+const SortableCategoryRow = ({ category, handleDeleteCategory }: { category: any; handleDeleteCategory: (slug: string) => void }) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: category.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    zIndex: isDragging ? 10 : 1,
+    position: isDragging ? "relative" as const : "static" as const,
+  };
+
+  return (
+    <tr ref={setNodeRef} style={style} className={`border-b border-neutral-100 hover:bg-neutral-50 bg-white ${isDragging ? "shadow-lg opacity-80" : ""}`}>
+      <td className="p-4 w-12 text-neutral-400">
+        <button {...attributes} {...listeners} className="cursor-grab active:cursor-grabbing hover:text-neutral-900 transition-colors touch-none outline-none">
+          <GripVertical size={18} />
+        </button>
+      </td>
+      <td className="p-4 font-sans text-[#222] font-medium">{category.name}</td>
+      <td className="p-4 flex justify-end gap-3">
+        <button onClick={() => handleDeleteCategory(category.slug)} className="text-red-500 hover:text-red-700">
+          <Trash2 size={18} />
+        </button>
+      </td>
+    </tr>
+  );
+};
 
 export default function AdminDashboard() {
   const [products, setProducts] = useState<any[]>([]);
@@ -53,21 +104,46 @@ export default function AdminDashboard() {
     }
   };
 
-  const handleUpdateCategoryOrder = async (slug: string, newOrder: number) => {
-    const token = Cookies.get("access_token");
-    try {
-      await fetch(apiUrl(`/api/v1/categories/${slug}/`), {
-        method: "PATCH",
-        headers: { 
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ order: newOrder })
-      });
-      fetchData();
-    } catch (err) {
-      console.error(err);
-      alert("Failed to update category order.");
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  const handleDragEnd = async (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (over && active.id !== over.id) {
+      const oldIndex = categories.findIndex((c) => c.id === active.id);
+      const newIndex = categories.findIndex((c) => c.id === over.id);
+
+      const newCategories = arrayMove(categories, oldIndex, newIndex);
+      setCategories(newCategories); // Optimistic UI update
+
+      const token = Cookies.get("access_token");
+      try {
+        await Promise.all(
+          newCategories.map((cat, index) => {
+            if (cat.order !== index) {
+              cat.order = index; // local update
+              return fetch(apiUrl(`/api/v1/categories/${cat.slug}/`), {
+                method: "PATCH",
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ order: index }),
+              });
+            }
+            return Promise.resolve();
+          })
+        );
+      } catch (err) {
+        console.error("Failed to update orders", err);
+        alert("Failed to save the new order.");
+        fetchData(); // revert
+      }
     }
   };
 
@@ -181,36 +257,27 @@ export default function AdminDashboard() {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-neutral-50 border-b border-neutral-200 text-xs uppercase tracking-widest text-neutral-500">
+                <th className="p-4 w-12"></th>
                 <th className="p-4 font-bold">Category Name</th>
-                <th className="p-4 font-bold text-center">Order</th>
                 <th className="p-4 font-bold text-right">Actions</th>
               </tr>
             </thead>
-            <tbody>
-              {categories.map(category => (
-                <tr key={category.id} className="border-b border-neutral-100 hover:bg-neutral-50">
-                  <td className="p-4 font-sans text-[#222] font-medium">{category.name}</td>
-                  <td className="p-4 text-center">
-                    <input 
-                      type="number" 
-                      defaultValue={category.order || 0}
-                      className="w-16 border border-neutral-200 rounded px-2 py-1 text-center"
-                      onBlur={(e) => handleUpdateCategoryOrder(category.slug, parseInt(e.target.value))}
-                    />
-                  </td>
-                  <td className="p-4 flex justify-end gap-3">
-                    <button onClick={() => handleDeleteCategory(category.slug)} className="text-red-500 hover:text-red-700">
-                      <Trash2 size={18} />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-              {categories.length === 0 && (
-                <tr>
-                  <td colSpan={2} className="p-8 text-center text-neutral-500">No categories found.</td>
-                </tr>
-              )}
-            </tbody>
+            <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+              <SortableContext items={categories.map((c) => c.id)} strategy={verticalListSortingStrategy}>
+                <tbody>
+                  {categories.map((category) => (
+                    <SortableCategoryRow key={category.id} category={category} handleDeleteCategory={handleDeleteCategory} />
+                  ))}
+                  {categories.length === 0 && (
+                    <tr>
+                      <td colSpan={3} className="p-8 text-center text-neutral-500">
+                        No categories found.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </SortableContext>
+            </DndContext>
           </table>
         </div>
       </div>
