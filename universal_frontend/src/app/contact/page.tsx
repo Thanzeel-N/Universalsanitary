@@ -18,7 +18,7 @@ export default function ContactPage() {
 
         <div className="mb-12">
           <h2 className="font-sans font-bold uppercase tracking-widest text-xs mb-2">Direct Contact</h2>
-          <p className="text-lg leading-[1.7]">+91- 484- 2351581, 2360931, 2366939<br/>universalsanitary@yahoo.com<br/>www.universalsanitary.com</p>
+          <p className="text-lg leading-[1.7]">+91- 484- 2351581, 2360931, 2366939<br/>universalsanitary@yahoo.com</p>
         </div>
 
         <a 

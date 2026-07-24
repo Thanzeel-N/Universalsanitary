@@ -29,7 +29,6 @@ export default function Footer() {
             <li>+91- 484- 2351581, 2360931, 2366939</li>
             <li><Link href="https://wa.me/917356863985" className="hover:text-white smooth-hover">WhatsApp: +917356863985</Link></li>
             <li><Link href="mailto:universalsanitary@yahoo.com" className="hover:text-white smooth-hover break-all">universalsanitary@yahoo.com</Link></li>
-            <li><Link href="http://www.universalsanitary.com" className="hover:text-white smooth-hover">www.universalsanitary.com</Link></li>
           </ul>
         </div>
       </div>
