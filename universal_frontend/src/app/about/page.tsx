@@ -26,16 +26,16 @@ export default function AboutPage() {
       <section className="py-24 px-6 md:px-12 max-w-4xl mx-auto text-center">
         <h2 className="font-playfair text-3xl md:text-4xl text-foreground mb-8">A Tradition of Excellence</h2>
         <p className="text-lg md:text-xl text-neutral-600 leading-[1.7] font-sans mb-8">
-          <strong className="text-foreground">Universal Sanitary House</strong> was Established in 1968 in Ernakulam, the commercial capital of Kerala, Universal Sanitary House has grown to become a trusted luxury sanitaryware showroom in Kochi and one of the leading sanitaryware dealers in Ernakulam.
+          <strong className="text-foreground">Universal Sanitary House</strong> Founded in 1968, Universal Sanitary House is one of the leading suppliers of sanitaryware, plumbing, and water supply materials in Kerala. As a trusted luxury sanitaryware showroom in Kochi, we have become a premier destination for homeowners and professionals seeking premium bathroom solutions.
         </p>
         <p className="text-lg md:text-xl text-neutral-600 leading-[1.7] font-sans mb-8">
-          For over five decades, we have served homeowners, architects, interior designers, builders, and contractors with a wide range of premium sanitaryware, bathroom fittings, tiles, and water supply materials. Our experienced team helps customers select quality products and cost-effective solutions that suit their functional requirements, design preferences, and budgets.
+          As we approach six decades of excellence, we continue to serve homeowners, contractors, architects, builders, and developers across Kerala. Our extensive product range includes premium sanitaryware, luxury bathroom fittings, tiles, plumbing materials, water supply products, and bathroom accessories. Each product is carefully selected to meet different design preferences, quality standards, project requirements, and budgets.
         </p>
         <p className="text-lg md:text-xl text-neutral-600 leading-[1.7] font-sans mb-8">
-          Over the years, Universal Sanitary House has earned a strong and loyal customer base by offering dependable products, transparent pricing, and professional guidance. Today, we are recognised as a trusted destination for premium sanitaryware and bathroom fittings in Kerala, along with reliable solutions for residential and commercial projects.
+          Over the years, we have built a strong reputation for reliability, quality, and professional service. As one of the trusted sanitaryware dealers in Ernakulam, we have supplied products to numerous major projects, institutions, commercial developments, and organisations throughout the state.
         </p>
         <p className="text-lg md:text-xl text-neutral-600 leading-[1.7] font-sans mb-8">
-          Our core strength lies in our extensive industry expertise, carefully selected products, fair pricing, and the unmatched service we provide to every customer.
+          Our success is built on deep industry expertise, transparent pricing, quality products, and an unwavering commitment to customer satisfaction. Whether you are building your dream home, renovating a bathroom, or managing a large-scale commercial project, Universal Sanitary House remains a trusted destination for premium sanitaryware and bathroom fittings in Kerala.
         </p>
       </section>
 
