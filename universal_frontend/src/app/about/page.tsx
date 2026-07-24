@@ -120,8 +120,8 @@ export default function AboutPage() {
               <span>Phone:</span> <strong className="text-white">0484-2351581</strong>
             </a>
             <span className="hidden md:inline text-neutral-800">|</span>
-            <a href="mailto:universalsanitaryhouse@yahoo.com" className="hover:text-white transition-colors flex items-center gap-2">
-              <span>Email:</span> <strong className="text-white">universalsanitaryhouse@yahoo.com</strong>
+            <a href="mailto:universalsanitary@yahoo.com" className="hover:text-white transition-colors flex items-center gap-2">
+              <span>Email:</span> <strong className="text-white">universalsanitary@yahoo.com</strong>
             </a>
           </div>
         </div>
