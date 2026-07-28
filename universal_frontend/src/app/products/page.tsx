@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowRight, Layers, Sparkles } from "lucide-react";
+import { ArrowUpRight, Layers } from "lucide-react";
 import { apiUrl } from "@/lib/api";
 
 const CategorySkeleton = () => (
@@ -105,43 +105,48 @@ export default function ProductsPage() {
                 <Link
                   key={category.id}
                   href={`/categories/${category.slug}`}
-                  className="group relative h-[420px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 block cursor-pointer bg-neutral-900 border border-neutral-200/20"
+                  className="group relative h-[460px] md:h-[500px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-700 block cursor-pointer bg-neutral-950 border border-neutral-200/10 hover:border-white/30"
                 >
                   {/* Category Image */}
                   <img
                     src={heroImage}
                     alt={category.name}
-                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-85 group-hover:opacity-95"
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-out opacity-85 group-hover:opacity-100"
                   />
                   
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent group-hover:from-black/95 transition-colors duration-500" />
+                  {/* Two Layer Monochrome Luxury Overlays */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-90 group-hover:opacity-95 transition-opacity duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent opacity-70" />
 
-                  {/* Card Content */}
-                  <div className="absolute inset-0 p-8 flex flex-col justify-end z-10">
-                    <div className="mb-auto">
-                      <span className="inline-block px-3 py-1 rounded-full bg-black/40 backdrop-blur-md text-amber-300 border border-amber-300/30 text-[10px] uppercase font-bold tracking-widest shadow-sm">
-                        {count} Product{count !== 1 ? "s" : ""} Available
+                  {/* Top Bar Badge (Frosted Monochrome Glass) */}
+                  <div className="absolute top-0 inset-x-0 p-7 flex items-center justify-between z-10">
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-white border border-white/20 text-[10px] font-mono tracking-[0.2em] uppercase font-semibold shadow-lg group-hover:bg-white/20 transition-all duration-500">
+                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                      <span>{count} PRODUCT{count !== 1 ? "S" : ""}</span>
+                    </div>
+                  </div>
+
+                  {/* Bottom Interactive Content */}
+                  <div className="absolute bottom-0 inset-x-0 p-7 flex flex-col justify-end z-10">
+                    <div className="transform transition-transform duration-500 group-hover:-translate-y-1">
+                      <span className="text-neutral-400 text-[10px] font-mono uppercase tracking-[0.3em] mb-2 block group-hover:text-neutral-200 transition-colors">
+                        COLLECTION SERIES
                       </span>
+                      
+                      <h3 className="font-playfair text-3xl md:text-4xl font-bold text-white tracking-wide drop-shadow-md mb-6 transition-all duration-500">
+                        {category.name}
+                      </h3>
                     </div>
 
-                    <h3 className="font-playfair text-3xl font-bold text-white mb-2 group-hover:text-amber-400 transition-colors duration-300 drop-shadow">
-                      {category.name}
-                    </h3>
-
-                    {category.description ? (
-                      <p className="text-sm text-neutral-300 line-clamp-2 mb-6 font-normal leading-relaxed">
-                        {category.description}
-                      </p>
-                    ) : (
-                      <p className="text-sm text-neutral-400 italic mb-6">
-                        Explore premium architectural solutions in this collection.
-                      </p>
-                    )}
-
-                    <div className="flex items-center gap-2 text-xs uppercase font-bold tracking-widest text-white group-hover:text-amber-400 transition-colors">
-                      <span>Explore Collection</span>
-                      <ArrowRight size={16} className="group-hover:translate-x-1.5 transition-transform duration-300" />
+                    {/* Sleek Interactive Footer Bar */}
+                    <div className="pt-5 border-t border-white/15 group-hover:border-white/40 transition-colors duration-500 flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-xs uppercase font-bold tracking-[0.25em] text-neutral-300 group-hover:text-white transition-colors">
+                        <span>EXPLORE COLLECTION</span>
+                      </div>
+                      
+                      <div className="w-10 h-10 rounded-full border border-white/20 bg-white/10 backdrop-blur-md flex items-center justify-center text-white group-hover:bg-white group-hover:text-neutral-950 group-hover:border-white transition-all duration-500 group-hover:scale-110 shadow-lg shrink-0">
+                        <ArrowUpRight size={18} className="transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </div>
                     </div>
                   </div>
                 </Link>
