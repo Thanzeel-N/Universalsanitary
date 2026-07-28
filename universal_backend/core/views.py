@@ -1,7 +1,7 @@
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from .models import Category, Brand, Product, Project, ProductImage
 from .serializers import CategorySerializer, BrandSerializer, ProductSerializer, ProjectSerializer, ProductImageSerializer
 
@@ -10,6 +10,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
     lookup_field = 'slug'
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    parser_classes = [JSONParser, MultiPartParser, FormParser]
 
 class BrandViewSet(viewsets.ModelViewSet):
     queryset = Brand.objects.all()

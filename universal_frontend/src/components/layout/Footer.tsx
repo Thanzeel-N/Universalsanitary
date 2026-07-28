@@ -16,8 +16,10 @@ export default function Footer() {
         <div className="col-span-1">
           <h3 className="font-sans font-bold uppercase tracking-widest text-xs mb-6 text-white">Explore</h3>
           <ul className="flex flex-col gap-4 font-sans text-sm text-neutral-400">
-            <li><Link href="/products" className="hover:text-white smooth-hover">Collections</Link></li>
             <li><Link href="/about" className="hover:text-white smooth-hover">About Us</Link></li>
+            <li><Link href="/products" className="hover:text-white smooth-hover">Collections</Link></li>
+            <li><Link href="/clients" className="hover:text-white smooth-hover">Clients</Link></li>
+            <li><Link href="/blog" className="hover:text-white smooth-hover">Blog</Link></li>
           </ul>
         </div>
 

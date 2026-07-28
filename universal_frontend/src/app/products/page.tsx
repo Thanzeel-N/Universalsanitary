@@ -1,117 +1,70 @@
 "use client";
 
-
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Filter, ShoppingBag } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { ArrowRight, Layers, Sparkles } from "lucide-react";
 import { apiUrl } from "@/lib/api";
 
-const ProductSkeleton = () => (
-  <div className="animate-pulse flex flex-col mb-4">
-    <div className="aspect-square bg-neutral-200 rounded-lg w-full mb-4"></div>
-    <div className="h-3 bg-neutral-200 rounded w-1/4 mb-2"></div>
-    <div className="h-5 bg-neutral-200 rounded w-3/4 mb-2"></div>
-    <div className="h-4 bg-neutral-200 rounded w-full mb-1"></div>
-    <div className="h-4 bg-neutral-200 rounded w-5/6"></div>
-  </div>
-);
-
-const FilterSkeleton = () => (
-  <div className="animate-pulse flex flex-col gap-3">
-    {[1, 2, 3, 4].map(i => (
-      <div key={i} className="flex items-center gap-3">
-        <div className="w-4 h-4 bg-neutral-200 rounded"></div>
-        <div className="h-4 bg-neutral-200 rounded w-24"></div>
-      </div>
-    ))}
-  </div>
-);
-
-const ProductCard = ({ product }: { product: any }) => (
-  <Link href={`/products/${product.slug}`} className="group block cursor-pointer">
-    <div className="aspect-square bg-neutral-100 rounded-lg overflow-hidden mb-4 relative">
-      {product.images && product.images.length > 0 ? (
-        <img src={product.images[0].image} alt={product.name} className="absolute inset-0 w-full h-full object-contain p-6 mix-blend-multiply group-hover:scale-110 transition-transform duration-500" />
-      ) : (
-        <div className="absolute inset-0 flex items-center justify-center text-neutral-300">
-          <ShoppingBag size={48} strokeWidth={1} />
-        </div>
-      )}
-    </div>
-    <p className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold mb-1">{product.category?.name || "Sanitary"}</p>
-    <h3 className="font-playfair text-lg text-foreground mb-1">{product.name}</h3>
-    <p className="text-sm text-neutral-500 line-clamp-2">{product.description}</p>
-  </Link>
+const CategorySkeleton = () => (
+  <div className="animate-pulse h-[400px] bg-neutral-200 rounded-2xl w-full"></div>
 );
 
 export default function ProductsPage() {
-  const [products, setProducts] = useState<any[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
-  const [brands, setBrands] = useState<any[]>([]);
-  
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+  const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     Promise.all([
-      fetch(apiUrl(`/api/v1/products/`)).then(r => r.ok ? r.json() : []).catch(() => []),
       fetch(apiUrl(`/api/v1/categories/`)).then(r => r.ok ? r.json() : []).catch(() => []),
-      fetch(apiUrl(`/api/v1/brands/`)).then(r => r.ok ? r.json() : []).catch(() => [])
-    ]).then(([prods, cats, brs]) => {
+      fetch(apiUrl(`/api/v1/products/`)).then(r => r.ok ? r.json() : []).catch(() => [])
+    ]).then(([cats, prods]) => {
+      const activeCats = cats && cats.length > 0 ? cats : [];
+      setCategories(activeCats);
       setProducts(prods && prods.length > 0 ? prods : []);
-      setCategories(cats && cats.length > 0 ? cats : []);
-      setBrands(brs && brs.length > 0 ? brs : []);
       setLoading(false);
 
-      // Check for category filter in URL query parameter
+      // Seamless backwards compatibility: if someone navigated to /products?category=faucets
+      // automatically send them to the dedicated luxury category page!
       const params = new URLSearchParams(window.location.search);
       const catParam = params.get("category");
-      if (catParam) {
+      if (catParam && activeCats.length > 0) {
         const norm = (s: string) => (s || "").toLowerCase().replace(/[^a-z0-9]/g, "");
         const target = norm(catParam);
-        const activeCats = cats && cats.length > 0 ? cats : [];
         const matched = activeCats.find((c: any) => {
           const cSlug = norm(c.slug);
           const cName = norm(c.name);
           return cSlug === target || cName === target || cSlug.includes(target) || cName.includes(target) || target.includes(cSlug) || target.includes(cName);
         });
-        if (matched) {
-          setSelectedCategories([String(matched.id)]);
+        if (matched && matched.slug) {
+          router.replace(`/categories/${matched.slug}`);
         }
       }
     });
-  }, []);
+  }, [router]);
 
-  const handleCategoryToggle = (catId: string) => {
-    setSelectedCategories(prev => 
-      prev.includes(catId) ? prev.filter(id => id !== catId) : [...prev, catId]
-    );
+  // Count products in each category
+  const getProductCount = (catId: number, catSlug: string) => {
+    return products.filter((p: any) => {
+      const pCatId = p.category?.id ?? p.category;
+      const pCatSlug = p.category?.slug;
+      return String(pCatId) === String(catId) || pCatSlug === catSlug;
+    }).length;
   };
-
-  const handleBrandToggle = (brandId: string) => {
-    setSelectedBrands(prev => 
-      prev.includes(brandId) ? prev.filter(id => id !== brandId) : [...prev, brandId]
-    );
-  };
-
-  const filteredProducts = products.filter(p => {
-    // Backend returns nested objects due to serializer relations
-    const catId = p.category?.id ?? p.category;
-    const brandId = p.brand?.id ?? p.brand;
-    const catMatch = selectedCategories.length === 0 || selectedCategories.includes(String(catId));
-    const brandMatch = selectedBrands.length === 0 || selectedBrands.includes(String(brandId));
-    return catMatch && brandMatch;
-  });
 
   return (
-    <main className="min-h-screen bg-background pb-24">
+    <main className="min-h-screen bg-background pb-32">
       {/* Hero Section */}
-      <section className="relative h-[50vh] md:h-[60vh] flex items-center justify-center overflow-hidden mb-12">
+      <section className="relative h-[55vh] md:h-[65vh] flex items-center justify-center overflow-hidden mb-16 bg-neutral-900">
         <div className="absolute inset-0 w-full h-full">
-          <img src="/images/products/hero.webp" alt="Our Collections" className="w-full h-full object-cover blur-[2px] scale-105" />
-          <div className="absolute inset-0 bg-black/50" />
+          <img 
+            src="/images/products/hero.webp" 
+            alt="Our Collections" 
+            className="w-full h-full object-cover blur-[1px] scale-105 opacity-80" 
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
         </div>
         <div className="relative z-10 text-center px-6 mt-16">
           <h1 className="font-playfair text-5xl md:text-7xl text-white mb-4 drop-shadow-lg">Our Collections</h1>
@@ -122,115 +75,88 @@ export default function ProductsPage() {
       </section>
 
       <div className="px-6 md:px-12 max-w-7xl mx-auto">
-        <div className="flex justify-end items-end mb-8">
-          <p className="text-sm font-bold uppercase tracking-widest text-neutral-400">
-            {filteredProducts.length} Product{filteredProducts.length !== 1 && 's'}
-          </p>
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4 border-b border-neutral-200 pb-6">
+          <div>
+            <h2 className="font-playfair text-2xl md:text-3xl text-foreground font-semibold">
+              Browse by Collection
+            </h2>
+            <p className="text-sm text-neutral-500 mt-1">
+              Select a collection below to view specialized product catalogs and brand offerings.
+            </p>
+          </div>
+          <div className="flex items-center gap-2 text-neutral-400 text-sm font-bold uppercase tracking-widest">
+            <Layers size={16} />
+            <span>{categories.length} Collection{categories.length !== 1 && "s"}</span>
+          </div>
         </div>
-      <div className="flex flex-col md:flex-row gap-12">
-        {/* Sidebar Filters */}
-        <aside className="w-full md:w-64 shrink-0 md:sticky md:top-8 self-start max-h-[85vh] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-          <div 
-            className="flex items-center justify-between gap-2 mb-4 md:mb-6 text-foreground font-playfair text-xl border-b border-neutral-200 pb-4 cursor-pointer md:cursor-default"
-            onClick={() => setIsMobileFilterOpen(!isMobileFilterOpen)}
-          >
-            <div className="flex items-center gap-2">
-              <Filter size={20} />
-              <h2>Filters</h2>
-            </div>
-            <button className="md:hidden text-xs uppercase tracking-widest font-bold text-neutral-500">
-              {isMobileFilterOpen ? "Hide" : "Show"}
-            </button>
+
+        {/* Categories Showcase Grid */}
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+            {[...Array(6)].map((_, i) => <CategorySkeleton key={i} />)}
           </div>
+        ) : categories.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+            {categories.map((category: any) => {
+              const count = getProductCount(category.id, category.slug);
+              const heroImage = category.hero_image || "/images/products/hero.webp";
 
-          <div className={`md:block ${isMobileFilterOpen ? 'block mb-8' : 'hidden'}`}>
-            <div className="mb-8">
-              <h3 className="text-xs uppercase tracking-widest font-bold text-neutral-500 mb-4">Categories</h3>
-              {loading ? <FilterSkeleton /> : (
-                <div className="flex flex-col gap-3">
-                  {categories.map(cat => (
-                    <label key={cat.id} className="flex items-center gap-3 cursor-pointer group">
-                      <input 
-                        type="checkbox" 
-                        className="accent-primary w-4 h-4"
-                        checked={selectedCategories.includes(String(cat.id))}
-                        onChange={() => handleCategoryToggle(String(cat.id))}
-                      />
-                      <span className="text-sm text-neutral-600 group-hover:text-black transition-colors">{cat.name}</span>
-                    </label>
-                  ))}
-                </div>
-              )}
-            </div>
+              return (
+                <Link
+                  key={category.id}
+                  href={`/categories/${category.slug}`}
+                  className="group relative h-[420px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 block cursor-pointer bg-neutral-900 border border-neutral-200/20"
+                >
+                  {/* Category Image */}
+                  <img
+                    src={heroImage}
+                    alt={category.name}
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-85 group-hover:opacity-95"
+                  />
+                  
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent group-hover:from-black/95 transition-colors duration-500" />
 
-            <div>
-              <h3 className="text-xs uppercase tracking-widest font-bold text-neutral-500 mb-4">Brands</h3>
-              {loading ? <FilterSkeleton /> : (
-                <div className="flex flex-col gap-3">
-                  {brands.map(brand => (
-                    <label key={brand.id} className="flex items-center gap-3 cursor-pointer group">
-                      <input 
-                        type="checkbox" 
-                        className="accent-primary w-4 h-4"
-                        checked={selectedBrands.includes(String(brand.id))}
-                        onChange={() => handleBrandToggle(String(brand.id))}
-                      />
-                      <span className="text-sm text-neutral-600 group-hover:text-black transition-colors">{brand.name}</span>
-                    </label>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        </aside>
-
-        {/* Product Grid */}
-        <div className="flex-1">
-          {loading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[...Array(6)].map((_, i) => <ProductSkeleton key={i} />)}
-            </div>
-          ) : filteredProducts.length > 0 ? (
-            selectedCategories.length === 0 && selectedBrands.length === 0 ? (
-              <div className="flex flex-col gap-12">
-                {categories.map(category => {
-                  const categoryProducts = filteredProducts.filter(p => (p.category?.id ?? p.category) === category.id);
-                  if (categoryProducts.length === 0) return null;
-                  return (
-                    <div key={category.id}>
-                      <div className="flex items-center gap-4 mb-6">
-                        <h2 className="font-playfair text-2xl text-foreground">{category.name}</h2>
-                        <div className="h-px bg-neutral-200 flex-1"></div>
-                      </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {categoryProducts.map(product => (
-                          <ProductCard key={product.id} product={product} />
-                        ))}
-                      </div>
+                  {/* Card Content */}
+                  <div className="absolute inset-0 p-8 flex flex-col justify-end z-10">
+                    <div className="mb-auto">
+                      <span className="inline-block px-3 py-1 rounded-full bg-black/40 backdrop-blur-md text-amber-300 border border-amber-300/30 text-[10px] uppercase font-bold tracking-widest shadow-sm">
+                        {count} Product{count !== 1 ? "s" : ""} Available
+                      </span>
                     </div>
-                  );
-                })}
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredProducts.map(product => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
-            )
-          ) : (
-            <div className="flex flex-col items-center justify-center h-64 bg-neutral-50 rounded-lg border border-dashed border-neutral-200">
-              <p className="text-neutral-500 mb-2">No products match your selected filters.</p>
-              <button 
-                onClick={() => { setSelectedCategories([]); setSelectedBrands([]); }}
-                className="text-xs uppercase tracking-widest font-bold text-foreground border-b border-foreground pb-1 hover:text-primary hover:border-primary transition-colors"
-              >
-                Clear Filters
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
+
+                    <h3 className="font-playfair text-3xl font-bold text-white mb-2 group-hover:text-amber-400 transition-colors duration-300 drop-shadow">
+                      {category.name}
+                    </h3>
+
+                    {category.description ? (
+                      <p className="text-sm text-neutral-300 line-clamp-2 mb-6 font-normal leading-relaxed">
+                        {category.description}
+                      </p>
+                    ) : (
+                      <p className="text-sm text-neutral-400 italic mb-6">
+                        Explore premium architectural solutions in this collection.
+                      </p>
+                    )}
+
+                    <div className="flex items-center gap-2 text-xs uppercase font-bold tracking-widest text-white group-hover:text-amber-400 transition-colors">
+                      <span>Explore Collection</span>
+                      <ArrowRight size={16} className="group-hover:translate-x-1.5 transition-transform duration-300" />
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center h-72 bg-neutral-50 rounded-2xl border border-dashed border-neutral-200 p-8 text-center">
+            <Layers size={48} className="text-neutral-300 mb-4 stroke-[1]" />
+            <p className="text-neutral-600 font-playfair text-xl mb-2">No collections found.</p>
+            <p className="text-neutral-400 text-sm max-w-md">
+              Our catalogs are currently being updated with premium inventory. Please check back shortly.
+            </p>
+          </div>
+        )}
       </div>
     </main>
   );

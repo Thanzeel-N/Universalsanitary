@@ -21,9 +21,9 @@ export default function Header({ isHomePage = true }: { isHomePage?: boolean }) 
 
   const navLinks = [
     { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
     { name: "Collections", href: "/products" },
     { name: "Clients", href: "/clients" },
-    { name: "About", href: "/about" },
     { name: "Blog", href: "/blog" },
   ];
 
@@ -89,7 +89,7 @@ export default function Header({ isHomePage = true }: { isHomePage?: boolean }) 
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 w-4/5 max-w-sm h-[100dvh] bg-transparent backdrop-blur-xl border-l border-white/10 text-white z-50 flex flex-col p-8 shadow-2xl"
+              className="fixed top-0 right-0 w-4/5 max-w-sm h-[100dvh] bg-neutral-900/80 backdrop-blur-2xl border-l border-white/15 text-white z-50 flex flex-col p-8 shadow-[0_0_50px_rgba(0,0,0,0.8)]"
             >
               <button className="absolute top-6 right-6" onClick={() => setMobileMenuOpen(false)}>
                 <X size={32} />
