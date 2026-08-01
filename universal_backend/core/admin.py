@@ -18,9 +18,14 @@ class ProductImageInline(admin.TabularInline):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
-    list_display = ('name', 'category', 'brand', 'is_featured')
-    list_filter = ('category', 'brand', 'is_featured')
+    list_display = ('name', 'get_categories', 'brand', 'is_featured')
+    list_filter = ('categories', 'brand', 'is_featured')
+    filter_horizontal = ('categories',)
     inlines = [ProductImageInline]
+
+    @admin.display(description='Categories')
+    def get_categories(self, obj):
+        return ', '.join(c.name for c in obj.categories.all())
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):

@@ -1,8 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
 import { Metadata } from 'next';
-import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Our Clients | Universal Sanitary',
@@ -32,19 +30,42 @@ const CLIENT_CATEGORIES = [
       { logo: '/images/clients/client_7.png', name: 'Kumarakom Lake Resort' },
       { logo: '/images/clients/client_8.jpg', name: 'Coconut Lagoon' },
       { logo: '/images/clients/client_20.jpg', name: 'Spice Village' },
+      { logo: '/images/clients/client_29.png', name: 'Foschia Resorts' },
+      { logo: '/images/clients/client_39.jpg', name: 'ARC Adventure Resorts' },
+      { logo: '/images/clients/client_41.png', name: 'The Leaf Munnar' },
+      { logo: '/images/clients/client_42.png', name: 'Wyte Portico Hotels' },
+      { logo: '/images/clients/client_43.webp', name: 'The Tall Trees Munnar' },
+      { logo: '/images/clients/client_44.png', name: 'The Wild Trails Munnar' },
     ]
   },
   {
-    category: 'Healthcare',
+    category: 'Healthcare & Hospitals',
     clients: [
       { logo: '/images/clients/client_9.webp', name: 'Aster Medcity' },
       { logo: '/images/clients/client_10.jpg', name: 'Rajagiri Hospital' },
+      { logo: '/images/clients/client_33.jpg', name: 'Amrita Hospital' },
+      { logo: '/images/clients/client_34.jpg', name: 'Jubilee Mission Hospital' },
+      { logo: '/images/clients/client_35.png', name: 'SNMM Hospital' },
+      { logo: '/images/clients/client_36.jpg', name: 'SNIMS Medical College' },
+      { logo: '/images/clients/client_37.jpg', name: 'Ernakulam Medical Centre' },
+      { logo: '/images/clients/client_38.jpg', name: 'SUN Medical Centre' },
+      { logo: '/images/clients/client_40.jpg', name: 'TMM Hospital' },
+      { logo: '/images/clients/client_32.png', name: 'Agasthya Ayurvedic Medical Centre' },
+    ]
+  },
+  {
+    category: 'Education & Institutions',
+    clients: [
+      { logo: '/images/clients/client_27.jpg', name: 'Amrita Vidyalayam' },
+      { logo: '/images/clients/client_28.png', name: 'Eastern Newton School' },
+      { logo: '/images/clients/client_30.jpg', name: 'Greets Public School' },
+      { logo: '/images/clients/client_31.webp', name: 'Naipunnya College' },
     ]
   },
   {
     category: 'Government & Public Sector',
     clients: [
-      { logo: '/images/clients/client_6.png', name: 'Kerala Livestock Development Board' },
+      { logo: '/images/clients/client_6.png', name: 'Kerala Livestock Dev. Board' },
       { logo: '/images/clients/client_19.jpg', name: 'CPWD' },
     ]
   },
@@ -81,6 +102,19 @@ const CLIENT_CATEGORIES = [
   }
 ];
 
+// Helper to determine if mix-blend-multiply should be bypassed for solid/dark background logos
+const isSolidBackgroundLogo = (logoPath: string) => {
+  const solidBgLogos = [
+    'client_6.png',
+    'client_27.jpg',
+    'client_28.png',
+    'client_29.png',
+    'client_30.jpg',
+    'client_37.jpg'
+  ];
+  return solidBgLogos.some((name) => logoPath.includes(name));
+};
+
 export default function ClientsPage() {
   return (
     <main className="min-h-screen bg-white pt-32 pb-32">
@@ -95,7 +129,7 @@ export default function ClientsPage() {
           </h1>
           <div className="w-12 h-[1px] bg-neutral-300 mx-auto mb-8"></div>
           <p className="text-neutral-500 font-sans text-sm md:text-base leading-relaxed max-w-xl mx-auto font-light">
-            We take immense pride in our long-standing relationships with some of the most esteemed organizations, developers, and architects.
+            We take immense pride in our long-standing relationships with some of the most esteemed organizations, developers, hospitals, educational institutions, and resorts.
           </p>
         </div>
 
@@ -117,24 +151,27 @@ export default function ClientsPage() {
               
               {/* Clients Grid */}
               <div className="w-full md:w-2/3 grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-                {category.clients.map((client, idx) => (
-                  <div 
-                    key={idx} 
-                    className="flex flex-col items-center justify-center group bg-neutral-50/50 hover:bg-neutral-50 border border-transparent hover:border-neutral-200 transition-all duration-500 rounded-2xl p-8 cursor-default"
-                  >
-                    <div className={`relative w-full h-16 md:h-20 mb-6 ${client.logo.includes('client_6.png') ? 'bg-black p-2 rounded' : ''}`}>
-                      <Image
-                        src={client.logo}
-                        alt={client.name}
-                        fill
-                        className={`object-contain transition-transform duration-700 ease-out group-hover:scale-110 ${client.logo.includes('client_6.png') ? '' : 'mix-blend-multiply'} opacity-80 group-hover:opacity-100`}
-                      />
+                {category.clients.map((client, idx) => {
+                  const hasSolidBg = isSolidBackgroundLogo(client.logo);
+                  return (
+                    <div 
+                      key={idx} 
+                      className="flex flex-col items-center justify-center group bg-neutral-50/50 hover:bg-neutral-50 border border-transparent hover:border-neutral-200 transition-all duration-500 rounded-2xl p-6 md:p-8 cursor-default"
+                    >
+                      <div className={`relative w-full h-16 md:h-20 mb-6 overflow-hidden rounded-lg ${hasSolidBg ? 'p-1' : ''}`}>
+                        <Image
+                          src={client.logo}
+                          alt={client.name}
+                          fill
+                          className={`object-contain transition-transform duration-700 ease-out group-hover:scale-110 ${hasSolidBg ? '' : 'mix-blend-multiply'} opacity-90 group-hover:opacity-100`}
+                        />
+                      </div>
+                      <h3 className="text-center font-sans font-medium text-[10px] md:text-[11px] tracking-widest uppercase text-neutral-500 group-hover:text-neutral-900 transition-colors duration-500">
+                        {client.name}
+                      </h3>
                     </div>
-                    <h3 className="text-center font-sans font-medium text-[10px] md:text-[11px] tracking-widest uppercase text-neutral-400 group-hover:text-neutral-800 transition-colors duration-500">
-                      {client.name}
-                    </h3>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           ))}
@@ -143,3 +180,4 @@ export default function ClientsPage() {
     </main>
   );
 }
+

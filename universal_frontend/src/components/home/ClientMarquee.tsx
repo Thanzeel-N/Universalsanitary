@@ -5,16 +5,18 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 const CLIENT_LOGOS = [
-  '/images/clients/client_14.webp', // Sobha
-  '/images/clients/client_15.png', // Prestige Group
-  '/images/clients/client_21.jpg', // Skyline Builders
-  '/images/clients/client_22.jpg', // SFS Homes
-  '/images/clients/client_23.jpg', // Abad Builders
-  '/images/clients/client_24.jpg', // Heera Builders
-  '/images/clients/client_25.jpg', // Asset Homes
-  '/images/clients/client_17.png', // Taj Hotels
-  '/images/clients/client_12.jpg', // Crowne Plaza
-  '/images/clients/client_13.png', // Le Meridien
+  { logo: '/images/clients/client_14.webp', name: 'Sobha' },
+  { logo: '/images/clients/client_15.png', name: 'Prestige Group' },
+  { logo: '/images/clients/client_17.png', name: 'Taj Hotels' },
+  { logo: '/images/clients/client_12.jpg', name: 'Crowne Plaza' },
+  { logo: '/images/clients/client_9.webp', name: 'Aster Medcity' },
+  { logo: '/images/clients/client_33.jpg', name: 'Amrita Hospital' },
+  { logo: '/images/clients/client_16.png', name: 'Cochin International Airport' },
+  { logo: '/images/clients/client_32.png', name: 'Agasthya Ayurvedic Medical Centre' },
+  { logo: '/images/clients/client_41.png', name: 'The Leaf Munnar' },
+  { logo: '/images/clients/client_1.png', name: 'TATA' },
+  { logo: '/images/clients/client_21.jpg', name: 'Skyline Builders' },
+  { logo: '/images/clients/client_43.webp', name: 'The Tall Trees Munnar' },
 ];
 
 export default function ClientMarquee() {
@@ -31,15 +33,15 @@ export default function ClientMarquee() {
 
       <div className="relative flex overflow-x-hidden group">
         <div className="flex animate-marquee whitespace-nowrap min-w-max mask-fade-edges items-center">
-          {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((logo, idx) => (
+          {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((client, idx) => (
             <div 
               key={idx} 
               className="inline-flex items-center justify-center w-32 h-20 md:w-48 md:h-24 mx-4 md:mx-6 bg-white rounded-lg p-3 shadow-[0_2px_8px_-4px_rgba(0,0,0,0.1)] border border-neutral-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer"
             >
               <div className="relative w-full h-full">
                 <Image
-                  src={logo}
-                  alt={`Client ${idx}`}
+                  src={client.logo}
+                  alt={client.name}
                   fill
                   className="object-contain mix-blend-multiply"
                 />
@@ -51,3 +53,4 @@ export default function ClientMarquee() {
     </section>
   );
 }
+

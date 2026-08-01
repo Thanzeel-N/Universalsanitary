@@ -589,7 +589,7 @@ export default function HomeContent({ categories }: { categories: any[] }) {
                       </div>
                     )}
                   </div>
-                  <p className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold mb-1">{product.category?.name || "Sanitary"}</p>
+                  <p className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold mb-1">{product.categories?.[0]?.name || "Sanitary"}</p>
                   <h3 className="font-playfair text-lg text-foreground mb-1">{product.name}</h3>
                   <p className="text-base text-neutral-500 line-clamp-2 leading-[1.7]">{product.description}</p>
                 </Link>

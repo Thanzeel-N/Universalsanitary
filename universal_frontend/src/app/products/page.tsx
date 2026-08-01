@@ -48,9 +48,12 @@ export default function ProductsPage() {
   // Count products in each category
   const getProductCount = (catId: number, catSlug: string) => {
     return products.filter((p: any) => {
-      const pCatId = p.category?.id ?? p.category;
-      const pCatSlug = p.category?.slug;
-      return String(pCatId) === String(catId) || pCatSlug === catSlug;
+      const cats = p.categories || [];
+      return cats.some((c: any) => {
+        const cId = c.id ?? c;
+        const cSlug = c.slug;
+        return String(cId) === String(catId) || cSlug === catSlug;
+      });
     }).length;
   };
 

@@ -35,7 +35,7 @@ class Product(models.Model):
     technical_specs = models.TextField(blank=True)
     dimensions = models.CharField(max_length=255, blank=True)
     is_featured = models.BooleanField(default=False)
-    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
+    categories = models.ManyToManyField(Category, related_name='products', blank=True)
     brand = models.ForeignKey(Brand, related_name='products', on_delete=models.CASCADE)
 
     def __str__(self):

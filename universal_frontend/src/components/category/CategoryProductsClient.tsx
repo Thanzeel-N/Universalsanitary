@@ -65,9 +65,12 @@ export default function CategoryProductsClient({ category }: { category: any }) 
     ]).then(([allProds, allBrands]) => {
       // Filter products belonging to this category (by id or slug)
       const catProds = (allProds && allProds.length > 0 ? allProds : []).filter((p: any) => {
-        const pCatId = p.category?.id ?? p.category;
-        const pCatSlug = p.category?.slug;
-        return String(pCatId) === String(category.id) || pCatSlug === category.slug;
+        const cats = p.categories || [];
+        return cats.some((c: any) => {
+          const cId = c.id ?? c;
+          const cSlug = c.slug;
+          return String(cId) === String(category.id) || cSlug === category.slug;
+        });
       });
       setProducts(catProds);
 

@@ -362,7 +362,10 @@ export default function AdminDashboard() {
 
   // Count helper functions
   const getCategoryProductCount = (catId: number) => {
-    return products.filter((p: any) => (p.category?.id ?? p.category) === catId).length;
+    return products.filter((p: any) => {
+      const cats = p.categories || [];
+      return cats.some((c: any) => (c.id ?? c) === catId);
+    }).length;
   };
 
   const getBrandProductCount = (brandId: number) => {
@@ -588,7 +591,7 @@ export default function AdminDashboard() {
               <tr className="bg-neutral-50 border-b border-neutral-200 text-[11px] uppercase tracking-widest font-bold text-neutral-500">
                 <th className="p-4 w-20">Image</th>
                 <th className="p-4">Product Title</th>
-                <th className="p-4">Category</th>
+                <th className="p-4">Categories</th>
                 <th className="p-4">Brand</th>
                 <th className="p-4 text-center">Featured</th>
                 <th className="p-4 text-right">Actions</th>
@@ -613,9 +616,15 @@ export default function AdminDashboard() {
                       <span className="text-[11px] text-neutral-400 font-mono">/{product.slug}</span>
                     </td>
                     <td className="p-4">
-                      <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200/60">
-                        {product.category?.name || "Unassigned"}
-                      </span>
+                      <div className="flex flex-wrap gap-1">
+                        {(product.categories && product.categories.length > 0) ? product.categories.map((cat: any) => (
+                          <span key={cat.id || cat} className="text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200/60">
+                            {cat.name || "Unnamed"}
+                          </span>
+                        )) : (
+                          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-neutral-100 text-neutral-400 border border-neutral-200">Unassigned</span>
+                        )}
+                      </div>
                     </td>
                     <td className="p-4 text-xs font-bold uppercase tracking-wider text-neutral-600">
                       {product.brand?.name || "None"}

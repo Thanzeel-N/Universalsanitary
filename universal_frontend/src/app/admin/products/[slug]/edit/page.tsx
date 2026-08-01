@@ -24,7 +24,7 @@ export default function EditProductPage({ params }: { params: Promise<{ slug: st
     technical_specs: "",
     dimensions: "",
     is_featured: false,
-    category: "",
+    categories: [] as number[],
     brand: ""
   });
   
@@ -45,7 +45,7 @@ export default function EditProductPage({ params }: { params: Promise<{ slug: st
         technical_specs: prod.technical_specs || "",
         dimensions: prod.dimensions || "",
         is_featured: prod.is_featured || false,
-        category: prod.category ? prod.category.id || prod.category : "",
+        categories: prod.categories ? prod.categories.map((c: any) => c.id || c) : [],
         brand: prod.brand ? prod.brand.id || prod.brand : ""
       });
       setExistingImages(prod.images || []);
@@ -69,7 +69,7 @@ export default function EditProductPage({ params }: { params: Promise<{ slug: st
       if (!res.ok) throw new Error("Failed to create category");
       const newCat = await res.json();
       setCategories(prev => [...prev, newCat]);
-      setFormData(prev => ({ ...prev, category: newCat.id }));
+      setFormData(prev => ({ ...prev, categories: [...prev.categories, newCat.id] }));
     } catch (err) {
       console.error(err);
       alert("Failed to create category. Please make sure you are logged in.");
@@ -107,13 +107,21 @@ export default function EditProductPage({ params }: { params: Promise<{ slug: st
     }));
   };
 
+  const handleCategoryToggle = (catId: number) => {
+    setFormData(prev => ({
+      ...prev,
+      categories: prev.categories.includes(catId)
+        ? prev.categories.filter(id => id !== catId)
+        : [...prev.categories, catId]
+    }));
+  };
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const token = Cookies.get("access_token");
     
     const payload = {
         ...formData,
-        category: formData.category || null,
         brand: formData.brand || null,
     };
 
@@ -184,16 +192,27 @@ export default function EditProductPage({ params }: { params: Promise<{ slug: st
           <input required name="slug" value={formData.slug} onChange={handleChange} className="w-full border p-2 rounded" />
         </div>
         <div>
-          <label className="block text-xs uppercase text-neutral-500 font-bold mb-1">Category</label>
-          <div className="flex gap-2">
-            <select name="category" value={formData.category} onChange={handleChange} className="flex-1 border p-2 rounded">
-              <option value="">Select Category...</option>
-              {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
-            </select>
-            <button type="button" onClick={handleAddCategory} className="bg-neutral-100 text-[#222] border px-4 py-2 rounded hover:bg-neutral-200 transition-colors text-sm font-bold">
-              + New
-            </button>
+          <label className="block text-xs uppercase text-neutral-500 font-bold mb-1">Categories</label>
+          <div className="border rounded p-3 max-h-48 overflow-y-auto space-y-2 bg-white">
+            {categories.length === 0 ? (
+              <p className="text-sm text-neutral-400 italic">No categories available.</p>
+            ) : (
+              categories.map(c => (
+                <label key={c.id} className="flex items-center gap-2.5 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    checked={formData.categories.includes(c.id)}
+                    onChange={() => handleCategoryToggle(c.id)}
+                    className="accent-primary w-4 h-4"
+                  />
+                  <span className="text-sm text-neutral-700 group-hover:text-black transition-colors">{c.name}</span>
+                </label>
+              ))
+            )}
           </div>
+          <button type="button" onClick={handleAddCategory} className="mt-2 bg-neutral-100 text-[#222] border px-4 py-1.5 rounded hover:bg-neutral-200 transition-colors text-xs font-bold">
+            + New Category
+          </button>
         </div>
         <div>
           <label className="block text-xs uppercase text-neutral-500 font-bold mb-1">Brand</label>

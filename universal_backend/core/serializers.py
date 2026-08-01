@@ -18,7 +18,9 @@ class ProductImageSerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     images = ProductImageSerializer(many=True, read_only=True)
-    category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
+    categories = serializers.PrimaryKeyRelatedField(
+        queryset=Category.objects.all(), many=True, required=False
+    )
     brand = serializers.PrimaryKeyRelatedField(queryset=Brand.objects.all())
 
     class Meta:
@@ -27,7 +29,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation['category'] = CategorySerializer(instance.category).data if instance.category else None
+        representation['categories'] = CategorySerializer(instance.categories.all(), many=True).data
         representation['brand'] = BrandSerializer(instance.brand).data if instance.brand else None
         return representation
 
