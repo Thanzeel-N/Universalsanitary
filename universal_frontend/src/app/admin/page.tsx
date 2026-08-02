@@ -133,6 +133,7 @@ export default function AdminDashboard() {
 
   // Modals state
   const [editingCategory, setEditingCategory] = useState<any | null>(null);
+  const [editingBrand, setEditingBrand] = useState<any | null>(null);
   const [showAddCategory, setShowAddCategory] = useState(false);
   const [showAddBrand, setShowAddBrand] = useState(false);
 
@@ -145,6 +146,25 @@ export default function AdminDashboard() {
 
   // Form states for Brand
   const [brandFormName, setBrandFormName] = useState("");
+
+  const openAddBrand = () => {
+    setEditingBrand(null);
+    setBrandFormName("");
+    setShowAddBrand(true);
+  };
+
+  const openEditBrand = (brand: any) => {
+    setEditingBrand(brand);
+    setBrandFormName(brand.name || "");
+    setShowAddBrand(true);
+  };
+
+  const closeBrandModals = () => {
+    setEditingBrand(null);
+    setShowAddBrand(false);
+    setBrandFormName("");
+    setIsSaving(false);
+  };
 
   const fetchData = async () => {
     try {
@@ -246,25 +266,34 @@ export default function AdminDashboard() {
     }
   };
 
-  // Save new Brand
+  // Save (Update or Create) Brand
   const handleSaveBrand = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!brandFormName.trim()) return;
     setIsSaving(true);
     const token = Cookies.get("access_token");
+    const isEditing = Boolean(editingBrand);
+    const url = isEditing
+      ? apiUrl(`/api/v1/brands/${editingBrand.id}/`)
+      : apiUrl(`/api/v1/brands/`);
+    const method = isEditing ? "PATCH" : "POST";
+
     try {
-      const res = await fetch(apiUrl(`/api/v1/brands/`), {
-        method: "POST",
+      const res = await fetch(url, {
+        method,
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify({ name: brandFormName.trim() })
       });
-      if (!res.ok) throw new Error("Failed to add brand");
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        console.error("Failed to save brand:", errData);
+        throw new Error("Failed to save brand");
+      }
       await fetchData();
-      setShowAddBrand(false);
-      setBrandFormName("");
+      closeBrandModals();
     } catch (err) {
       console.error(err);
       alert("Failed to save brand.");
@@ -412,7 +441,7 @@ export default function AdminDashboard() {
             <Plus size={16} /> Add Category
           </button>
           <button
-            onClick={() => setShowAddBrand(true)}
+            onClick={openAddBrand}
             className="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest flex items-center gap-1.5 transition-all"
           >
             <Plus size={16} /> Add Brand
@@ -684,7 +713,7 @@ export default function AdminDashboard() {
               <p className="text-xs text-neutral-500 mt-0.5">Manage brand identifiers across product collections.</p>
             </div>
             <button
-              onClick={() => setShowAddBrand(true)}
+              onClick={openAddBrand}
               className="bg-neutral-900 hover:bg-neutral-800 text-white px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest flex items-center gap-1.5 shadow transition-colors shrink-0"
             >
               <Plus size={15} /> Add Brand
@@ -710,12 +739,20 @@ export default function AdminDashboard() {
                       </span>
                     </td>
                     <td className="p-4 text-right">
-                      <button 
-                        onClick={() => handleDeleteBrand(brand.id)} 
-                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold text-red-600 hover:bg-red-50 border border-transparent hover:border-red-200 transition-colors"
-                      >
-                        <Trash2 size={15} /> Delete
-                      </button>
+                      <div className="flex justify-end gap-2">
+                        <button
+                          onClick={() => openEditBrand(brand)}
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-neutral-100 hover:bg-neutral-200 text-neutral-800 transition-colors"
+                        >
+                          <Edit size={14} /> Edit
+                        </button>
+                        <button 
+                          onClick={() => handleDeleteBrand(brand.id)} 
+                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold text-red-600 hover:bg-red-50 border border-transparent hover:border-red-200 transition-colors"
+                        >
+                          <Trash2 size={15} /> Delete
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 );
@@ -829,13 +866,15 @@ export default function AdminDashboard() {
         </div>
       )}
 
-      {/* MODAL: ADD BRAND */}
-      {showAddBrand && (
+      {/* MODAL: ADD / EDIT BRAND */}
+      {(showAddBrand || editingBrand) && (
         <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden border border-neutral-200 animate-in fade-in zoom-in-95 duration-200">
             <div className="bg-neutral-900 text-white p-6 flex items-center justify-between">
-              <h3 className="font-playfair font-bold text-xl">Add Partner Brand</h3>
-              <button onClick={() => setShowAddBrand(false)} className="text-neutral-400 hover:text-white transition-colors">
+              <h3 className="font-playfair font-bold text-xl">
+                {editingBrand ? `Edit Brand: ${editingBrand.name}` : "Add Partner Brand"}
+              </h3>
+              <button onClick={closeBrandModals} className="text-neutral-400 hover:text-white transition-colors">
                 <X size={22} />
               </button>
             </div>
@@ -856,7 +895,7 @@ export default function AdminDashboard() {
               <div className="flex items-center justify-end gap-3 pt-2 border-t border-neutral-200">
                 <button
                   type="button"
-                  onClick={() => setShowAddBrand(false)}
+                  onClick={closeBrandModals}
                   className="px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-neutral-600 hover:bg-neutral-100 transition-colors"
                 >
                   Cancel
@@ -866,7 +905,7 @@ export default function AdminDashboard() {
                   disabled={isSaving}
                   className="px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider bg-neutral-900 hover:bg-neutral-800 text-white shadow transition-all disabled:opacity-50"
                 >
-                  {isSaving ? "Adding..." : "Add Brand"}
+                  {isSaving ? (editingBrand ? "Updating..." : "Adding...") : (editingBrand ? "Update Brand" : "Add Brand")}
                 </button>
               </div>
             </form>
