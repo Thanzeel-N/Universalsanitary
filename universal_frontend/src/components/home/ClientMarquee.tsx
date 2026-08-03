@@ -8,6 +8,9 @@ const CLIENT_LOGOS = [
   { logo: '/images/clients/client_14.webp', name: 'Sobha' },
   { logo: '/images/clients/client_15.png', name: 'Prestige Group' },
   { logo: '/images/clients/client_17.png', name: 'Taj Hotels' },
+  { logo: '/images/clients/taj-malabar.jpg', name: 'Taj Malabar Resort & Spa' },
+  { logo: '/images/clients/holiday-inn.png', name: 'Holiday Inn' },
+  { logo: '/images/clients/ramada-kochi.png', name: 'Ramada by Wyndham Kochi' },
   { logo: '/images/clients/client_12.jpg', name: 'Crowne Plaza' },
   { logo: '/images/clients/client_9.webp', name: 'Aster Medcity' },
   { logo: '/images/clients/client_33.jpg', name: 'Amrita Hospital' },
@@ -33,21 +36,24 @@ export default function ClientMarquee() {
 
       <div className="relative flex overflow-x-hidden group">
         <div className="flex animate-marquee whitespace-nowrap min-w-max mask-fade-edges items-center">
-          {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((client, idx) => (
-            <div 
-              key={idx} 
-              className="inline-flex items-center justify-center w-32 h-20 md:w-48 md:h-24 mx-4 md:mx-6 bg-white rounded-lg p-3 shadow-[0_2px_8px_-4px_rgba(0,0,0,0.1)] border border-neutral-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer"
-            >
-              <div className="relative w-full h-full">
-                <Image
-                  src={client.logo}
-                  alt={client.name}
-                  fill
-                  className="object-contain mix-blend-multiply"
-                />
+          {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((client, idx) => {
+            const isDark = client.logo.includes('ramada-kochi.png') || client.logo.includes('client_6.png');
+            return (
+              <div 
+                key={idx} 
+                className="inline-flex items-center justify-center w-32 h-20 md:w-48 md:h-24 mx-4 md:mx-6 bg-white rounded-lg p-3 shadow-[0_2px_8px_-4px_rgba(0,0,0,0.1)] border border-neutral-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+              >
+                <div className={`relative w-full h-full rounded-md ${isDark ? 'bg-neutral-900 p-1.5' : ''}`}>
+                  <Image
+                    src={client.logo}
+                    alt={client.name}
+                    fill
+                    className={`object-contain ${isDark ? '' : 'mix-blend-multiply'}`}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

@@ -15,8 +15,7 @@ const CLIENT_CATEGORIES = [
       { logo: '/images/clients/client_15.png', name: 'Prestige Group' },
       { logo: '/images/clients/client_21.jpg', name: 'Skyline Builders' },
       { logo: '/images/clients/client_22.jpg', name: 'SFS Homes' },
-      { logo: '/images/clients/client_23.jpg', name: 'Abad Builders' },
-      { logo: '/images/clients/client_24.jpg', name: 'Heera Builders' },
+      { logo: '/images/clients/abad-builders.avif', name: 'Abad Builders' },
       { logo: '/images/clients/client_25.jpg', name: 'Asset Homes' },
     ]
   },
@@ -24,12 +23,21 @@ const CLIENT_CATEGORIES = [
     category: 'Hotels, Resorts & Hospitality',
     clients: [
       { logo: '/images/clients/client_17.png', name: 'Taj Hotels' },
+      { logo: '/images/clients/taj-malabar.jpg', name: 'Taj Malabar Resort & Spa' },
+      { logo: '/images/clients/vivanta.png', name: 'Vivanta' },
+      { logo: '/images/clients/holiday-inn.png', name: 'Holiday Inn' },
+      { logo: '/images/clients/ramada-kochi.png', name: 'Ramada by Wyndham Kochi' },
+      { logo: '/images/clients/novotel-kochi.jpg', name: 'Novotel Kochi Infopark' },
       { logo: '/images/clients/client_12.jpg', name: 'Crowne Plaza' },
       { logo: '/images/clients/client_13.png', name: 'Le Meridien' },
-      { logo: '/images/clients/client_18.jpg', name: 'Casino Group of Hotels' },
+      { logo: '/images/clients/abad-hotels.avif', name: 'Abad Hotels & Resorts' },
+      { logo: '/images/clients/cgh-earth.png', name: 'CGH Earth Experience Hotels' },
+      { logo: '/images/clients/brunton-boatyard.png', name: 'Brunton Boatyard' },
       { logo: '/images/clients/client_7.png', name: 'Kumarakom Lake Resort' },
       { logo: '/images/clients/client_8.jpg', name: 'Coconut Lagoon' },
       { logo: '/images/clients/client_20.jpg', name: 'Spice Village' },
+      { logo: '/images/clients/gokulam-park.webp', name: 'Gokulam Park Convention Centre' },
+      { logo: '/images/clients/ktdc-hotels.jpg', name: 'KTDC Hotels & Resorts' },
       { logo: '/images/clients/client_29.png', name: 'Foschia Resorts' },
       { logo: '/images/clients/client_39.jpg', name: 'ARC Adventure Resorts' },
       { logo: '/images/clients/client_41.png', name: 'The Leaf Munnar' },
@@ -102,24 +110,20 @@ const CLIENT_CATEGORIES = [
   }
 ];
 
-// Helper to determine if mix-blend-multiply should be bypassed for solid/dark background logos
-const isSolidBackgroundLogo = (logoPath: string) => {
-  const solidBgLogos = [
+// Helper to determine if a logo has white text / dark theme requiring a black background
+const isDarkBackgroundLogo = (logoPath: string) => {
+  const darkBgLogos = [
     'client_6.png',
-    'client_27.jpg',
-    'client_28.png',
-    'client_29.png',
-    'client_30.jpg',
-    'client_37.jpg'
+    'ramada-kochi.png'
   ];
-  return solidBgLogos.some((name) => logoPath.includes(name));
+  return darkBgLogos.some((name) => logoPath.includes(name));
 };
 
 export default function ClientsPage() {
   return (
     <main className="min-h-screen bg-white pt-32 pb-32">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        
+
         <div className="text-center mb-24">
           <span className="font-sans font-medium uppercase tracking-[0.2em] text-xs text-neutral-400 mb-6 block">
             Partners in Excellence
@@ -148,22 +152,22 @@ export default function ClientsPage() {
                   {category.category}
                 </h2>
               </div>
-              
+
               {/* Clients Grid */}
               <div className="w-full md:w-2/3 grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
                 {category.clients.map((client, idx) => {
-                  const hasSolidBg = isSolidBackgroundLogo(client.logo);
+                  const isDarkBg = isDarkBackgroundLogo(client.logo);
                   return (
-                    <div 
-                      key={idx} 
+                    <div
+                      key={idx}
                       className="flex flex-col items-center justify-center group bg-neutral-50/50 hover:bg-neutral-50 border border-transparent hover:border-neutral-200 transition-all duration-500 rounded-2xl p-6 md:p-8 cursor-default"
                     >
-                      <div className={`relative w-full h-16 md:h-20 mb-6 overflow-hidden rounded-lg ${hasSolidBg ? 'p-1' : ''}`}>
+                      <div className={`relative w-full h-16 md:h-20 mb-6 overflow-hidden rounded-xl ${isDarkBg ? 'bg-neutral-900 p-2.5 shadow-sm' : ''}`}>
                         <Image
                           src={client.logo}
                           alt={client.name}
                           fill
-                          className={`object-contain transition-transform duration-700 ease-out group-hover:scale-110 ${hasSolidBg ? '' : 'mix-blend-multiply'} opacity-90 group-hover:opacity-100`}
+                          className={`object-contain transition-transform duration-700 ease-out group-hover:scale-110 ${isDarkBg ? '' : 'mix-blend-multiply'} opacity-90 group-hover:opacity-100`}
                         />
                       </div>
                       <h3 className="text-center font-sans font-medium text-[10px] md:text-[11px] tracking-widest uppercase text-neutral-500 group-hover:text-neutral-900 transition-colors duration-500">
