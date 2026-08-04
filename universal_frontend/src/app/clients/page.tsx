@@ -22,7 +22,6 @@ const CLIENT_CATEGORIES = [
   {
     category: 'Hotels, Resorts & Hospitality',
     clients: [
-      { logo: '/images/clients/client_17.png', name: 'Taj Hotels' },
       { logo: '/images/clients/taj-malabar.jpg', name: 'Taj Malabar Resort & Spa' },
       { logo: '/images/clients/vivanta.png', name: 'Vivanta' },
       { logo: '/images/clients/holiday-inn.png', name: 'Holiday Inn' },
@@ -50,6 +49,7 @@ const CLIENT_CATEGORIES = [
     category: 'Healthcare & Hospitals',
     clients: [
       { logo: '/images/clients/client_9.webp', name: 'Aster Medcity' },
+      { logo: '/images/clients/lisie-hospital-logo.png', name: 'Lisie Hospital' },
       { logo: '/images/clients/client_10.jpg', name: 'Rajagiri Hospital' },
       { logo: '/images/clients/client_33.jpg', name: 'Amrita Hospital' },
       { logo: '/images/clients/client_34.jpg', name: 'Jubilee Mission Hospital' },
@@ -64,6 +64,7 @@ const CLIENT_CATEGORIES = [
   {
     category: 'Education & Institutions',
     clients: [
+      { logo: '/images/clients/mgm-logos-11.webp', name: 'MGM Public School' },
       { logo: '/images/clients/client_27.jpg', name: 'Amrita Vidyalayam' },
       { logo: '/images/clients/client_28.png', name: 'Eastern Newton School' },
       { logo: '/images/clients/client_30.jpg', name: 'Greets Public School' },
@@ -73,6 +74,9 @@ const CLIENT_CATEGORIES = [
   {
     category: 'Government & Public Sector',
     clients: [
+      { logo: '/images/clients/isro.svg', name: 'ISRO (Indian Space Research Organisation)' },
+      { logo: '/images/clients/Logo-Grade-480x160-01.png', name: 'Cochin Shipyard Limited' },
+      { logo: '/images/clients/military_engineer_services_india_logo.jpg', name: 'Military Engineer Services (MES)' },
       { logo: '/images/clients/client_6.png', name: 'Kerala Livestock Dev. Board' },
       { logo: '/images/clients/client_19.jpg', name: 'CPWD' },
     ]

@@ -5,14 +5,17 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 const CLIENT_LOGOS = [
+  { logo: '/images/clients/isro.svg', name: 'ISRO' },
+  { logo: '/images/clients/Logo-Grade-480x160-01.png', name: 'Cochin Shipyard' },
+  { logo: '/images/clients/military_engineer_services_india_logo.jpg', name: 'Military Engineer Services' },
   { logo: '/images/clients/client_14.webp', name: 'Sobha' },
   { logo: '/images/clients/client_15.png', name: 'Prestige Group' },
-  { logo: '/images/clients/client_17.png', name: 'Taj Hotels' },
   { logo: '/images/clients/taj-malabar.jpg', name: 'Taj Malabar Resort & Spa' },
   { logo: '/images/clients/holiday-inn.png', name: 'Holiday Inn' },
   { logo: '/images/clients/ramada-kochi.png', name: 'Ramada by Wyndham Kochi' },
   { logo: '/images/clients/client_12.jpg', name: 'Crowne Plaza' },
   { logo: '/images/clients/client_9.webp', name: 'Aster Medcity' },
+  { logo: '/images/clients/lisie-hospital-logo.png', name: 'Lisie Hospital' },
   { logo: '/images/clients/client_33.jpg', name: 'Amrita Hospital' },
   { logo: '/images/clients/client_16.png', name: 'Cochin International Airport' },
   { logo: '/images/clients/client_32.png', name: 'Agasthya Ayurvedic Medical Centre' },
