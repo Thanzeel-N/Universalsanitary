@@ -121,15 +121,112 @@ const SortableCategoryRow = ({
   );
 };
 
+const SortableProductRow = ({ 
+  product, 
+  onDelete 
+}: { 
+  product: any; 
+  onDelete: (slug: string) => void; 
+}) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: product.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    zIndex: isDragging ? 20 : 1,
+    position: isDragging ? "relative" as const : "static" as const,
+  };
+
+  const primaryImg = product.images?.[0]?.image;
+
+  return (
+    <tr ref={setNodeRef} style={style} className={`border-b border-neutral-100 hover:bg-neutral-50/80 bg-white transition-colors ${isDragging ? "shadow-xl opacity-90 scale-[1.01]" : ""}`}>
+      <td className="p-4 w-12 text-neutral-400">
+        <button {...attributes} {...listeners} className="cursor-grab active:cursor-grabbing hover:text-neutral-900 transition-colors touch-none outline-none p-1" title="Drag to reorder product position">
+          <GripVertical size={18} />
+        </button>
+      </td>
+      <td className="p-4 w-20">
+        <div className="w-14 h-14 rounded-lg bg-neutral-100 border border-neutral-200 overflow-hidden flex items-center justify-center p-1.5 shadow-sm">
+          {primaryImg ? (
+            <img src={primaryImg} alt={product.name} className="w-full h-full object-contain mix-blend-multiply" />
+          ) : (
+            <ShoppingBag size={20} className="text-neutral-300" />
+          )}
+        </div>
+      </td>
+      <td className="p-4">
+        <span className="font-sans font-bold text-[#222] block">{product.name}</span>
+        <span className="text-[11px] text-neutral-400 font-mono">/{product.slug}</span>
+      </td>
+      <td className="p-4">
+        <div className="flex flex-wrap gap-1">
+          {(product.categories && product.categories.length > 0) ? product.categories.map((cat: any) => (
+            <span key={cat.id || cat} className="text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200/60">
+              {cat.name || "Unnamed"}
+            </span>
+          )) : (
+            <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-neutral-100 text-neutral-400 border border-neutral-200">Unassigned</span>
+          )}
+        </div>
+      </td>
+      <td className="p-4 text-xs font-bold uppercase tracking-wider text-neutral-600">
+        {product.brand?.name || "None"}
+      </td>
+      <td className="p-4 text-center">
+        {product.is_featured ? (
+          <span className="inline-flex items-center text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded font-bold border border-green-200">
+            <Check size={12} className="mr-1" /> Featured
+          </span>
+        ) : (
+          <span className="text-neutral-300 text-xs">&mdash;</span>
+        )}
+      </td>
+      <td className="p-4 text-right">
+        <div className="flex justify-end gap-2">
+          <Link 
+            href={`/products/${product.slug}`}
+            target="_blank"
+            className="p-2 rounded-lg text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 transition-colors"
+            title="Preview Product"
+          >
+            <ExternalLink size={16} />
+          </Link>
+          <Link 
+            href={`/admin/products/${product.slug}/edit`} 
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-neutral-100 hover:bg-neutral-200 text-neutral-800 transition-colors"
+          >
+            <Edit size={14} /> Edit
+          </Link>
+          <button 
+            onClick={() => onDelete(product.slug)} 
+            className="p-2 rounded-lg text-red-400 hover:text-red-700 hover:bg-red-50 transition-colors"
+          >
+            <Trash2 size={16} />
+          </button>
+        </div>
+      </td>
+    </tr>
+  );
+};
+
 export default function AdminDashboard() {
   const [products, setProducts] = useState<any[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
   const [brands, setBrands] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Tabs and search states
+  // Tabs, filter, and search states
   const [activeTab, setActiveTab] = useState<"categories" | "products" | "brands">("categories");
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState<string>("all");
 
   // Modals state
   const [editingCategory, setEditingCategory] = useState<any | null>(null);
@@ -389,6 +486,61 @@ export default function AdminDashboard() {
     }
   };
 
+  // Category-filtered and search-filtered product lists for product arrangement
+  const categoryFilteredProducts = products
+    .filter((p: any) => {
+      if (selectedCategoryFilter === "all") return true;
+      const cats = p.categories || [];
+      return cats.some((c: any) => String(c.id ?? c) === String(selectedCategoryFilter));
+    })
+    .sort((a: any, b: any) => (a.order ?? 0) - (b.order ?? 0));
+
+  const activeProductsList = categoryFilteredProducts.filter(p =>
+    p.name?.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleProductDragEnd = async (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (over && active.id !== over.id) {
+      const oldIndex = categoryFilteredProducts.findIndex((p) => p.id === active.id);
+      const newIndex = categoryFilteredProducts.findIndex((p) => p.id === over.id);
+
+      if (oldIndex === -1 || newIndex === -1) return;
+
+      const reorderedList = arrayMove(categoryFilteredProducts, oldIndex, newIndex);
+
+      reorderedList.forEach((prod, index) => {
+        prod.order = index;
+      });
+
+      const reorderedIds = new Set(reorderedList.map(p => p.id));
+      const untouchedProducts = products.filter(p => !reorderedIds.has(p.id));
+      const updatedAllProducts = [...reorderedList, ...untouchedProducts].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+
+      setProducts(updatedAllProducts); // Optimistic UI update
+
+      const token = Cookies.get("access_token");
+      try {
+        await Promise.all(
+          reorderedList.map((prod, index) => {
+            return fetch(apiUrl(`/api/v1/products/${prod.slug}/`), {
+              method: "PATCH",
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ order: index }),
+            });
+          })
+        );
+      } catch (err) {
+        console.error("Failed to update product orders", err);
+        alert("Failed to save the new product order.");
+        fetchData();
+      }
+    }
+  };
+
   // Count helper functions
   const getCategoryProductCount = (catId: number) => {
     return products.filter((p: any) => {
@@ -603,21 +755,39 @@ export default function AdminDashboard() {
       {/* TAB 2: PRODUCTS */}
       {activeTab === "products" && (
         <div className="bg-white border border-neutral-200 rounded-2xl overflow-hidden shadow-sm">
-          <div className="p-6 bg-neutral-50/80 border-b border-neutral-200 flex justify-between items-center">
+          <div className="p-6 bg-neutral-50/80 border-b border-neutral-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h2 className="font-playfair text-xl font-bold text-neutral-900">Products Directory</h2>
-              <p className="text-xs text-neutral-500 mt-0.5">Manage specs, technical descriptions, and images for all store products.</p>
+              <h2 className="font-playfair text-xl font-bold text-neutral-900">Products Directory & Arrangement</h2>
+              <p className="text-xs text-neutral-500 mt-0.5">Filter by category and drag using the handle on the left to reorder product display positions.</p>
             </div>
-            <Link
-              href="/admin/products/new"
-              className="bg-neutral-900 hover:bg-neutral-800 text-white px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest flex items-center gap-1.5 shadow transition-colors shrink-0"
-            >
-              <Plus size={15} /> Add Product
-            </Link>
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl border border-neutral-200 shadow-sm">
+                <span className="text-xs uppercase tracking-widest font-bold text-neutral-500">Collection:</span>
+                <select
+                  value={selectedCategoryFilter}
+                  onChange={(e) => setSelectedCategoryFilter(e.target.value)}
+                  className="text-xs font-bold bg-transparent text-neutral-900 focus:outline-none cursor-pointer"
+                >
+                  <option value="all">All Collections ({products.length})</option>
+                  {categories.map((c) => (
+                    <option key={c.id} value={String(c.id)}>
+                      {c.name} ({getCategoryProductCount(c.id)})
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <Link
+                href="/admin/products/new"
+                className="bg-neutral-900 hover:bg-neutral-800 text-white px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest flex items-center gap-1.5 shadow transition-colors shrink-0"
+              >
+                <Plus size={15} /> Add Product
+              </Link>
+            </div>
           </div>
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-neutral-50 border-b border-neutral-200 text-[11px] uppercase tracking-widest font-bold text-neutral-500">
+                <th className="p-4 w-12 text-center">Ord</th>
                 <th className="p-4 w-20">Image</th>
                 <th className="p-4">Product Title</th>
                 <th className="p-4">Categories</th>
@@ -626,80 +796,26 @@ export default function AdminDashboard() {
                 <th className="p-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody>
-              {filteredProducts.map(product => {
-                const primaryImg = product.images?.[0]?.image;
-                return (
-                  <tr key={product.id} className="border-b border-neutral-100 hover:bg-neutral-50/80 transition-colors">
-                    <td className="p-4">
-                      <div className="w-14 h-14 rounded-lg bg-neutral-100 border border-neutral-200 overflow-hidden flex items-center justify-center p-1.5">
-                        {primaryImg ? (
-                          <img src={primaryImg} alt={product.name} className="w-full h-full object-contain mix-blend-multiply" />
-                        ) : (
-                          <ShoppingBag size={20} className="text-neutral-300" />
-                        )}
-                      </div>
-                    </td>
-                    <td className="p-4">
-                      <span className="font-sans font-bold text-[#222] block">{product.name}</span>
-                      <span className="text-[11px] text-neutral-400 font-mono">/{product.slug}</span>
-                    </td>
-                    <td className="p-4">
-                      <div className="flex flex-wrap gap-1">
-                        {(product.categories && product.categories.length > 0) ? product.categories.map((cat: any) => (
-                          <span key={cat.id || cat} className="text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200/60">
-                            {cat.name || "Unnamed"}
-                          </span>
-                        )) : (
-                          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-neutral-100 text-neutral-400 border border-neutral-200">Unassigned</span>
-                        )}
-                      </div>
-                    </td>
-                    <td className="p-4 text-xs font-bold uppercase tracking-wider text-neutral-600">
-                      {product.brand?.name || "None"}
-                    </td>
-                    <td className="p-4 text-center">
-                      {product.is_featured ? (
-                        <span className="inline-flex items-center text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded font-bold border border-green-200">
-                          <Check size={12} className="mr-1" /> Featured
-                        </span>
-                      ) : (
-                        <span className="text-neutral-300 text-xs">&mdash;</span>
-                      )}
-                    </td>
-                    <td className="p-4 text-right">
-                      <div className="flex justify-end gap-2">
-                        <Link 
-                          href={`/products/${product.slug}`}
-                          target="_blank"
-                          className="p-2 rounded-lg text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 transition-colors"
-                          title="Preview Product"
-                        >
-                          <ExternalLink size={16} />
-                        </Link>
-                        <Link 
-                          href={`/admin/products/${product.slug}/edit`} 
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-neutral-100 hover:bg-neutral-200 text-neutral-800 transition-colors"
-                        >
-                          <Edit size={14} /> Edit
-                        </Link>
-                        <button 
-                          onClick={() => handleDeleteProduct(product.slug)} 
-                          className="p-2 rounded-lg text-red-400 hover:text-red-700 hover:bg-red-50 transition-colors"
-                        >
-                          <Trash2 size={16} />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
-              {filteredProducts.length === 0 && (
-                <tr>
-                  <td colSpan={6} className="p-12 text-center text-neutral-500 font-playfair text-lg">No products found matching query.</td>
-                </tr>
-              )}
-            </tbody>
+            <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleProductDragEnd}>
+              <SortableContext items={activeProductsList.map((p) => p.id)} strategy={verticalListSortingStrategy}>
+                <tbody>
+                  {activeProductsList.map(product => (
+                    <SortableProductRow
+                      key={product.id}
+                      product={product}
+                      onDelete={handleDeleteProduct}
+                    />
+                  ))}
+                  {activeProductsList.length === 0 && (
+                    <tr>
+                      <td colSpan={7} className="p-12 text-center text-neutral-500 font-playfair text-lg">
+                        No products found matching category or search query.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </SortableContext>
+            </DndContext>
           </table>
         </div>
       )}

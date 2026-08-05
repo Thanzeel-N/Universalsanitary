@@ -35,8 +35,12 @@ class Product(models.Model):
     technical_specs = models.TextField(blank=True)
     dimensions = models.CharField(max_length=255, blank=True)
     is_featured = models.BooleanField(default=False)
+    order = models.IntegerField(default=0, help_text="Order in which product is displayed (lower numbers first)")
     categories = models.ManyToManyField(Category, related_name='products', blank=True)
     brand = models.ForeignKey(Brand, related_name='products', on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['order', 'id']
 
     def __str__(self):
         return self.name

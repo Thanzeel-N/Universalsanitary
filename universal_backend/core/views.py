@@ -26,12 +26,18 @@ class ProductViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
         is_featured = self.request.query_params.get('is_featured', None)
+        category_param = self.request.query_params.get('category', None)
         if is_featured is not None:
             if is_featured.lower() == 'true':
                 queryset = queryset.filter(is_featured=True)
             elif is_featured.lower() == 'false':
                 queryset = queryset.filter(is_featured=False)
-        return queryset
+        if category_param:
+            if category_param.isdigit():
+                queryset = queryset.filter(categories__id=category_param)
+            else:
+                queryset = queryset.filter(categories__slug=category_param)
+        return queryset.distinct()
 
     @action(detail=True, methods=['post'], parser_classes=[MultiPartParser, FormParser])
     def upload_image(self, request, slug=None):

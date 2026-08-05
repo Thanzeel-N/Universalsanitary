@@ -63,15 +63,17 @@ export default function CategoryProductsClient({ category }: { category: any }) 
       fetch(apiUrl(`/api/v1/products/`)).then(r => r.ok ? r.json() : []).catch(() => []),
       fetch(apiUrl(`/api/v1/brands/`)).then(r => r.ok ? r.json() : []).catch(() => [])
     ]).then(([allProds, allBrands]) => {
-      // Filter products belonging to this category (by id or slug)
-      const catProds = (allProds && allProds.length > 0 ? allProds : []).filter((p: any) => {
-        const cats = p.categories || [];
-        return cats.some((c: any) => {
-          const cId = c.id ?? c;
-          const cSlug = c.slug;
-          return String(cId) === String(category.id) || cSlug === category.slug;
-        });
-      });
+      // Filter products belonging to this category (by id or slug) and sort by order
+      const catProds = (allProds && allProds.length > 0 ? allProds : [])
+        .filter((p: any) => {
+          const cats = p.categories || [];
+          return cats.some((c: any) => {
+            const cId = c.id ?? c;
+            const cSlug = c.slug;
+            return String(cId) === String(category.id) || cSlug === category.slug;
+          });
+        })
+        .sort((a: any, b: any) => (a.order ?? 0) - (b.order ?? 0));
       setProducts(catProds);
 
       // Extract brands relevant to the available products in this category
