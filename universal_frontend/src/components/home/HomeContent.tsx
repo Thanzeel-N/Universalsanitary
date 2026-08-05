@@ -743,7 +743,98 @@ export default function HomeContent({ categories }: { categories: any[] }) {
         </AnimatePresence>
       </motion.section>
 
+      {/* NECO Infrastructure — Reference Image Layout (Floating product, top giant headline, side stats & bottom dark card) */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-120px" }}
+        variants={sectionVariants}
+        className="py-20 md:py-32 px-6 md:px-12 bg-[#faf8f5] border-t border-neutral-200 relative overflow-hidden"
+      >
+        <div className="max-w-[1400px] mx-auto">
+          {/* Top Giant Editorial Headline */}
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 sm:mb-16">
+            <h2 className="font-oswald text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold uppercase tracking-tight text-neutral-900 leading-[0.9]">
+              NECO COVER
+            </h2>
+            <span className="font-sans text-xs uppercase font-bold tracking-[0.25em] text-primary mt-4 md:mt-0">
+              Infrastructure Division · Kerala
+            </span>
+          </div>
 
+          {/* Central Showcase Grid: Left Card | Floating Center Disc | Right 40t Stat */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
+
+            {/* Left Column: Subtext, Thumbnail Card & Explore Pill Button */}
+            <div className="lg:col-span-4 flex flex-col items-start text-left">
+              <span className="text-[11px] font-sans font-bold tracking-[0.2em] text-neutral-400 uppercase mb-3 block">
+                Exclusive Dealership
+              </span>
+              <p className="text-neutral-600 text-sm md:text-base leading-relaxed mb-6 font-light">
+                Authorised Kerala supplier of high-strength grey and ductile iron manhole covers, drainage gratings, and gully frames.
+              </p>
+
+              <p className="text-neutral-500 text-xs md:text-sm leading-relaxed mb-8 max-w-sm font-light">
+                Engineered for IS 1726 & EN 124 compliance — manufactured for heavy municipal and residential durability.
+              </p>
+
+              <Link
+                href="/neco"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-primary text-white font-sans text-xs uppercase tracking-widest font-bold rounded-full hover:brightness-110 transition-all shadow-md hover:shadow-lg smooth-hover"
+              >
+                <span>Explore Collection</span>
+                <ArrowRight size={14} />
+              </Link>
+            </div>
+
+            {/* Center Column: Floating Isolated Circular Disc + Background Graphic Accent Shape */}
+            <div className="lg:col-span-4 flex flex-col items-center justify-center relative py-8 lg:py-0">
+              {/* Graphic Backdrop Accent Shape */}
+              <div className="w-[280px] h-[280px] sm:w-[360px] sm:h-[360px] bg-primary/10 rounded-[3rem] -rotate-12 absolute z-0 pointer-events-none" />
+
+              {/* Floating Circular Product Cover Disc with Shadow */}
+              <div className="relative z-10 w-64 h-64 sm:w-80 sm:h-80 md:w-88 md:h-88 rounded-full overflow-hidden shadow-[0_30px_70px_-15px_rgba(0,0,0,0.35)] border-4 border-white transition-transform duration-700 hover:scale-105 cursor-pointer">
+                <img
+                  src="/images/neco/ezgif-frame-220.jpg"
+                  alt="NECO 525DIA 75KG Manhole Cover"
+                  className="w-full h-full object-cover scale-110"
+                />
+              </div>
+
+              {/* Floor Shadow Effect */}
+              <div className="w-48 sm:w-64 h-6 bg-black/15 rounded-[100%] blur-md mt-4 pointer-events-none" />
+            </div>
+
+            {/* Right Column: Giant 40t Stat Callout */}
+            <div className="lg:col-span-4 flex flex-col items-start lg:items-end text-left lg:text-right">
+              <span className="font-sans text-[11px] font-bold tracking-[0.25em] text-primary uppercase mb-2">
+                Maximum Load Class
+              </span>
+              <div className="font-playfair text-7xl sm:text-8xl md:text-9xl font-light text-neutral-900 leading-none mb-3">
+                40<span className="text-primary font-normal">t</span>
+              </div>
+              <h4 className="font-playfair text-xl text-neutral-800 font-medium mb-3">
+                Extra Heavy Duty (EHD 400)
+              </h4>
+              <p className="text-neutral-500 text-xs md:text-sm leading-relaxed max-w-xs font-light">
+                Tested and certified for airport runways, container terminals, seaports, and heavy freight corridors.
+              </p>
+            </div>
+          </div>
+
+          {/* Bottom Dark Metric Card (2-Column Stat Bar) */}
+          <div className="bg-neutral-900 text-white rounded-3xl p-8 sm:p-10 shadow-2xl mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 text-center border border-neutral-800 relative z-10">
+            <div className="flex flex-col items-center justify-center">
+              <span className="font-playfair text-3xl sm:text-4xl text-white font-light mb-1">1.5t – 40t</span>
+              <span className="font-sans text-[10px] uppercase tracking-widest text-neutral-400 font-bold">Complete Load Spectrum (LD to EHD)</span>
+            </div>
+            <div className="flex flex-col items-center justify-center border-t md:border-t-0 md:border-l border-neutral-800 pt-6 md:pt-0 pl-0 md:pl-4">
+              <span className="font-playfair text-3xl sm:text-4xl text-primary font-light mb-1">IS 1726 / EN 124</span>
+              <span className="font-sans text-[10px] uppercase tracking-widest text-neutral-400 font-bold">100% Certified Bureau Standards</span>
+            </div>
+          </div>
+        </div>
+      </motion.section>
 
       <motion.section
         initial="hidden"

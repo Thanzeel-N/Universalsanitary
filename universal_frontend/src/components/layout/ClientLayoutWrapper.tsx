@@ -9,14 +9,16 @@ export default function ClientLayoutWrapper({ children }: { children: React.Reac
   const pathname = usePathname();
   const isAppArea = pathname?.startsWith("/admin") || pathname?.startsWith("/login");
   const isHomePage = pathname === "/";
+  const isNecoPage = pathname === "/neco" || pathname === "/brands/neco";
+  const isHeroPage = isHomePage || isNecoPage;
 
   return (
     <>
-      {!isAppArea && <Header isHomePage={isHomePage} />}
-      <main className={!isAppArea && !isHomePage ? "pt-24" : ""}>
+      {!isAppArea && !isNecoPage && <Header isHomePage={isHomePage} />}
+      <main className={!isAppArea && !isHeroPage ? "pt-24" : ""}>
         {children}
       </main>
-      {!isAppArea && <Footer />}
+      {!isAppArea && !isNecoPage && <Footer />}
       <CookieConsent />
     </>
   );

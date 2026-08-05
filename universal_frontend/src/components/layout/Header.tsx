@@ -29,7 +29,9 @@ export default function Header({ isHomePage = true }: { isHomePage?: boolean }) 
 
   const headerClass = isHomePage && !isScrolled
     ? "bg-transparent py-6 text-white"
-    : "bg-transparent backdrop-blur-md py-4 text-primary";
+    : isScrolled
+    ? "bg-white/90 backdrop-blur-md shadow-sm py-4 text-neutral-900 border-b border-neutral-200/60"
+    : "bg-transparent py-6 text-neutral-900";
 
   return (
     <header

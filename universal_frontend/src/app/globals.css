@@ -22,6 +22,14 @@ body {
 }
 
 /* Custom Utilities for smooth animations */
+.font-oswald {
+  font-family: var(--font-oswald), sans-serif;
+}
+
+.font-mono-spec {
+  font-family: var(--font-mono-spec), monospace;
+}
+
 .smooth-hover {
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -30,6 +38,7 @@ body {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -49,4 +58,3 @@ body {
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
   mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
 }
-
