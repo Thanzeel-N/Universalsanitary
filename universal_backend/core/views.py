@@ -47,9 +47,11 @@ class ProductViewSet(viewsets.ModelViewSet):
             return Response({'detail': 'No image provided'}, status=status.HTTP_400_BAD_REQUEST)
         is_primary = request.data.get('is_primary', False) in ['true', 'True', True]
         
-        # Optionally, delete existing primary image or set to False if this one is primary
+        # Delete existing primary image(s) for this product so old file and record are removed
         if is_primary:
-            ProductImage.objects.filter(product=product, is_primary=True).update(is_primary=False)
+            old_primary_images = list(ProductImage.objects.filter(product=product, is_primary=True))
+            for old_img in old_primary_images:
+                old_img.delete()  # Triggers post_delete signal to delete file from disk
             
         product_image = ProductImage.objects.create(product=product, image=image, is_primary=is_primary)
         return Response(ProductImageSerializer(product_image).data, status=status.HTTP_201_CREATED)
