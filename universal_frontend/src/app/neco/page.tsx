@@ -45,50 +45,74 @@ interface FaqItem {
 
 const LOAD_CLASSES: LoadClass[] = [
   {
-    code: "LD 400",
+    code: "CLASS A15",
     en124: "A15",
-    load: "1.5t",
-    loadNum: "1.5",
+    load: "15 kN (1.5t)",
+    loadNum: "15",
     title: "Light Duty",
-    duty: "Pedestrian",
-    material: "Grey Iron CI Grade 20",
+    duty: "Pedestrian & Garden",
+    material: "Grey Iron CI Grade 20 / Ductile Iron",
     use: "Pedestrian walkways, garden areas, residential footpaths, cycle tracks.",
     icon: <Footprints size={24} />,
     color: "from-emerald-500/20 to-emerald-500/5",
   },
   {
-    code: "MD 400",
+    code: "CLASS B125",
     en124: "B125",
-    load: "5.0t",
-    loadNum: "5.0",
+    load: "125 kN (12.5t)",
+    loadNum: "125",
     title: "Medium Duty",
-    duty: "Light Vehicle",
-    material: "Ductile SG Iron GGG50",
-    use: "Car parks, housing society driveways, shopping complex light vehicle zones.",
+    duty: "Light Vehicle Traffic",
+    material: "Ductile Iron SG500/7 (GGG50)",
+    use: "Car parks, housing society driveways, shopping complex light vehicle zones, footways.",
     icon: <Car size={24} />,
     color: "from-sky-500/20 to-sky-500/5",
   },
   {
-    code: "HD 400",
+    code: "CLASS C250",
+    en124: "C250",
+    load: "250 kN (25.0t)",
+    loadNum: "250",
+    title: "Medium Heavy Duty",
+    duty: "Kerbside & Channels",
+    material: "Ductile Iron SG500/7 (GGG50)",
+    use: "Service station forecourts, kerbside drainage channels, roadside parking spaces.",
+    icon: <Truck size={24} />,
+    color: "from-amber-500/20 to-amber-500/5",
+  },
+  {
+    code: "CLASS D400",
     en124: "D400",
-    load: "25.0t",
-    loadNum: "25",
+    load: "400 kN (40.0t)",
+    loadNum: "400",
     title: "Heavy Duty",
-    duty: "Road Traffic",
-    material: "Ductile SG Iron GGG50",
-    use: "City arterial roads, commercial expressways, bus terminals, heavy traffic.",
+    duty: "Main Carriageways",
+    material: "Ductile Iron SG500/7 (GGG50)",
+    use: "City arterial roads, commercial expressways, bus terminals, heavy traffic loading.",
     icon: <TrendingUp size={24} />,
     color: "from-orange-500/20 to-orange-500/5",
   },
   {
-    code: "EHD 400",
-    en124: "F900",
-    load: "40.0t",
-    loadNum: "40",
+    code: "CLASS E600",
+    en124: "E600",
+    load: "600 kN (60.0t)",
+    loadNum: "600",
     title: "Extra Heavy Duty",
-    duty: "Aviation & Port",
-    material: "Ductile SG Iron GGG50",
-    use: "International airports, container yards, seaports, industrial plant roads.",
+    duty: "Industrial & Freight",
+    material: "Ductile Iron SG500/7 (GGG50)",
+    use: "Industrial plant roads, high wheel load areas, docks, container freight yards.",
+    icon: <Factory size={24} />,
+    color: "from-indigo-500/20 to-indigo-500/5",
+  },
+  {
+    code: "CLASS F900",
+    en124: "F900",
+    load: "900 kN (90.0t)",
+    loadNum: "900",
+    title: "Extreme Duty",
+    duty: "Aviation & Seaports",
+    material: "Ductile Iron SG500/7 (GGG50)",
+    use: "International airport taxiways & pavements, container ports, extreme load docks.",
     icon: <Plane size={24} />,
     color: "from-rose-500/20 to-rose-500/5",
   },
@@ -96,9 +120,9 @@ const LOAD_CLASSES: LoadClass[] = [
 
 const PRODUCTS: ProductCard[] = [
   {
-    title: "NECO 525DIA Circular Cover",
-    material: "Ductile SG Iron GGG50 (75kg)",
-    loadClass: "D400 · 25 Ton",
+    title: "NECO 525DIA Circular Cover in Frame",
+    material: "Ductile SG Iron SG500/7 (75kg)",
+    loadClass: "Class D400 · 400 kN (40t)",
     applications: ["Arterial Roads", "Expressways", "Bus Terminals"],
     image: "/images/neco/ezgif-frame-220.jpg",
     badge: "D400",
@@ -107,7 +131,7 @@ const PRODUCTS: ProductCard[] = [
   {
     title: "Inspection Cover (300×600)",
     material: "Grey Cast Iron CI Grade 20 (25kg)",
-    loadClass: "A15 · Light Duty",
+    loadClass: "Class A15 · 15 kN (1.5t)",
     applications: ["Footpaths", "Residential Pits", "Cable Trenches"],
     image: "/images/neco/product 1.png",
     badge: "A15",
@@ -115,8 +139,8 @@ const PRODUCTS: ProductCard[] = [
   },
   {
     title: "Stormwater Drainage Grating",
-    material: "Ductile SG Iron GGG50",
-    loadClass: "B125 · 5 Ton",
+    material: "Ductile SG Iron SG500/7",
+    loadClass: "Class B125 · 125 kN (12.5t)",
     applications: ["Parking Lots", "Driveways", "Pedestrian Plazas"],
     image: "/images/neco/product 2.png",
     badge: "B125",
@@ -124,17 +148,17 @@ const PRODUCTS: ProductCard[] = [
   },
   {
     title: "Square Slotted Drainage Grating",
-    material: "Ductile SG Iron GGG50",
-    loadClass: "B125 · 5 Ton",
-    applications: ["Commercial Grounds", "Housing Societies", "Pathways"],
+    material: "Ductile SG Iron SG500/7",
+    loadClass: "Class C250 · 250 kN (25t)",
+    applications: ["Kerbside Channels", "Commercial Grounds", "Pathways"],
     image: "/images/neco/product 3.png",
-    badge: "B125",
-    badgeColor: "text-sky-400 bg-sky-500/10 border-sky-500/30",
+    badge: "C250",
+    badgeColor: "text-amber-400 bg-amber-500/10 border-amber-500/30",
   },
   {
     title: "600DIA Cover in Square Frame",
-    material: "Ductile SG Iron GGG50 (95kg)",
-    loadClass: "D400 · 40 Ton",
+    material: "Ductile SG Iron SG500/7 (95kg)",
+    loadClass: "Class D400 · 400 kN (40t)",
     applications: ["Heavy Freight Roads", "City Junctions", "Highways"],
     image: "/images/neco/poduct 4.png",
     badge: "D400",
@@ -142,24 +166,24 @@ const PRODUCTS: ProductCard[] = [
   },
   {
     title: "Heavy Duty Road Gully Grating",
-    material: "Ductile SG Iron GGG50",
-    loadClass: "D400 · 40 Ton",
+    material: "Ductile SG Iron SG500/7",
+    loadClass: "Class E600 · 600 kN (60t)",
     applications: ["Highways", "Industrial Plants", "Port Corridors"],
     image: "/images/neco/product 5.png",
-    badge: "D400",
-    badgeColor: "text-orange-400 bg-orange-500/10 border-orange-500/30",
+    badge: "E600",
+    badgeColor: "text-indigo-400 bg-indigo-500/10 border-indigo-500/30",
   },
 ];
 
-
 const BENEFITS = [
-  { icon: <Award size={28} />, title: "EN124 Certified", desc: "Fully compliant with IS 1726 and EN 124 international load standards." },
-  { icon: <Scale size={28} />, title: "Heavy Load Capacity", desc: "Engineered for loads from 1.5 to 40 tonnes without structural compromise." },
-  { icon: <Droplets size={28} />, title: "Corrosion Resistant", desc: "Bitumen-coated surfaces with natural iron oxide protection for decades of service." },
-  { icon: <Clock size={28} />, title: "Long Service Life", desc: "Cast iron durability ensures 30+ years of reliable performance in demanding environments." },
-  { icon: <Target size={28} />, title: "Precision Casting", desc: "Matched frame and cover seating ensures non-rocking, silent fit under continuous traffic." },
-  { icon: <Building2 size={28} />, title: "Trusted Infrastructure", desc: "Deployed across Kerala's premier roads, airports, ports, and smart city projects." },
+  { icon: <Award size={28} />, title: "EN 124-2 Certified", desc: "Fully compliant with EN 124-2, IS 1726, IS 1865, and ISO 1083 standards." },
+  { icon: <Scale size={28} />, title: "High Load Capacity", desc: "Engineered for load classes A15 (15kN) to F900 (900kN) for light to extreme duty." },
+  { icon: <ShieldCheck size={28} />, title: "Anti-Theft Hinge Design", desc: "Hinged captive construction eliminates theft risks and accidental displacement." },
+  { icon: <Clock size={28} />, title: "High Ductility & Safety", desc: "500 N/mm² tensile strength prevents sudden brittle fracture under heavy dynamic loads." },
+  { icon: <Target size={28} />, title: "Precision Seating & Anti-Skid", desc: "Raised checker design gives superior grip, while machined seating eliminates rattling." },
+  { icon: <Building2 size={28} />, title: "Lightweight & Cost-Effective", desc: "High strength-to-weight ratio cuts transport, installation, and lifecycle maintenance costs." },
 ];
+
 
 const APPLICATIONS = [
   { icon: <TrendingUp size={32} />, label: "Arterial Roads", color: "text-sky-400" },
@@ -577,7 +601,7 @@ export default function NecoPage() {
                 </motion.div>
               </motion.div>
 
-              {/* Right: Floating Product Showcase */}
+              {/* Right: Floating Product Showcase (Single Clean Card) */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.92 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -585,60 +609,66 @@ export default function NecoPage() {
                 className="relative flex justify-center lg:justify-end"
               >
                 <div className="relative w-full max-w-md">
-                  {/* Glow ring */}
-                  <div className="absolute inset-0 rounded-3xl bg-sky-500/10 animate-neco-glow blur-2xl scale-105" />
+                  {/* Glow ring background */}
+                  <div className="absolute inset-0 rounded-3xl bg-sky-500/15 animate-neco-glow blur-3xl scale-105" />
 
-                  <div className="animate-neco-float relative z-10 w-full aspect-square bg-gradient-to-br from-slate-900 via-[#0f172a] to-slate-950 rounded-3xl border border-slate-700/80 shadow-2xl overflow-hidden">
+                  {/* ── SINGLE MAIN HERO CARD ── */}
+                  <div className="animate-neco-float relative z-20 w-full aspect-square bg-gradient-to-br from-slate-900 via-[#0f172a] to-slate-950 rounded-3xl border border-slate-700/80 shadow-2xl overflow-hidden group">
                     {/* Shimmer overlay */}
                     <div className="absolute inset-0 animate-neco-shimmer z-20 pointer-events-none" />
                     {/* Product Image */}
                     <img
                       src="/images/neco/ezgif-frame-220.jpg"
                       alt="NECO 525DIA 75KG ductile iron circular manhole cover D400"
-                      className="w-full h-full object-cover opacity-90"
+                      className="w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
 
                     {/* Top Badge */}
-                    <div className="absolute top-5 left-5 flex items-center gap-2 neco-glass px-3 py-1.5 rounded-full">
+                    <div className="absolute top-5 left-5 flex items-center gap-2 neco-glass px-3 py-1.5 rounded-full z-30">
                       <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
-                      <span className="font-sans text-[10px] uppercase font-bold tracking-widest text-sky-300">IS 1726 / EN 124</span>
+                      <span className="font-sans text-[10px] uppercase font-bold tracking-widest text-sky-300">IS 1726 / EN 124-2</span>
                     </div>
 
                     {/* Bottom Info */}
-                    <div className="absolute bottom-0 left-0 right-0 p-5 border-t border-slate-700/60">
+                    <div className="absolute bottom-0 left-0 right-0 p-5 border-t border-slate-700/60 bg-slate-950/80 backdrop-blur-md z-30">
                       <div className="flex justify-between items-end">
                         <div>
-                          <span className="font-sans text-[9px] uppercase tracking-widest text-slate-400 font-bold block">Model</span>
-                          <span className="font-sans text-sm text-white font-bold">NECO 525DIA D400</span>
+                          <span className="font-sans text-[9px] uppercase tracking-widest text-slate-400 font-bold block mb-0.5">Model</span>
+                          <span className="font-sans text-sm text-white font-bold">NECO 525DIA Class D400</span>
                         </div>
-                        <span className="px-3 py-1 bg-orange-500/20 border border-orange-500/40 text-orange-400 text-xs font-bold uppercase tracking-wider rounded-full">D400</span>
+                        <span className="px-3 py-1 bg-orange-500/20 border border-orange-500/40 text-orange-400 text-xs font-bold uppercase tracking-wider rounded-full">D400 · 400 kN</span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Floating badge cards */}
+                  {/* Floating badge card - Top Right */}
                   <motion.div
-                    initial={{ opacity: 0, x: 30 }}
+                    initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.8, duration: 0.6 }}
-                    className="absolute -right-8 top-1/4 neco-glass rounded-2xl px-4 py-3 shadow-xl border border-slate-700/60 hidden sm:block"
+                    className="absolute -right-6 top-8 neco-glass rounded-2xl px-4 py-2.5 shadow-2xl border border-slate-700/70 hidden sm:flex items-center gap-3 z-30"
                   >
-                    <div className="text-white font-oswald text-2xl font-bold">40<span className="text-sky-400 text-lg">t</span></div>
-                    <div className="text-slate-400 text-[9px] uppercase tracking-widest font-bold">Max Load</div>
+                    <div className="text-right">
+                      <div className="text-white font-oswald text-xl font-bold leading-none">900<span className="text-sky-400 text-sm">kN</span></div>
+                      <div className="text-slate-400 text-[8px] uppercase tracking-widest font-bold mt-0.5">Max Load</div>
+                    </div>
                   </motion.div>
 
+                  {/* Floating badge card - Bottom Left */}
                   <motion.div
-                    initial={{ opacity: 0, x: -30 }}
+                    initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 1.0, duration: 0.6 }}
-                    className="absolute -left-8 bottom-1/4 neco-glass rounded-2xl px-4 py-3 shadow-xl border border-slate-700/60 hidden sm:block"
+                    className="absolute -left-6 bottom-16 neco-glass rounded-2xl px-4 py-2.5 shadow-2xl border border-slate-700/70 hidden sm:flex items-center gap-2.5 z-30"
                   >
-                    <div className="flex items-center gap-1.5">
-                      <CheckCircle2 size={14} className="text-emerald-400" />
-                      <span className="text-white text-xs font-bold">EN124 Certified</span>
+                    <div className="p-1.5 rounded-full bg-emerald-500/20 text-emerald-400 shrink-0">
+                      <CheckCircle2 size={14} />
                     </div>
-                    <div className="text-slate-400 text-[9px] uppercase tracking-widest font-bold mt-0.5">IS 1726 Compliant</div>
+                    <div>
+                      <div className="text-white text-xs font-bold leading-none">EN 124-2 Certified</div>
+                      <div className="text-slate-400 text-[8px] uppercase tracking-widest font-bold mt-0.5">IS 1726 / IS 1865</div>
+                    </div>
                   </motion.div>
                 </div>
               </motion.div>
@@ -825,18 +855,15 @@ export default function NecoPage() {
                     transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                     className="neco-card-hover bg-slate-900/80 border border-slate-800 rounded-3xl overflow-hidden flex flex-col group"
                   >
-                    {/* Image */}
-                    <div className="relative aspect-square overflow-hidden bg-slate-950">
+                    {/* Image Container with Dark Theme Backdrop */}
+                    <div className="relative aspect-square overflow-hidden bg-[#0a0f1d] flex items-center justify-center p-4">
                       <img
                         src={product.image}
                         alt={`${product.title} - ${product.material}`}
-                        className="w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-110"
+                        className="w-full h-full object-cover opacity-85 transition-transform duration-700 group-hover:scale-105"
                         loading="lazy"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" />
-                      <div className={`absolute top-4 right-4 px-3 py-1 border rounded-full text-xs font-bold uppercase tracking-wider ${product.badgeColor}`}>
-                        {product.badge}
-                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/10 to-transparent pointer-events-none" />
                     </div>
 
                     {/* Content */}
@@ -890,7 +917,7 @@ export default function NecoPage() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5">
                 {LOAD_CLASSES.map((card, i) => (
                   <motion.div
                     key={card.code}
@@ -900,38 +927,38 @@ export default function NecoPage() {
                     transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                     className="neco-card-hover bg-slate-900/80 border border-slate-800 rounded-3xl overflow-hidden flex flex-col h-full"
                   >
-                    {/* Header Gradient */}
-                    <div className={`bg-gradient-to-b ${card.color} px-6 pt-7 pb-5`}>
-                      <div className="flex justify-between items-start mb-4">
-                        <div className="p-2.5 bg-white/5 border border-white/10 rounded-2xl text-white">
+                    {/* Header */}
+                    <div className="bg-slate-950/80 border-b border-slate-800/80 px-5 pt-6 pb-4">
+                      <div className="flex justify-between items-start mb-3">
+                        <div className="p-2 bg-sky-500/10 border border-sky-500/20 rounded-xl text-sky-400">
                           {card.icon}
                         </div>
                         <div className="text-right">
-                          <div className="font-oswald text-4xl font-bold text-white leading-none">{card.loadNum}</div>
-                          <div className="font-sans text-[10px] text-slate-400 uppercase tracking-widest font-bold mt-0.5">tonnes</div>
+                          <div className="font-oswald text-2xl font-bold text-white leading-none">{card.loadNum}</div>
+                          <div className="font-sans text-[9px] text-slate-400 uppercase tracking-widest font-bold mt-0.5">kN</div>
                         </div>
                       </div>
 
                       <div className="space-y-1">
-                        <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 rounded-full">
-                          <span className="font-sans text-[10px] uppercase font-bold tracking-widest text-white">EN124 {card.en124}</span>
+                        <div className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-slate-800 border border-slate-700 rounded-full">
+                          <span className="font-sans text-[9px] uppercase font-bold tracking-widest text-slate-300">EN124 {card.en124}</span>
                         </div>
-                        <h3 className="font-oswald text-xl font-bold uppercase tracking-wide text-white">
+                        <h3 className="font-oswald text-lg font-bold uppercase tracking-wide text-white">
                           {card.title}
                         </h3>
-                        <p className="font-sans text-xs text-white/60 font-semibold tracking-wider uppercase">{card.duty}</p>
+                        <p className="font-sans text-[10px] text-slate-400 font-semibold tracking-wider uppercase">{card.duty}</p>
                       </div>
                     </div>
 
                     {/* Body */}
-                    <div className="px-6 py-5 flex flex-col flex-1">
-                      <p className="font-sans text-xs text-slate-300 leading-relaxed font-light mb-5 flex-1">
+                    <div className="px-5 py-4 flex flex-col flex-1">
+                      <p className="font-sans text-xs text-slate-300 leading-relaxed font-light mb-4 flex-1">
                         {card.use}
                       </p>
 
-                      <div className="pt-4 border-t border-slate-800">
+                      <div className="pt-3 border-t border-slate-800">
                         <div className="font-sans text-[9px] uppercase tracking-widest text-slate-500 font-bold mb-1">Material Grade</div>
-                        <div className="font-sans text-xs text-slate-300 font-medium">{card.material}</div>
+                        <div className="font-sans text-[11px] text-slate-300 font-medium">{card.material}</div>
                       </div>
                     </div>
                   </motion.div>
@@ -971,27 +998,27 @@ export default function NecoPage() {
                       <th className="py-5 px-6 font-bold text-slate-300 uppercase tracking-widest text-[10px]">
                         <div className="flex items-center gap-2">
                           <span className="w-2 h-2 rounded-full bg-slate-400" />
-                          Grey Cast Iron
+                          Grey Cast Iron (CI 20)
                         </div>
                       </th>
                       <th className="py-5 px-6 font-bold text-sky-400 uppercase tracking-widest text-[10px]">
                         <div className="flex items-center gap-2">
                           <span className="w-2 h-2 rounded-full bg-sky-400" />
-                          Ductile Iron (SG)
+                          Ductile Iron (SG500/7)
                         </div>
                       </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-800/80">
                     {[
-                      { prop: "Tensile Strength", grey: "150–200 MPa", ductile: "400–600 MPa ✓" },
-                      { prop: "Yield Strength", grey: "No defined yield", ductile: "250–350 MPa ✓" },
-                      { prop: "Elongation / Flexibility", grey: "~0% (brittle)", ductile: "15–18% ✓" },
-                      { prop: "Impact Resistance", grey: "Low — prone to cracking", ductile: "High — absorbs shocks ✓" },
-                      { prop: "Fatigue Life", grey: "Moderate", ductile: "Excellent under cyclic loads ✓" },
-                      { prop: "Load Classes", grey: "A15 (Light Duty)", ductile: "B125, D400, F900 ✓" },
-                      { prop: "Recommended Environments", grey: "Pedestrian, low traffic", ductile: "Roads, airports, ports, industrial ✓" },
-                      { prop: "Material Grade", grey: "CI Grade 20 (IS 1726)", ductile: "GGG50 (IS 1726 / EN 124) ✓" },
+                      { prop: "Tensile Strength", grey: "150–200 N/mm²", ductile: "500 N/mm² (Min) ✓" },
+                      { prop: "Elongation Percentage", grey: "~0% (brittle)", ductile: "7% Min (High Ductility) ✓" },
+                      { prop: "Brinell Hardness (HBS)", grey: "180–220 HBS", ductile: "160 to 240 HBS ✓" },
+                      { prop: "Impact Resistance", grey: "Low — prone to cracking", ductile: "High — absorbs heavy shocks ✓" },
+                      { prop: "Skid Resistance", grey: "Plain / Standard", ductile: "Raised Checker Pattern ✓" },
+                      { prop: "Theft Protection", grey: "Standard loose lid", ductile: "Integrated Hinge Anti-Theft ✓" },
+                      { prop: "Reaction to Fire", grey: "Class A1", ductile: "Class A1 (Non-combustible) ✓" },
+                      { prop: "EN 124-2 Classes", grey: "A15 (Light Duty)", ductile: "A15 to F900 (Up to 900 kN) ✓" },
                     ].map((row, i) => (
                       <tr key={row.prop} className={`transition-colors hover:bg-slate-800/40 ${i % 2 === 0 ? "bg-slate-900/40" : ""}`}>
                         <td className="py-4 px-6 text-slate-400 font-semibold text-xs uppercase tracking-wide">{row.prop}</td>
@@ -1006,7 +1033,7 @@ export default function NecoPage() {
           </motion.section>
 
           {/* ════════════════════════════════════════════════════════════
-              7 · TECHNICAL SPECIFICATIONS TABLE
+              7 · TECHNICAL SPECIFICATIONS TABLE & DATA SHEET
           ════════════════════════════════════════════════════════════ */}
           <motion.section
             id="spec-table"
@@ -1021,11 +1048,11 @@ export default function NecoPage() {
               <div className="mb-12 max-w-2xl">
                 <SectionLabel>Technical Specifications</SectionLabel>
                 <h2 className="font-oswald text-4xl md:text-5xl font-bold uppercase text-white tracking-tight mb-4">
-                  Exact dimensions for<br />
-                  <span className="text-sky-400">your specification.</span>
+                  Exact dimensions &amp;<br />
+                  <span className="text-sky-400">Technical Data Sheet.</span>
                 </h2>
                 <p className="text-slate-300 text-sm md:text-base leading-relaxed font-light">
-                  Clear opening sizes, frame depths, and load ratings across circular, square, rectangular, and grating configurations.
+                  Official 11-point EN 124-2 data sheet and clear opening dimensions across circular, square, recessed, and grating configurations.
                 </p>
               </div>
               <SpecTable darkTheme={true} />
@@ -1033,7 +1060,131 @@ export default function NecoPage() {
           </motion.section>
 
           {/* ════════════════════════════════════════════════════════════
-              8 · APPLICATIONS
+              8 · INSTALLATION INSTRUCTIONS (EN 124-2)
+          ════════════════════════════════════════════════════════════ */}
+          <motion.section
+            id="installation"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={fadeUp}
+            className="py-24 md:py-36 px-6 md:px-10 bg-[#0d1424] border-b border-slate-800/60"
+            aria-label="EN 124-2 Installation Instructions"
+          >
+            <div className="max-w-7xl mx-auto">
+              <div className="mb-14">
+                <SectionLabel>EN 124-2 Guidelines</SectionLabel>
+                <h2 className="font-oswald text-4xl md:text-5xl lg:text-6xl font-bold uppercase text-white tracking-tight mb-4">
+                  Installation Instructions &amp;<br />
+                  <span className="text-sky-400">Best Practices</span>
+                </h2>
+                <p className="text-slate-300 text-sm md:text-base font-light max-w-2xl leading-relaxed">
+                  Proper installation ensures full load transfer, eliminates cover rattling, and guarantees long operational service.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* Location & Load Class */}
+                <div className="bg-slate-900/80 border border-slate-800 rounded-3xl p-8 flex flex-col">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="p-3 bg-sky-500/10 border border-sky-500/30 rounded-2xl text-sky-400">
+                      <Target size={24} />
+                    </div>
+                    <div>
+                      <h3 className="font-oswald text-xl font-bold uppercase text-white">1. Location &amp; Load Class</h3>
+                      <span className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">EN 124-2 Standard</span>
+                    </div>
+                  </div>
+                  <p className="text-slate-300 text-xs leading-relaxed font-light mb-4">
+                    The procedure for installing manhole covers depends on site location, traffic loads, and planned surface layer.
+                  </p>
+                  <ul className="space-y-2.5 text-xs text-slate-400 font-light flex-1">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 size={14} className="text-sky-400 shrink-0 mt-0.5" />
+                      <span>Assigned to classes A15 through F900 as per EN 124-2.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 size={14} className="text-sky-400 shrink-0 mt-0.5" />
+                      <span>Manhole structure must be suitable for planned traffic load.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 size={14} className="text-sky-400 shrink-0 mt-0.5" />
+                      <span>Planner / Engineer responsible for load class, mortar quality &amp; orientation.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Preparation Before Installation */}
+                <div className="bg-slate-900/80 border border-slate-800 rounded-3xl p-8 flex flex-col">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="p-3 bg-amber-500/10 border border-amber-500/30 rounded-2xl text-amber-400">
+                      <ShieldCheck size={24} />
+                    </div>
+                    <div>
+                      <h3 className="font-oswald text-xl font-bold uppercase text-white">2. Pre-Installation Checklist</h3>
+                      <span className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Verification Steps</span>
+                    </div>
+                  </div>
+                  <ul className="space-y-2 text-xs text-slate-300 font-light flex-1">
+                    <li className="flex items-start gap-2">
+                      <span className="w-4 h-4 rounded-full bg-amber-500/20 text-amber-300 font-bold text-[9px] flex items-center justify-center shrink-0 mt-0.5">1</span>
+                      <span>Check size correctness with chamber / Gully opening.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-4 h-4 rounded-full bg-amber-500/20 text-amber-300 font-bold text-[9px] flex items-center justify-center shrink-0 mt-0.5">2</span>
+                      <span>Verify appropriate load class for location.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-4 h-4 rounded-full bg-amber-500/20 text-amber-300 font-bold text-[9px] flex items-center justify-center shrink-0 mt-0.5">3</span>
+                      <span>Inspect working order — <strong>Never install damaged parts!</strong></span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-4 h-4 rounded-full bg-amber-500/20 text-amber-300 font-bold text-[9px] flex items-center justify-center shrink-0 mt-0.5">4</span>
+                      <span>Use lifting gear to prevent seating edge damage.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-4 h-4 rounded-full bg-amber-500/20 text-amber-300 font-bold text-[9px] flex items-center justify-center shrink-0 mt-0.5">5</span>
+                      <span>Clean bearing surfaces &amp; setting area prior to insertion.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-4 h-4 rounded-full bg-amber-500/20 text-amber-300 font-bold text-[9px] flex items-center justify-center shrink-0 mt-0.5">6</span>
+                      <span>Clean and wet underside of frame before placement.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Mortar Bed & Frame Installation */}
+                <div className="bg-slate-900/80 border border-slate-800 rounded-3xl p-8 flex flex-col">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl text-emerald-400">
+                      <Layers size={24} />
+                    </div>
+                    <div>
+                      <h3 className="font-oswald text-xl font-bold uppercase text-white">3. Mortar Bed &amp; Frame</h3>
+                      <span className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Bearing Execution</span>
+                    </div>
+                  </div>
+                  <ul className="space-y-3 text-xs text-slate-300 font-light flex-1">
+                    <li className="p-3 bg-slate-950/60 rounded-xl border border-slate-800">
+                      <strong className="text-emerald-400 block mb-1">Full Mortar Contact:</strong>
+                      Frame must be in 100% full contact with mortar bed. Poor substructure causes traffic loosening, premature wear, rattling, or frame destruction.
+                    </li>
+                    <li className="p-3 bg-slate-950/60 rounded-xl border border-slate-800">
+                      <strong className="text-emerald-400 block mb-1">Thin-Walled Frames:</strong>
+                      When installing thin-walled non-torsion-free frames, keep cover fitted inside frame during setting.
+                    </li>
+                    <li className="p-3 bg-slate-950/60 rounded-xl border border-slate-800">
+                      <strong className="text-emerald-400 block mb-1">Height Adjustments:</strong>
+                      Always execute a complete new mortar bed throughout for any height adjustments.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </motion.section>
+
+          {/* ════════════════════════════════════════════════════════════
+              9 · APPLICATIONS
           ════════════════════════════════════════════════════════════ */}
           <motion.section
             id="applications"
@@ -1041,7 +1192,7 @@ export default function NecoPage() {
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={fadeUp}
-            className="py-24 md:py-36 px-6 md:px-10 bg-[#0d1424] border-b border-slate-800/60"
+            className="py-24 md:py-36 px-6 md:px-10 bg-[#0b1120] border-b border-slate-800/60"
             aria-label="Applications for NECO manhole covers"
           >
             <div className="max-w-7xl mx-auto">
@@ -1080,6 +1231,7 @@ export default function NecoPage() {
 
 
 
+
           {/* ════════════════════════════════════════════════════════════
               10 · FAQ
           ════════════════════════════════════════════════════════════ */}
@@ -1104,6 +1256,51 @@ export default function NecoPage() {
               <FaqAccordion faqs={FAQS} />
             </div>
           </motion.section>
+
+          {/* ════════════════════════════════════════════════════════════
+              10.5 · MANUFACTURER & DISTRIBUTOR DIRECTORY
+          ════════════════════════════════════════════════════════════ */}
+          <section className="py-20 px-6 md:px-10 bg-[#080d19] border-b border-slate-800/80">
+            <div className="max-w-7xl mx-auto">
+              <div className="p-8 md:p-12 bg-slate-900/90 border border-slate-800 rounded-3xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div className="lg:col-span-7">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="font-oswald text-2xl font-bold text-white uppercase tracking-wider">JAYASWAL NECO INDUSTRIES LTD.</span>
+                    <span className="px-2.5 py-0.5 bg-sky-500/20 text-sky-400 text-[10px] font-bold uppercase rounded-full border border-sky-500/30">Official Manufacturer</span>
+                  </div>
+                  <p className="text-slate-400 text-xs leading-relaxed font-light mb-6">
+                    Corporate Office: F-8, MIDC, Industrial Area Hingna Road, Nagpur-440016 M.S. (INDIA)<br />
+                    Phone: (07104) 237471, 237461, 235002 | Fax: (07104) 237583, 236255<br />
+                    Email: contact@necoindia.com, b.praveen@necoindia.com | Website: www.necoindia.com
+                  </p>
+                  <div className="font-sans text-[11px] uppercase tracking-widest text-slate-500 font-bold mb-3">National Branch Offices Network</div>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-[11px] text-slate-300 font-medium">
+                    <div className="flex items-center gap-1.5"><CheckCircle2 size={12} className="text-sky-400" /> Cochin: 09349277907</div>
+                    <div className="flex items-center gap-1.5"><CheckCircle2 size={12} className="text-sky-400" /> Chennai: 09382722422</div>
+                    <div className="flex items-center gap-1.5"><CheckCircle2 size={12} className="text-sky-400" /> Bangalore: (080) 26743718</div>
+                    <div className="flex items-center gap-1.5"><CheckCircle2 size={12} className="text-sky-400" /> Mumbai: 07219107564</div>
+                    <div className="flex items-center gap-1.5"><CheckCircle2 size={12} className="text-sky-400" /> Delhi: 09350614245</div>
+                    <div className="flex items-center gap-1.5"><CheckCircle2 size={12} className="text-sky-400" /> Hyderabad: (040) 24658000</div>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-5 p-6 bg-slate-950/80 border border-slate-800 rounded-2xl text-center lg:text-left flex flex-col justify-between h-full">
+                  <div>
+                    <div className="text-xs font-bold text-sky-400 uppercase tracking-widest mb-1">Authorised Distributor in Kerala</div>
+                    <div className="font-oswald text-2xl text-white font-bold mb-2">Universal Sanitary House</div>
+                    <p className="text-slate-400 text-xs mb-4 leading-relaxed">NH Bypass, Edappally, Kochi, Kerala 682024</p>
+                  </div>
+                  <a
+                    href="tel:+917356863985"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-sky-500 hover:bg-sky-400 text-white font-bold text-xs uppercase tracking-wider rounded-full transition-all shadow-lg shadow-sky-500/20"
+                  >
+                    <Phone size={14} /> Contact Authorised Kerala Dealer
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+
 
           {/* ════════════════════════════════════════════════════════════
               11 · CTA SECTION
