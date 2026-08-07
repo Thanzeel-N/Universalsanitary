@@ -124,7 +124,7 @@ const PRODUCTS: ProductCard[] = [
     material: "Ductile SG Iron SG500/7 (75kg)",
     loadClass: "Class D400 · 400 kN (40t)",
     applications: ["Arterial Roads", "Expressways", "Bus Terminals"],
-    image: "/images/neco/ezgif-frame-220.jpg",
+    image: "/images/neco/rounded_manhole_cover_nobg.png",
     badge: "D400",
     badgeColor: "text-orange-400 bg-orange-500/10 border-orange-500/30",
   },
@@ -133,7 +133,7 @@ const PRODUCTS: ProductCard[] = [
     material: "Grey Cast Iron CI Grade 20 (25kg)",
     loadClass: "Class A15 · 15 kN (1.5t)",
     applications: ["Footpaths", "Residential Pits", "Cable Trenches"],
-    image: "/images/neco/product 1.png",
+    image: "/images/neco/product_1_transparent.png",
     badge: "A15",
     badgeColor: "text-emerald-400 bg-emerald-500/10 border-emerald-500/30",
   },
@@ -142,7 +142,7 @@ const PRODUCTS: ProductCard[] = [
     material: "Ductile SG Iron SG500/7",
     loadClass: "Class B125 · 125 kN (12.5t)",
     applications: ["Parking Lots", "Driveways", "Pedestrian Plazas"],
-    image: "/images/neco/product 2.png",
+    image: "/images/neco/product_2_transparent.png",
     badge: "B125",
     badgeColor: "text-sky-400 bg-sky-500/10 border-sky-500/30",
   },
@@ -151,7 +151,7 @@ const PRODUCTS: ProductCard[] = [
     material: "Ductile SG Iron SG500/7",
     loadClass: "Class C250 · 250 kN (25t)",
     applications: ["Kerbside Channels", "Commercial Grounds", "Pathways"],
-    image: "/images/neco/product 3.png",
+    image: "/images/neco/product_3_transparent.png",
     badge: "C250",
     badgeColor: "text-amber-400 bg-amber-500/10 border-amber-500/30",
   },
@@ -160,7 +160,7 @@ const PRODUCTS: ProductCard[] = [
     material: "Ductile SG Iron SG500/7 (95kg)",
     loadClass: "Class D400 · 400 kN (40t)",
     applications: ["Heavy Freight Roads", "City Junctions", "Highways"],
-    image: "/images/neco/poduct 4.png",
+    image: "/images/neco/square_manhole_cover_nobg.png",
     badge: "D400",
     badgeColor: "text-orange-400 bg-orange-500/10 border-orange-500/30",
   },
@@ -169,7 +169,7 @@ const PRODUCTS: ProductCard[] = [
     material: "Ductile SG Iron SG500/7",
     loadClass: "Class E600 · 600 kN (60t)",
     applications: ["Highways", "Industrial Plants", "Port Corridors"],
-    image: "/images/neco/product 5.png",
+    image: "/images/neco/product_5_transparent.png",
     badge: "E600",
     badgeColor: "text-indigo-400 bg-indigo-500/10 border-indigo-500/30",
   },
@@ -400,8 +400,8 @@ export default function NecoPage() {
         ════════════════════════════════════════════════════════════ */}
         <header
           className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled
-              ? "bg-[#0b1120]/95 backdrop-blur-xl border-b border-slate-800/80 py-3 shadow-2xl shadow-black/40"
-              : "bg-transparent py-5"
+            ? "bg-[#0b1120]/95 backdrop-blur-xl border-b border-slate-800/80 py-3 shadow-2xl shadow-black/40"
+            : "bg-transparent py-5"
             }`}
         >
           <div className="max-w-7xl mx-auto px-6 sm:px-10 flex items-center justify-between">
@@ -617,11 +617,13 @@ export default function NecoPage() {
                     {/* Shimmer overlay */}
                     <div className="absolute inset-0 animate-neco-shimmer z-20 pointer-events-none" />
                     {/* Product Image */}
-                    <img
-                      src="/images/neco/ezgif-frame-220.jpg"
-                      alt="NECO 525DIA 75KG ductile iron circular manhole cover D400"
-                      className="w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"
-                    />
+                    <div className="w-full h-full flex items-center justify-center p-6">
+                      <img
+                        src="/images/neco/square_manhole_cover_nobg.png"
+                        alt="NECO Square Frame Ductile Iron Manhole Cover D400"
+                        className="w-full h-full object-contain filter drop-shadow-[0_25px_35px_rgba(0,0,0,0.8)] transition-transform duration-700 group-hover:scale-110"
+                      />
+                    </div>
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
 
                     {/* Top Badge */}

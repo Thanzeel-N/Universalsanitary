@@ -787,17 +787,17 @@ export default function HomeContent({ categories }: { categories: any[] }) {
               </Link>
             </div>
 
-            {/* Center Column: Floating Isolated Circular Disc + Background Accent */}
+            {/* Center Column: Floating Square Manhole Cover + Background Accent */}
             <div className="lg:col-span-4 flex flex-col items-center justify-center relative py-8 lg:py-0">
               {/* Graphic Backdrop Accent Shape */}
               <div className="w-[280px] h-[280px] sm:w-[360px] sm:h-[360px] bg-primary/10 rounded-[3rem] -rotate-12 absolute z-0 pointer-events-none" />
 
-              {/* Floating Circular Product Cover Disc with Shadow */}
-              <div className="relative z-10 w-64 h-64 sm:w-80 sm:h-80 md:w-88 md:h-88 rounded-full overflow-hidden shadow-[0_30px_70px_-15px_rgba(0,0,0,0.35)] border-4 border-white transition-transform duration-700 hover:scale-105 cursor-pointer">
+              {/* Floating Square Product Cover Container */}
+              <div className="relative z-10 w-64 h-64 sm:w-80 sm:h-80 md:w-88 md:h-88 flex items-center justify-center p-2 transition-transform duration-700 hover:scale-105 cursor-pointer">
                 <img
-                  src="/images/neco/ezgif-frame-220.jpg"
-                  alt="NECO 525DIA Ductile Iron Manhole Cover D400"
-                  className="w-full h-full object-cover scale-110"
+                  src="/images/neco/square_manhole_cover_nobg.png"
+                  alt="NECO Square Frame Ductile Iron Manhole Cover D400"
+                  className="w-full h-full object-contain filter drop-shadow-[0_25px_40px_rgba(0,0,0,0.4)]"
                 />
               </div>
 
