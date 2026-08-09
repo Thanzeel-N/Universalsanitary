@@ -138,7 +138,7 @@ const PRODUCTS: ProductCard[] = [
     badgeColor: "text-emerald-400 bg-emerald-500/10 border-emerald-500/30",
   },
   {
-    title: "Stormwater Drainage Grating",
+    title: "Grating with Frame",
     material: "Ductile SG Iron SG500/7",
     loadClass: "Class B125 · 125 kN (12.5t)",
     applications: ["Parking Lots", "Driveways", "Pedestrian Plazas"],
@@ -374,13 +374,13 @@ export default function NecoPage() {
             "seller": {
               "@type": "Organization",
               "name": "Universal Sanitary House",
-              "telephone": "+917356863985",
+              "telephone": "+914842351581",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "NH Bypass, Edappally",
-                "addressLocality": "Kochi",
+                "streetAddress": "Post Box No. 3674, Jew Street",
+                "addressLocality": "Ernakulam, Kochi",
                 "addressRegion": "Kerala",
-                "postalCode": "682024",
+                "postalCode": "682035",
                 "addressCountry": "IN"
               }
             }
@@ -1290,14 +1290,28 @@ export default function NecoPage() {
                   <div>
                     <div className="text-xs font-bold text-sky-400 uppercase tracking-widest mb-1">Authorised Distributor in Kerala</div>
                     <div className="font-oswald text-2xl text-white font-bold mb-2">Universal Sanitary House</div>
-                    <p className="text-slate-400 text-xs mb-4 leading-relaxed">NH Bypass, Edappally, Kochi, Kerala 682024</p>
+                    <p className="text-slate-400 text-xs mb-4 leading-relaxed">
+                      Post Box No. 3674, Jew Street, Ernakulam, Kochi, Kerala – 682035<br />
+                      Ph: +91-484-2351581, 2360931, 2366939 | Mob: +91 7356863985<br />
+                      Email: universalsanitary@yahoo.com
+                    </p>
                   </div>
-                  <a
-                    href="tel:+917356863985"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-sky-500 hover:bg-sky-400 text-white font-bold text-xs uppercase tracking-wider rounded-full transition-all shadow-lg shadow-sky-500/20"
-                  >
-                    <Phone size={14} /> Contact Authorised Kerala Dealer
-                  </a>
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <a
+                      href="tel:+914842351581"
+                      className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-sky-500 hover:bg-sky-400 text-white font-bold text-xs uppercase tracking-wider rounded-full transition-all shadow-lg shadow-sky-500/20 flex-1"
+                    >
+                      <Phone size={14} /> Call Showroom
+                    </a>
+                    <a
+                      href="https://wa.me/917356863985?text=Hello%20Universal%20Sanitary,%20I%20would%20like%20to%20enquire%20about%20NECO%20covers."
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold text-xs uppercase tracking-wider rounded-full transition-all shadow-lg flex-1"
+                    >
+                      <MessageSquare size={14} /> WhatsApp
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1370,9 +1384,9 @@ export default function NecoPage() {
                 className="mt-16 pt-12 border-t border-slate-800/60 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center"
               >
                 {[
-                  { icon: <MapPin size={18} />, label: "Dealer Location", val: "NH Bypass, Edappally, Kochi, Kerala 682024" },
-                  { icon: <Phone size={18} />, label: "Phone", val: "+91 7356 863985" },
-                  { icon: <Star size={18} />, label: "Certification", val: "IS 1726 / EN 124 Authorised Dealer" },
+                  { icon: <MapPin size={18} />, label: "Showroom Location", val: "P.B. No. 3674, Jew Street, Ernakulam, Kochi 682035" },
+                  { icon: <Phone size={18} />, label: "Phone & WhatsApp", val: "+91 484 2351581 / +91 7356863985" },
+                  { icon: <Star size={18} />, label: "Dealership", val: "Universal Sanitary House · Kerala Distributor" },
                 ].map((item) => (
                   <div key={item.label} className="flex flex-col items-center gap-3">
                     <div className="p-2.5 bg-sky-500/10 rounded-xl text-sky-400">{item.icon}</div>
@@ -1437,10 +1451,10 @@ export default function NecoPage() {
               <address className="not-italic space-y-3">
                 <div>
                   <div className="text-slate-300 font-medium text-[11px] mb-0.5">Universal Sanitary House</div>
-                  <div className="text-slate-500 leading-relaxed text-[11px]">NH Bypass, Edappally<br />Kochi, Kerala 682024</div>
+                  <div className="text-slate-500 leading-relaxed text-[11px]">Post Box No. 3674, Jew Street<br />Ernakulam, Kochi, Kerala – 682035</div>
                 </div>
-                <a href="tel:+917356863985" className="flex items-center gap-2 text-slate-300 hover:text-sky-400 transition-colors font-mono text-[11px]">
-                  <Phone size={11} /> +91 7356 863985
+                <a href="tel:+914842351581" className="flex items-center gap-2 text-slate-300 hover:text-sky-400 transition-colors font-mono text-[11px]">
+                  <Phone size={11} /> +91-484-2351581 / +91 7356 863985
                 </a>
                 <a
                   href="https://wa.me/917356863985"

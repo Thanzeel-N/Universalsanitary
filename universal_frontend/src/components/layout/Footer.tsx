@@ -12,7 +12,7 @@ export default function Footer() {
             Defining luxury spaces since 1968. A premium supplier of sanitaryware, architectural solutions, and the exclusive Kerala dealer for NECO manhole & drainage covers.
           </p>
         </div>
-        
+
         <div className="col-span-1">
           <h3 className="font-sans font-bold uppercase tracking-widest text-xs mb-6 text-white">Explore</h3>
           <ul className="flex flex-col gap-4 font-sans text-sm text-neutral-400">
@@ -34,7 +34,7 @@ export default function Footer() {
           </ul>
         </div>
       </div>
-      
+
       <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-neutral-800 text-xs font-sans text-neutral-500 flex justify-between flex-col md:flex-row gap-4 uppercase tracking-widest">
         <p>© {new Date().getFullYear()} Universal Sanitary House.</p>
         <div className="flex gap-6">
