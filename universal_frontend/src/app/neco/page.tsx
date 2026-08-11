@@ -475,6 +475,52 @@ export default function NecoPage() {
               </motion.div>
 
             </div>
+
+            {/* Trusted By Client Logos Strip inside Hero */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              className="max-w-7xl mx-auto mt-14 pt-8 border-t border-slate-200/80 w-full"
+            >
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-5 gap-2">
+                <span className="text-[11px] font-sans font-bold tracking-[0.2em] text-slate-500 uppercase flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  Trusted By Leading Projects in Kerala
+                </span>
+                <span className="text-xs text-slate-400 font-light hidden sm:inline-block">
+                  Healthcare • Commercial • Defense • Energy • Real Estate
+                </span>
+              </div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
+                {MAJOR_NECO_CLIENTS.map((client) => (
+                  <div
+                    key={client.name}
+                    className="bg-white/90 backdrop-blur-sm border border-slate-200/80 rounded-2xl p-3.5 flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md hover:border-sky-300 transition-all group"
+                  >
+                    {client.logo ? (
+                      <img
+                        src={client.logo}
+                        alt={client.name}
+                        className="h-8 max-w-full object-contain filter opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all mb-1.5"
+                      />
+                    ) : (
+                      <div className="p-1.5 bg-sky-50 text-sky-600 rounded-lg mb-1 group-hover:bg-sky-100 transition-colors">
+                        {client.icon}
+                      </div>
+                    )}
+                    <span className="font-oswald text-xs font-bold uppercase text-slate-900 tracking-tight group-hover:text-sky-600 transition-colors">
+                      {client.name}
+                    </span>
+                    <span className="text-[9px] text-slate-500 font-light">
+                      {client.category}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
           </section>
 
           {/* ════════════════════════════════════════════════════════════
@@ -518,56 +564,7 @@ export default function NecoPage() {
             </div>
           </motion.section>
 
-          {/* ════════════════════════════════════════════════════════════
-              MAJOR CLIENTS (MINIMAL & SIMPLE STRIP)
-          ════════════════════════════════════════════════════════════ */}
-          <motion.section
-            id="major-clients"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-40px" }}
-            variants={fadeUp}
-            className="py-12 px-6 sm:px-10 bg-slate-50 border-b border-slate-200"
-            aria-label="Key clients buying NECO products in Kerala"
-          >
-            <div className="max-w-7xl mx-auto">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-2">
-                <span className="text-[11px] font-sans font-bold tracking-[0.2em] text-slate-500 uppercase">
-                  Trusted By Leading Projects in Kerala
-                </span>
-                <span className="text-xs text-slate-400 font-light">
-                  Healthcare • Commercial • Defense • Energy • Residential
-                </span>
-              </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-                {MAJOR_NECO_CLIENTS.map((client) => (
-                  <div
-                    key={client.name}
-                    className="bg-white border border-slate-200/80 rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md hover:border-sky-300 transition-all group min-h-[96px]"
-                  >
-                    {client.logo ? (
-                      <img
-                        src={client.logo}
-                        alt={client.name}
-                        className="h-9 max-w-full object-contain filter grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100 transition-all mb-2"
-                      />
-                    ) : (
-                      <div className="p-2 bg-sky-50 text-sky-600 rounded-xl mb-1.5 group-hover:bg-sky-100 transition-colors">
-                        {client.icon}
-                      </div>
-                    )}
-                    <span className="font-oswald text-sm font-bold uppercase text-slate-900 tracking-tight group-hover:text-sky-600 transition-colors">
-                      {client.name}
-                    </span>
-                    <span className="text-[10px] text-slate-500 font-light mt-0.5">
-                      {client.category}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.section>
 
 
 
