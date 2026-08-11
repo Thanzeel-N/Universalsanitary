@@ -35,8 +35,6 @@ interface MajorClient {
   category: string;
   logo: string | null;
   icon?: React.ReactNode;
-  desc: string;
-  badge: string;
 }
 
 // ─── Data Records ─────────────────────────────────────────────────────────────
@@ -44,43 +42,33 @@ interface MajorClient {
 const MAJOR_NECO_CLIENTS: MajorClient[] = [
   {
     name: "Aster Medcity",
-    category: "Healthcare & Medical Campus",
+    category: "Healthcare",
     logo: "/images/clients/client_9.webp",
-    icon: <Hospital size={24} />,
-    desc: "Heavy-duty sanitary manhole covers and clean-finish inspection lids installed across hospital driveways and emergency access roads.",
-    badge: "Healthcare",
+    icon: <Hospital size={20} />,
   },
   {
     name: "LuLu Hypermarket",
-    category: "Commercial & Retail Landmarks",
+    category: "Commercial & Retail",
     logo: null,
-    icon: <ShoppingBag size={24} />,
-    desc: "High-capacity commercial drainage gratings and heavy vehicle load-rated manhole covers for mall parking zones and loading bays.",
-    badge: "Retail & Commercial",
+    icon: <ShoppingBag size={20} />,
   },
   {
     name: "SFS Homes",
-    category: "Real Estate & Housing Projects",
+    category: "Real Estate & Housing",
     logo: "/images/clients/client_22.jpg",
-    icon: <Building2 size={24} />,
-    desc: "Precision ductile iron driveway covers and lawn inspection pits for luxury residential apartments and gated villas.",
-    badge: "Residential",
+    icon: <Building2 size={20} />,
   },
   {
     name: "Indian Oil",
-    category: "Industrial & Energy Depots",
+    category: "Industrial & Energy",
     logo: null,
-    icon: <Fuel size={24} />,
-    desc: "Heavy industrial-grade extra heavy duty (E600/F900) cast iron & ductile covers for petroleum depots and refinery channelling.",
-    badge: "Industrial & Energy",
+    icon: <Fuel size={20} />,
   },
   {
     name: "Cochin Shipyard",
-    category: "Marine & Government Defense",
+    category: "Marine & Defense",
     logo: "/images/clients/Logo-Grade-480x160-01.png",
-    icon: <Anchor size={24} />,
-    desc: "EN 124 certified high-tonnage heavy duty gully gratings and dockyard access covers built to withstand extreme dynamic marine loads.",
-    badge: "Maritime & Defense",
+    icon: <Anchor size={20} />,
   },
 ];
 
@@ -531,75 +519,50 @@ export default function NecoPage() {
           </motion.section>
 
           {/* ════════════════════════════════════════════════════════════
-              MAJOR CLIENTS & LANDMARK PROJECTS SECTION
+              MAJOR CLIENTS (MINIMAL & SIMPLE STRIP)
           ════════════════════════════════════════════════════════════ */}
           <motion.section
             id="major-clients"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
+            viewport={{ once: true, margin: "-40px" }}
             variants={fadeUp}
-            className="py-20 px-6 sm:px-10 bg-slate-900 text-white relative overflow-hidden"
-            aria-label="Major Clients and Projects buying NECO products in Kerala"
+            className="py-12 px-6 sm:px-10 bg-slate-50 border-b border-slate-200"
+            aria-label="Key clients buying NECO products in Kerala"
           >
-            {/* Ambient Lighting Accents */}
-            <div className="absolute top-0 right-1/4 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute bottom-0 left-10 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
-
-            <div className="max-w-7xl mx-auto relative z-10">
-              <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
-                <div>
-                  <span className="text-[11px] font-sans font-bold tracking-[0.2em] text-sky-400 uppercase block mb-2">
-                    Key Client Portfolio
-                  </span>
-                  <h2 className="font-oswald text-3xl sm:text-4xl md:text-5xl font-bold uppercase text-white tracking-tight">
-                    Trusted By Kerala&apos;s Leading Landmarks
-                  </h2>
-                </div>
-                <p className="text-slate-400 text-xs sm:text-sm font-light max-w-md">
-                  NECO ductile and cast iron castings are deployed across high-impact healthcare, commercial, marine, energy, and residential developments.
-                </p>
+            <div className="max-w-7xl mx-auto">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-2">
+                <span className="text-[11px] font-sans font-bold tracking-[0.2em] text-slate-500 uppercase">
+                  Trusted By Leading Projects in Kerala
+                </span>
+                <span className="text-xs text-slate-400 font-light">
+                  Healthcare • Commercial • Defense • Energy • Residential
+                </span>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
                 {MAJOR_NECO_CLIENTS.map((client) => (
                   <div
                     key={client.name}
-                    className="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-5 flex flex-col justify-between hover:border-sky-400/50 hover:bg-slate-800 transition-all duration-300 group shadow-lg"
+                    className="bg-white border border-slate-200/80 rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md hover:border-sky-300 transition-all group min-h-[96px]"
                   >
-                    <div>
-                      <div className="h-16 flex items-center justify-center mb-4 bg-slate-900/60 rounded-xl p-3 border border-slate-700/50 group-hover:border-sky-500/30 transition-colors">
-                        {client.logo ? (
-                          <img
-                            src={client.logo}
-                            alt={client.name}
-                            className="max-h-11 max-w-full object-contain filter brightness-110 contrast-125 group-hover:scale-105 transition-transform"
-                          />
-                        ) : (
-                          <div className="flex items-center gap-2 text-sky-400 font-oswald text-base font-bold">
-                            {client.icon}
-                            <span>{client.name}</span>
-                          </div>
-                        )}
+                    {client.logo ? (
+                      <img
+                        src={client.logo}
+                        alt={client.name}
+                        className="h-9 max-w-full object-contain filter grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100 transition-all mb-2"
+                      />
+                    ) : (
+                      <div className="p-2 bg-sky-50 text-sky-600 rounded-xl mb-1.5 group-hover:bg-sky-100 transition-colors">
+                        {client.icon}
                       </div>
-                      <span className="text-[9px] font-bold uppercase tracking-widest text-sky-400 bg-sky-500/10 border border-sky-500/20 px-2.5 py-1 rounded-full block w-max mb-3">
-                        {client.badge}
-                      </span>
-                      <h3 className="font-oswald text-lg font-bold uppercase text-white mb-1 group-hover:text-sky-300 transition-colors">
-                        {client.name}
-                      </h3>
-                      <div className="text-[10px] font-semibold text-slate-400 mb-2.5 uppercase tracking-wider">
-                        {client.category}
-                      </div>
-                      <p className="text-slate-300 text-xs font-light leading-relaxed">
-                        {client.desc}
-                      </p>
-                    </div>
-
-                    <div className="mt-4 pt-3 border-t border-slate-700/60 flex items-center justify-between text-[10px] text-slate-400 font-medium">
-                      <span>Verified Client</span>
-                      <Check size={13} className="text-emerald-400" />
-                    </div>
+                    )}
+                    <span className="font-oswald text-sm font-bold uppercase text-slate-900 tracking-tight group-hover:text-sky-600 transition-colors">
+                      {client.name}
+                    </span>
+                    <span className="text-[10px] text-slate-500 font-light mt-0.5">
+                      {client.category}
+                    </span>
                   </div>
                 ))}
               </div>
