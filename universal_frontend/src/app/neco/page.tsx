@@ -6,7 +6,8 @@ import { motion, AnimatePresence, useInView, useMotionValue, useSpring } from "f
 import {
   MessageSquare, Phone, ArrowUpRight, Menu, X, ChevronDown, Award,
   ShieldCheck, Truck, Building2, Plane, Factory, MapPin,
-  Footprints, Car, TrendingUp, Sparkles, HelpCircle, Sliders, Shield, Compass, Check
+  Footprints, Car, TrendingUp, Sparkles, HelpCircle, Sliders, Shield, Compass, Check,
+  ShoppingBag, Fuel, Hospital, Anchor
 } from "lucide-react";
 
 // ─── Data Types ──────────────────────────────────────────────────────────────
@@ -29,7 +30,59 @@ interface ProductCard {
   badgeColor: string;
 }
 
+interface MajorClient {
+  name: string;
+  category: string;
+  logo: string | null;
+  icon?: React.ReactNode;
+  desc: string;
+  badge: string;
+}
+
 // ─── Data Records ─────────────────────────────────────────────────────────────
+
+const MAJOR_NECO_CLIENTS: MajorClient[] = [
+  {
+    name: "Aster Medcity",
+    category: "Healthcare & Medical Campus",
+    logo: "/images/clients/client_9.webp",
+    icon: <Hospital size={24} />,
+    desc: "Heavy-duty sanitary manhole covers and clean-finish inspection lids installed across hospital driveways and emergency access roads.",
+    badge: "Healthcare",
+  },
+  {
+    name: "LuLu Hypermarket",
+    category: "Commercial & Retail Landmarks",
+    logo: null,
+    icon: <ShoppingBag size={24} />,
+    desc: "High-capacity commercial drainage gratings and heavy vehicle load-rated manhole covers for mall parking zones and loading bays.",
+    badge: "Retail & Commercial",
+  },
+  {
+    name: "SFS Homes",
+    category: "Real Estate & Housing Projects",
+    logo: "/images/clients/client_22.jpg",
+    icon: <Building2 size={24} />,
+    desc: "Precision ductile iron driveway covers and lawn inspection pits for luxury residential apartments and gated villas.",
+    badge: "Residential",
+  },
+  {
+    name: "Indian Oil",
+    category: "Industrial & Energy Depots",
+    logo: null,
+    icon: <Fuel size={24} />,
+    desc: "Heavy industrial-grade extra heavy duty (E600/F900) cast iron & ductile covers for petroleum depots and refinery channelling.",
+    badge: "Industrial & Energy",
+  },
+  {
+    name: "Cochin Shipyard",
+    category: "Marine & Government Defense",
+    logo: "/images/clients/Logo-Grade-480x160-01.png",
+    icon: <Anchor size={24} />,
+    desc: "EN 124 certified high-tonnage heavy duty gully gratings and dockyard access covers built to withstand extreme dynamic marine loads.",
+    badge: "Maritime & Defense",
+  },
+];
 
 const LOAD_CLASSES: LoadClass[] = [
   {
@@ -460,7 +513,7 @@ export default function NecoPage() {
               </div>
               <div className="lg:col-span-7 space-y-6">
                 <p className="text-slate-700 text-sm md:text-base font-normal leading-relaxed">
-                  <strong className="font-bold text-slate-900">NECO</strong> is a premier global manufacturer of EN 124-certified ductile and cast iron castings exported to international markets worldwide. Distributed exclusively in Kerala by <strong className="font-bold text-slate-900">Universal Sanitary House</strong> (Ernakulam, Kochi), we supply home builders, contractors, and municipal projects with heavy-duty manhole covers, inspection lids, and rainwater drainage gratings built to last a lifetime.
+                  <strong className="font-bold text-slate-900">NECO</strong> is a premier global manufacturer of EN 124-certified ductile and cast iron castings exported to international markets worldwide. Distributed exclusively in Kerala by <strong className="font-bold text-slate-900">Universal Sanitary House</strong> (Ernakulam, Kochi), NECO products are trusted by landmark enterprises including <strong className="text-slate-900">Aster Medcity</strong>, <strong className="text-slate-900">LuLu Hypermarket</strong>, <strong className="text-slate-900">SFS Homes</strong>, <strong className="text-slate-900">Indian Oil</strong>, and <strong className="text-slate-900">Cochin Shipyard</strong>.
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
@@ -473,6 +526,82 @@ export default function NecoPage() {
                     <span className="text-xs text-slate-600 font-medium block mt-1">100% Certified Strength</span>
                   </div>
                 </div>
+              </div>
+            </div>
+          </motion.section>
+
+          {/* ════════════════════════════════════════════════════════════
+              MAJOR CLIENTS & LANDMARK PROJECTS SECTION
+          ════════════════════════════════════════════════════════════ */}
+          <motion.section
+            id="major-clients"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            variants={fadeUp}
+            className="py-20 px-6 sm:px-10 bg-slate-900 text-white relative overflow-hidden"
+            aria-label="Major Clients and Projects buying NECO products in Kerala"
+          >
+            {/* Ambient Lighting Accents */}
+            <div className="absolute top-0 right-1/4 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute bottom-0 left-10 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="max-w-7xl mx-auto relative z-10">
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
+                <div>
+                  <span className="text-[11px] font-sans font-bold tracking-[0.2em] text-sky-400 uppercase block mb-2">
+                    Key Client Portfolio
+                  </span>
+                  <h2 className="font-oswald text-3xl sm:text-4xl md:text-5xl font-bold uppercase text-white tracking-tight">
+                    Trusted By Kerala&apos;s Leading Landmarks
+                  </h2>
+                </div>
+                <p className="text-slate-400 text-xs sm:text-sm font-light max-w-md">
+                  NECO ductile and cast iron castings are deployed across high-impact healthcare, commercial, marine, energy, and residential developments.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5">
+                {MAJOR_NECO_CLIENTS.map((client) => (
+                  <div
+                    key={client.name}
+                    className="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-5 flex flex-col justify-between hover:border-sky-400/50 hover:bg-slate-800 transition-all duration-300 group shadow-lg"
+                  >
+                    <div>
+                      <div className="h-16 flex items-center justify-center mb-4 bg-slate-900/60 rounded-xl p-3 border border-slate-700/50 group-hover:border-sky-500/30 transition-colors">
+                        {client.logo ? (
+                          <img
+                            src={client.logo}
+                            alt={client.name}
+                            className="max-h-11 max-w-full object-contain filter brightness-110 contrast-125 group-hover:scale-105 transition-transform"
+                          />
+                        ) : (
+                          <div className="flex items-center gap-2 text-sky-400 font-oswald text-base font-bold">
+                            {client.icon}
+                            <span>{client.name}</span>
+                          </div>
+                        )}
+                      </div>
+                      <span className="text-[9px] font-bold uppercase tracking-widest text-sky-400 bg-sky-500/10 border border-sky-500/20 px-2.5 py-1 rounded-full block w-max mb-3">
+                        {client.badge}
+                      </span>
+                      <h3 className="font-oswald text-lg font-bold uppercase text-white mb-1 group-hover:text-sky-300 transition-colors">
+                        {client.name}
+                      </h3>
+                      <div className="text-[10px] font-semibold text-slate-400 mb-2.5 uppercase tracking-wider">
+                        {client.category}
+                      </div>
+                      <p className="text-slate-300 text-xs font-light leading-relaxed">
+                        {client.desc}
+                      </p>
+                    </div>
+
+                    <div className="mt-4 pt-3 border-t border-slate-700/60 flex items-center justify-between text-[10px] text-slate-400 font-medium">
+                      <span>Verified Client</span>
+                      <Check size={13} className="text-emerald-400" />
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </motion.section>
