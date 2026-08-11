@@ -149,7 +149,7 @@ const SPECIALTY_ITEMS = [
 const DATASHEET_ITEMS = [
   { no: "1", title: "Manufacturer & Brand", value: "Jayaswal Neco Industries Limited (NECO Brand) — Nagpur, India (jayaswalneco.com)" },
   { no: "2", title: "Ductile Iron Material Standard", value: "Spheroidal Graphite (SG) Iron Grade SG 500/7 as per IS-1865 / ISO-1083 / GGG50" },
-  { no: "3", title: "Cast Iron Material Standard", value: "Grey Cast Iron Grade FG 150 as per IS 210" },
+  { no: "3", title: "Cast Iron Material Standard", value: "Cast Iron Grade FG 150 as per IS 210" },
   { no: "4", title: "Product Load Standard (DI)", value: "BS EN 124 (Class A15, B125, C250, D400, E600, F900)" },
   { no: "5", title: "Product Load Standard (CI)", value: "IS 1726 (Light Duty 2.5 MT, Medium Duty 10 MT, Heavy Duty 20 MT, Extra Heavy Duty 35 MT)" },
   { no: "6", title: "Tensile Strength (DI)", value: "500 N/mm² (Minimum guaranteed)" },

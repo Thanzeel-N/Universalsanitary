@@ -88,7 +88,7 @@ const PRODUCTS: ProductCard[] = [
   },
   {
     title: "Inspection Cover & Frame (300×600)",
-    material: "Grey Cast Iron (CI Grade 20)",
+    material: "Cast Iron (CI Grade 20)",
     loadClass: "Class A15 · 1.5 Tons",
     applications: ["Footpaths", "Garden Pits", "Cable Trenches"],
     image: "/images/neco/product_1_transparent.png",
@@ -162,7 +162,7 @@ const FAQS = [
     a: "Base your choice on the heaviest vehicle that will ever drive over the cover. A15 (1.5t) is for footpaths and lawns. B125 (12.5t) is ideal for residential car driveways and parking slots. D400 (40t) is required for public roads and delivery trucks."
   },
   {
-    q: "What makes SG Ductile Iron superior to traditional Grey Cast Iron?",
+    q: "What makes SG Ductile Iron superior to traditional Cast Iron?",
     a: "SG Ductile iron undergoes spherical graphite treatment, making it 3 times stronger, impact flexible, and unbreakable under heavy vehicle wheel loads. NECO ductile covers also feature anti-theft locking hinges."
   },
   {
@@ -264,8 +264,8 @@ export default function NecoPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Product",
-            "name": "NECO Ductile & Grey Iron Manhole Covers",
-            "description": "EN124-certified ductile and grey iron manhole covers available in Kerala through Universal Sanitary House.",
+            "name": "NECO Ductile & Cast Iron Manhole Covers",
+            "description": "EN124-certified ductile and cast iron manhole covers available in Kerala through Universal Sanitary House.",
             "brand": { "@type": "Brand", "name": "NECO" },
             "seller": {
               "@type": "Organization",
@@ -362,7 +362,7 @@ export default function NecoPage() {
                   variants={fadeUp}
                   className="text-slate-600 text-base sm:text-lg leading-relaxed font-light mb-8 max-w-xl"
                 >
-                  EN 124-certified ductile &amp; grey iron castings trusted across global markets. Distributed in Kerala by Universal Sanitary House, authorized state distributor.
+                  EN 124-certified ductile &amp; cast iron castings trusted across global markets. Distributed in Kerala by Universal Sanitary House, authorized state distributor.
                 </motion.p>
 
                 <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
@@ -460,7 +460,7 @@ export default function NecoPage() {
               </div>
               <div className="lg:col-span-7 space-y-6">
                 <p className="text-slate-700 text-sm md:text-base font-normal leading-relaxed">
-                  <strong className="font-bold text-slate-900">NECO</strong> is a premier global manufacturer of EN 124-certified ductile and grey iron castings exported to international markets worldwide. Distributed exclusively in Kerala by <strong className="font-bold text-slate-900">Universal Sanitary House</strong> (Ernakulam, Kochi), we supply home builders, contractors, and municipal projects with heavy-duty manhole covers, inspection lids, and rainwater drainage gratings built to last a lifetime.
+                  <strong className="font-bold text-slate-900">NECO</strong> is a premier global manufacturer of EN 124-certified ductile and cast iron castings exported to international markets worldwide. Distributed exclusively in Kerala by <strong className="font-bold text-slate-900">Universal Sanitary House</strong> (Ernakulam, Kochi), we supply home builders, contractors, and municipal projects with heavy-duty manhole covers, inspection lids, and rainwater drainage gratings built to last a lifetime.
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
@@ -480,7 +480,7 @@ export default function NecoPage() {
 
 
           {/* ════════════════════════════════════════════════════════════
-              3 · MATERIAL SCIENCE COMPARISON (GREY VS DUCTILE IRON)
+              3 · MATERIAL SCIENCE COMPARISON (CAST IRON VS DUCTILE IRON)
           ════════════════════════════════════════════════════════════ */}
           <motion.section
             id="material-science"
@@ -489,7 +489,7 @@ export default function NecoPage() {
             viewport={{ once: true, margin: "-60px" }}
             variants={fadeUp}
             className="py-20 px-6 sm:px-10 bg-white border-b border-slate-200"
-            aria-label="Grey Iron vs Ductile Iron Material Science"
+            aria-label="Cast Iron vs Ductile Iron Material Science"
           >
             <div className="max-w-7xl mx-auto">
               <div className="mb-12 max-w-2xl">
@@ -497,7 +497,7 @@ export default function NecoPage() {
                   Material Science
                 </span>
                 <h2 className="font-oswald text-3xl sm:text-4xl md:text-5xl font-bold uppercase text-slate-900 tracking-tight">
-                  Grey Cast Iron vs SG Ductile Iron
+                  Cast Iron vs SG Ductile Iron
                 </h2>
                 <p className="text-slate-600 text-xs sm:text-sm font-light mt-2">
                   Why modern SG Ductile Iron is replacing traditional cast iron across car driveways and public roads.
@@ -506,11 +506,11 @@ export default function NecoPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                {/* Grey Iron Card */}
+                {/* Cast Iron Card */}
                 <div className="bg-slate-50 border border-slate-200 rounded-3xl p-8 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="font-oswald text-2xl font-bold uppercase text-slate-900">Grey Cast Iron (CI 20)</h3>
+                      <h3 className="font-oswald text-2xl font-bold uppercase text-slate-900">Cast Iron (CI 20)</h3>
                       <span className="text-[10px] font-bold uppercase text-slate-600 bg-slate-200 px-3 py-1 rounded-full">Traditional</span>
                     </div>
                     <p className="text-slate-600 text-xs font-light leading-relaxed mb-6">
@@ -554,7 +554,7 @@ export default function NecoPage() {
                       <span className="text-[10px] font-bold uppercase text-sky-300 bg-sky-500/20 border border-sky-500/30 px-3 py-1 rounded-full">3x Stronger</span>
                     </div>
                     <p className="text-slate-300 text-xs font-light leading-relaxed mb-6">
-                      Spheroidal graphite treated iron. 3 times stronger than grey iron, flexible under dynamic shocks, virtually unbreakable, and features anti-theft hinges.
+                      Spheroidal graphite treated iron. 3 times stronger than cast iron, flexible under dynamic shocks, virtually unbreakable, and features anti-theft hinges.
                     </p>
 
                     <div className="space-y-4 text-xs">

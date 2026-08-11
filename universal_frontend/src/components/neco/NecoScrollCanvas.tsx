@@ -11,7 +11,7 @@ const NARRATIVE_STEPS = [
     range: [1, 60],
     phase: "01 · FOUNDRY CASTING PROCESS",
     title: "High-Density Iron Alloy",
-    description: "Cast from SG ductile iron and grade 20 grey iron at 1,400°C into high-density precision moulds.",
+    description: "Cast from SG ductile iron and grade 20 cast iron at 1,400°C into high-density precision moulds.",
     position: "left",
   },
   {

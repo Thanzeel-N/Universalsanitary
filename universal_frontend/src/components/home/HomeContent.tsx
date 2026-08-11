@@ -771,7 +771,7 @@ export default function HomeContent({ categories }: { categories: any[] }) {
                 Jayaswal Neco Industries Ltd.
               </span>
               <p className="text-neutral-700 text-sm md:text-base leading-relaxed mb-4 font-normal">
-                Exclusive Kerala distributor for NECO Brand Ductile Iron (Grade SG500/7) and Grey Iron manhole covers, gully gratings, and frames.
+                Exclusive Kerala distributor for NECO Brand Ductile Iron (Grade SG500/7) and Cast Iron manhole covers, gully gratings, and frames.
               </p>
 
               <p className="text-neutral-500 text-xs md:text-sm leading-relaxed mb-8 max-w-sm font-light">
