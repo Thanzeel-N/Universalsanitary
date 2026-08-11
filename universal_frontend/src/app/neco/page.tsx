@@ -49,7 +49,7 @@ const MAJOR_NECO_CLIENTS: MajorClient[] = [
   {
     name: "LuLu Hypermarket",
     category: "Commercial & Retail",
-    logo: null,
+    logo: "/images/clients/lulu.png",
     icon: <ShoppingBag size={20} />,
   },
   {
@@ -61,7 +61,7 @@ const MAJOR_NECO_CLIENTS: MajorClient[] = [
   {
     name: "Indian Oil",
     category: "Industrial & Energy",
-    logo: null,
+    logo: "/images/clients/indian_oil.jpg",
     icon: <Fuel size={20} />,
   },
   {

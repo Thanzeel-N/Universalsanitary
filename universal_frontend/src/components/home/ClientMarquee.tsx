@@ -5,6 +5,8 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 const CLIENT_LOGOS = [
+  { logo: '/images/clients/lulu.png', name: 'LuLu Hypermarket' },
+  { logo: '/images/clients/indian_oil.jpg', name: 'Indian Oil' },
   { logo: '/images/clients/isro.svg', name: 'ISRO' },
   { logo: '/images/clients/Logo-Grade-480x160-01.png', name: 'Cochin Shipyard' },
   { logo: '/images/clients/military_engineer_services_india_logo.jpg', name: 'Military Engineer Services' },

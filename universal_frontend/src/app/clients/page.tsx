@@ -76,9 +76,16 @@ const CLIENT_CATEGORIES = [
     clients: [
       { logo: '/images/clients/isro.svg', name: 'ISRO (Indian Space Research Organisation)' },
       { logo: '/images/clients/Logo-Grade-480x160-01.png', name: 'Cochin Shipyard Limited' },
+      { logo: '/images/clients/indian_oil.jpg', name: 'Indian Oil Corporation' },
       { logo: '/images/clients/military_engineer_services_india_logo.jpg', name: 'Military Engineer Services (MES)' },
       { logo: '/images/clients/client_6.png', name: 'Kerala Livestock Dev. Board' },
       { logo: '/images/clients/client_19.jpg', name: 'CPWD' },
+    ]
+  },
+  {
+    category: 'Commercial & Retail',
+    clients: [
+      { logo: '/images/clients/lulu.png', name: 'LuLu Hypermarket & Malls' },
     ]
   },
   {
