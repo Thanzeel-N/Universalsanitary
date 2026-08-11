@@ -258,9 +258,8 @@ function FaqAccordion({ faqs }: { faqs: { q: string; a: string }[] }) {
               </span>
               <ChevronDown
                 size={16}
-                className={`text-slate-400 transition-transform duration-300 shrink-0 ${
-                  isOpen ? "rotate-180 text-sky-600" : ""
-                }`}
+                className={`text-slate-400 transition-transform duration-300 shrink-0 ${isOpen ? "rotate-180 text-sky-600" : ""
+                  }`}
               />
             </button>
             <AnimatePresence>
@@ -331,11 +330,10 @@ export default function NecoPage() {
             CLEAN FLOATING NAVBAR (BRAND LEFT, CONTACT RIGHT)
         ════════════════════════════════════════════════════════════ */}
         <header
-          className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-            scrolled
+          className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled
               ? "bg-white/90 backdrop-blur-md border-b border-slate-200 py-3 shadow-md shadow-slate-200/50"
               : "bg-transparent py-5"
-          }`}
+            }`}
         >
           <div className="max-w-7xl mx-auto px-6 sm:px-10 flex items-center justify-between">
             {/* Left Side: Brand Logo & Title */}
@@ -475,52 +473,6 @@ export default function NecoPage() {
               </motion.div>
 
             </div>
-
-            {/* Trusted By Client Logos Strip inside Hero */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              className="max-w-7xl mx-auto mt-14 pt-8 border-t border-slate-200/80 w-full"
-            >
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-5 gap-2">
-                <span className="text-[11px] font-sans font-bold tracking-[0.2em] text-slate-500 uppercase flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  Trusted By Leading Projects in Kerala
-                </span>
-                <span className="text-xs text-slate-400 font-light hidden sm:inline-block">
-                  Healthcare • Commercial • Defense • Energy • Real Estate
-                </span>
-              </div>
-
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
-                {MAJOR_NECO_CLIENTS.map((client) => (
-                  <div
-                    key={client.name}
-                    className="bg-white/90 backdrop-blur-sm border border-slate-200/80 rounded-2xl p-3.5 flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md hover:border-sky-300 transition-all group"
-                  >
-                    {client.logo ? (
-                      <img
-                        src={client.logo}
-                        alt={client.name}
-                        className="h-8 max-w-full object-contain filter opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all mb-1.5"
-                      />
-                    ) : (
-                      <div className="p-1.5 bg-sky-50 text-sky-600 rounded-lg mb-1 group-hover:bg-sky-100 transition-colors">
-                        {client.icon}
-                      </div>
-                    )}
-                    <span className="font-oswald text-xs font-bold uppercase text-slate-900 tracking-tight group-hover:text-sky-600 transition-colors">
-                      {client.name}
-                    </span>
-                    <span className="text-[9px] text-slate-500 font-light">
-                      {client.category}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
           </section>
 
           {/* ════════════════════════════════════════════════════════════
@@ -535,36 +487,78 @@ export default function NecoPage() {
             className="py-20 md:py-24 px-6 sm:px-10 bg-[#f8fafc] border-y border-slate-200/80 relative z-10"
             aria-label="About NECO and Universal Sanitary House"
           >
-            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-              <div className="lg:col-span-5">
-                <span className="text-[11px] font-sans font-bold tracking-[0.2em] text-sky-600 uppercase block mb-3">
-                  About NECO &amp; Kerala Distributor
-                </span>
-                <h2 className="font-oswald text-3xl sm:text-4xl md:text-5xl font-bold uppercase text-slate-900 tracking-tight leading-[1.1]">
-                  World-Class Engineering.<br />
-                  <span className="text-sky-600">Global Standards. Local Trust.</span>
-                </h2>
-              </div>
-              <div className="lg:col-span-7 space-y-6">
-                <p className="text-slate-700 text-sm md:text-base font-normal leading-relaxed">
-                  <strong className="font-bold text-slate-900">NECO</strong> is a premier global manufacturer of EN 124-certified ductile and cast iron castings exported to international markets worldwide. Distributed exclusively in Kerala by <strong className="font-bold text-slate-900">Universal Sanitary House</strong> (Ernakulam, Kochi), NECO products are trusted by landmark enterprises including <strong className="text-slate-900">Aster Medcity</strong>, <strong className="text-slate-900">LuLu Hypermarket</strong>, <strong className="text-slate-900">SFS Homes</strong>, <strong className="text-slate-900">Indian Oil</strong>, and <strong className="text-slate-900">Cochin Shipyard</strong>.
-                </p>
+            <div className="max-w-7xl mx-auto space-y-12">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+                <div className="lg:col-span-5">
+                  <span className="text-[11px] font-sans font-bold tracking-[0.2em] text-sky-600 uppercase block mb-3">
+                    About NECO &amp; Kerala Distributor
+                  </span>
+                  <h2 className="font-oswald text-3xl sm:text-4xl md:text-5xl font-bold uppercase text-slate-900 tracking-tight leading-[1.1]">
+                    World-Class Engineering.<br />
+                    <span className="text-sky-600">Global Standards. Local Trust.</span>
+                  </h2>
+                </div>
+                <div className="lg:col-span-7 space-y-6">
+                  <p className="text-slate-700 text-sm md:text-base font-normal leading-relaxed">
+                    <strong className="font-bold text-slate-900">NECO</strong> is a premier global manufacturer of EN 124-certified ductile and cast iron castings exported to international markets worldwide. Distributed exclusively in Kerala by <strong className="font-bold text-slate-900">Universal Sanitary House</strong> (Ernakulam, Kochi), we supply home builders, contractors, and major infrastructure projects with heavy-duty manhole covers and drainage gratings built to last a lifetime.
+                  </p>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                  <div className="p-4 bg-white border border-slate-200/90 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-                    <span className="font-oswald text-xl font-bold text-slate-900 block">50+ Years</span>
-                    <span className="text-xs text-slate-600 font-medium block mt-1">Distributor Legacy in Kochi</span>
-                  </div>
-                  <div className="p-4 bg-white border border-slate-200/90 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-                    <span className="font-oswald text-xl font-bold text-slate-900 block">IS &amp; EN 124</span>
-                    <span className="text-xs text-slate-600 font-medium block mt-1">100% Certified Strength</span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                    <div className="p-4 bg-white border border-slate-200/90 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                      <span className="font-oswald text-xl font-bold text-slate-900 block">50+ Years</span>
+                      <span className="text-xs text-slate-600 font-medium block mt-1">Distributor Legacy in Kochi</span>
+                    </div>
+                    <div className="p-4 bg-white border border-slate-200/90 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                      <span className="font-oswald text-xl font-bold text-slate-900 block">IS &amp; EN 124</span>
+                      <span className="text-xs text-slate-600 font-medium block mt-1">100% Certified Strength</span>
+                    </div>
                   </div>
                 </div>
               </div>
+
+              {/* Integrated Landmark Clients Row */}
+              <div className="pt-8 border-t border-slate-200/80">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-[10px] font-sans font-bold tracking-[0.2em] text-slate-500 uppercase flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                    Major Landmark Installations in Kerala
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
+                  {MAJOR_NECO_CLIENTS.map((client) => (
+                    <div
+                      key={client.name}
+                      className="p-3 bg-white border border-slate-200/80 rounded-2xl flex items-center gap-3 shadow-sm hover:shadow-md hover:border-sky-300 transition-all group"
+                    >
+                      <div className="w-10 h-10 shrink-0 bg-slate-50 rounded-xl p-1.5 flex items-center justify-center border border-slate-100 group-hover:border-sky-200 transition-colors">
+                        {client.logo ? (
+                          <img
+                            src={client.logo}
+                            alt={client.name}
+                            className="w-full h-full object-contain filter group-hover:scale-105 transition-transform"
+                          />
+                        ) : (
+                          <div className="text-sky-600">
+                            {client.icon}
+                          </div>
+                        )}
+                      </div>
+                      <div className="min-w-0">
+                        <div className="font-oswald text-xs font-bold uppercase text-slate-900 tracking-tight truncate group-hover:text-sky-600 transition-colors">
+                          {client.name}
+                        </div>
+                        <div className="text-[9px] text-slate-500 font-light truncate">
+                          {client.category}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
             </div>
           </motion.section>
-
-
 
 
 
@@ -815,7 +809,7 @@ export default function NecoPage() {
             aria-label="Universal Sanitary House Kerala Dealer Authority"
           >
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              
+
               <div className="lg:col-span-7 space-y-6">
                 <span className="text-[11px] font-sans font-bold tracking-[0.2em] text-sky-600 uppercase block">
                   Kerala State Distributor
