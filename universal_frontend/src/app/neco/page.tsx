@@ -516,42 +516,27 @@ export default function NecoPage() {
                 </div>
               </div>
 
-              {/* Integrated Landmark Clients Row */}
-              <div className="pt-8 border-t border-slate-200/80">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-[10px] font-sans font-bold tracking-[0.2em] text-slate-500 uppercase flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                    Major Landmark Installations in Kerala
+              {/* Integrated Landmark Clients Logo Strip */}
+              <div className="pt-10 border-t border-slate-200/80">
+                <div className="flex items-center justify-between mb-5">
+                  <span className="text-[11px] font-sans font-bold tracking-[0.2em] text-slate-500 uppercase flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    Trusted By Major Landmarks in Kerala
                   </span>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
                   {MAJOR_NECO_CLIENTS.map((client) => (
                     <div
                       key={client.name}
-                      className="p-3 bg-white border border-slate-200/80 rounded-2xl flex items-center gap-3 shadow-sm hover:shadow-md hover:border-sky-300 transition-all group"
+                      title={client.name}
+                      className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 h-20 sm:h-24 flex items-center justify-center shadow-sm hover:shadow-md hover:border-sky-400 transition-all group"
                     >
-                      <div className="w-10 h-10 shrink-0 bg-slate-50 rounded-xl p-1.5 flex items-center justify-center border border-slate-100 group-hover:border-sky-200 transition-colors">
-                        {client.logo ? (
-                          <img
-                            src={client.logo}
-                            alt={client.name}
-                            className="w-full h-full object-contain filter group-hover:scale-105 transition-transform"
-                          />
-                        ) : (
-                          <div className="text-sky-600">
-                            {client.icon}
-                          </div>
-                        )}
-                      </div>
-                      <div className="min-w-0">
-                        <div className="font-oswald text-xs font-bold uppercase text-slate-900 tracking-tight truncate group-hover:text-sky-600 transition-colors">
-                          {client.name}
-                        </div>
-                        <div className="text-[9px] text-slate-500 font-light truncate">
-                          {client.category}
-                        </div>
-                      </div>
+                      <img
+                        src={client.logo!}
+                        alt={client.name}
+                        className="max-h-12 sm:max-h-14 max-w-full object-contain filter group-hover:scale-105 transition-transform duration-300"
+                      />
                     </div>
                   ))}
                 </div>
